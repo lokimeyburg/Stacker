@@ -14,5 +14,5 @@ Pod::Spec.new do |s|
 
   s.requires_arc = true
   s.platform     = :ios
-  s.source_files = 'Lib/*/*.{h,m}'
+  s.source_files = 'Lib/**/*.{h,m}'
 end
