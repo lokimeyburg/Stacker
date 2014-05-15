@@ -1,0 +1,7 @@
+pod "LMStacker", :path => "../"
+
+target "Demo" do
+end
+
+target "DemoTests" do
+end
