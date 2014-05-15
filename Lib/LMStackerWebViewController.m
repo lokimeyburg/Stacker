@@ -7,6 +7,7 @@
 
 #import "LMStackerWebViewController.h"
 #import "LMStackerURLParser.h"
+#import "LMStackerCustomAction.h"
 #import "UIDevice+Hardware.h"
 
 @interface LMStackerWebViewController ()
@@ -46,7 +47,7 @@ andRootPageTabImageName:(NSString *)pageTabName
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        
+
     }
     return self;
 }
@@ -59,25 +60,25 @@ andRootPageTabImageName:(NSString *)pageTabName
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+
     // Setup Basics
     self.view.frame = CGRectMake(0, 0, 320, 480);
-    
+
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@" " style:UIBarButtonItemStyleDone target:nil action:nil];
     [self.navigationItem setBackBarButtonItem:backButton];
-    
+
     if([self.delegate stackerBackgroundColor] != NULL){
         [self.view setBackgroundColor: [self colorWithHexString:[self.delegate stackerBackgroundColor]]];
     }
-    
+
     // Setup Navigation Items
     [self updateNavigationItems];
-    
+
     // Setup WebView
     self.myWebView = [[UIWebView alloc] initWithFrame:self.view.bounds];
     self.myWebView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     [self loadWebView];
-    
+
     // Setup Refresh Control
     refreshControl = [[UIRefreshControl alloc] init];
     [refreshControl addTarget:self action:@selector(handleRefresh:) forControlEvents:UIControlEventValueChanged];
@@ -92,24 +93,24 @@ andRootPageTabImageName:(NSString *)pageTabName
     NSString *requestedURL          = [[request URL] absoluteString];
     LMStackerURLParser *parser        = [[LMStackerURLParser alloc] initWithURLString:requestedURL];
     NSString *pushPageVariable      = [parser valueForVariable:@"x_push_page"];
-    
+
     NSString *replacePageVariable   = [parser valueForVariable:@"x_replace_page"];
 
     NSString *popPage               = [parser valueForVariable:@"x_pop_page"];
     NSString *popPageAndRefresh     = [parser valueForVariable:@"x_pop_page_and_refresh"];
     NSString *popPageAndReplace     = [parser valueForVariable:@"x_pop_page_and_replace"];
-    
+
     NSString *clearStack            = [parser valueForVariable:@"x_clear_stack"];
     NSString *clearStackAndRefresh  = [parser valueForVariable:@"x_clear_stack_and_refresh"];
     NSString *clearStackAndReplace  = [parser valueForVariable:@"x_clear_stack_and_replace"];
-    
+
     NSString *externalURLVariable   = [parser valueForVariable:@"x_external_page"];
     NSString *customActionHandler   = [parser valueForVariable:@"x_action"];
-    
+
     // Don't move to the next page if we're reshreshing the page and always ignore the first request
     // on non-root pages to ensure we don't cause an infinte loop
     if(!currentlyRefreshing && (self.rootPage || [self.requestCount intValue] > 0)) {
-        
+
         // -- Custom capture paths (href="inapp://capture?x_action=foo")
         if ([request.URL.scheme isEqualToString:@"inapp"]) {
             if ([request.URL.host isEqualToString:@"capture"]) {
@@ -119,68 +120,68 @@ andRootPageTabImageName:(NSString *)pageTabName
             }
             return NO;
         }
-        
-        
+
+
         // -- Push new page
         if ([pushPageVariable isEqualToString:@"true"]) {
             [self.delegate pushNewPage:requestedURL];
             return NO;
         }
-        
+
         // -- Replace page
         if([replacePageVariable isEqualToString:@"true"]) {
             [self.delegate replacePage:requestedURL];
             return NO;
         }
-        
+
         // -- Go back one page
         if([popPage isEqualToString:@"true"]){
             [self.delegate popPage];
             return NO;
         }
-        
+
         // -- Go back one page and refresh
         if ([popPageAndRefresh isEqualToString:@"true"]) {
             [self.delegate popPage];
             [self.delegate refreshPage];
             return NO;
         }
-        
+
         // -- Go back one page and replace
         if ([popPageAndReplace isEqualToString:@"true"]) {
             [self.delegate popPage];
             [self.delegate replacePage:requestedURL];
             return NO;
         }
-        
+
         // -- Clear the stack
         if([clearStack isEqualToString:@"true"]){
             [self.delegate clearStack];
             return NO;
         }
-        
+
         // -- Clear the stack and refresh (useful when you post something)
         if ([clearStackAndRefresh isEqualToString:@"true"]) {
             [self.delegate clearStack];
             [self.delegate refreshPage];
             return NO;
         }
-        
+
         // -- Clear the stack and replace (useful when you post something)
         if ([clearStackAndReplace isEqualToString:@"true"]) {
             [self.delegate clearStack];
             [self.delegate replacePage:requestedURL];
             return NO;
         }
-        
+
         // -- External urls go in a browser
         if ([externalURLVariable isEqualToString:@"true"]) {
             // we need to strip the tilt_external_url parameter so as to keep the intended url
             NSURL *newURL = [[NSURL alloc] initWithScheme:[[request URL] scheme]
                                                      host:[[request URL] host]
                                                      path:[[request URL] path]];
-            
-            
+
+
             NSMutableArray* urlVariables = [parser.variables mutableCopy];
             [urlVariables enumerateObjectsWithOptions:NSEnumerationReverse usingBlock:^(NSString *parameter, NSUInteger index, BOOL *stop) {
                 if ([parameter rangeOfString:@"x_external_page"].location != NSNotFound) {
@@ -190,14 +191,14 @@ andRootPageTabImageName:(NSString *)pageTabName
             NSString *variablesWithoutExternalParamater = [urlVariables componentsJoinedByString:@"&"];
             NSString *urlForBrowser = [[[newURL absoluteString] stringByAppendingString:@"?"] stringByAppendingString:variablesWithoutExternalParamater];
             [self.delegate showBrowserView:urlForBrowser];
-            
+
             return NO;
         }
-        
+
     }
-    
+
     self.requestCount = [NSNumber numberWithInt:[self.requestCount intValue] + 1];
-    
+
     return YES;
 }
 
@@ -205,7 +206,7 @@ andRootPageTabImageName:(NSString *)pageTabName
 {
     // Create our URL parser to use in the next steps
     LMStackerURLParser *parser        = [[LMStackerURLParser alloc] initWithURLString:self.pageURL];
-    
+
     // Setup title
     NSString *newPageTitle          = [parser valueForVariable:@"x_page_title"];
     if([self stringIsNilOrEmpty:newPageTitle]) {
@@ -214,17 +215,17 @@ andRootPageTabImageName:(NSString *)pageTabName
         newPageTitle = [newPageTitle stringByReplacingOccurrencesOfString:@"+" withString:@" "];
         self.title = newPageTitle;
     }
-    
+
     // Setup first page title image
     if (self.rootPage) {
         if ([self.delegate rootPageTitleImage] != nil){
             self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[self.delegate rootPageTitleImage]];
         }
     }
-    
+
     // Setup left hand button handler
     self.buttonHandlers = [self.delegate buttonHandlers];
-    
+
     if (self.rootPage) {
         NSString *leftButtonHandler    = [parser valueForVariable:@"x_left_button"];
         UIBarButtonItem *ourLeftButton = self.buttonHandlers[leftButtonHandler];
@@ -232,7 +233,7 @@ andRootPageTabImageName:(NSString *)pageTabName
             self.navigationItem.leftBarButtonItems = @[ourLeftButton];
         }
     }
-    
+
     // Setup right hand button handler
     NSString *rightButtonHandler    = [parser valueForVariable:@"x_right_button"];
     self.buttonHandlers = [self.delegate buttonHandlers];
@@ -247,13 +248,13 @@ andRootPageTabImageName:(NSString *)pageTabName
 {
     // Clear any previous instances so we make some room in memory
     [self.myWebView removeFromSuperview];
-    
+
     // Now let's add a webview with our URL
     NSURL *url = [[NSURL alloc]initWithString:self.pageURL];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    
+
     request = [self requestWithStackerHeaders:request];
-    
+
     [self.myWebView loadRequest:request];
     [self.myWebView setScalesPageToFit:YES];
     self.myWebView.delegate = self;
@@ -262,7 +263,7 @@ andRootPageTabImageName:(NSString *)pageTabName
     self.myWebView.scrollView.bounces = YES;
     self.myWebView.alpha = 0.0f;
     [self.view addSubview:self.myWebView];
-    
+
     // Lets show a loading indicator
     activityIndicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
 //    [activityIndicator setActivityIndicatorViewStyle:UIActivityIndicatorViewStyleGray];
@@ -298,20 +299,20 @@ andRootPageTabImageName:(NSString *)pageTabName
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
 {
     [activityIndicator removeFromSuperview];
-    
+
     // Dont show error message for retries (-999)
     if([error code] == -1009){
         NSString *htmlFile = [[NSBundle mainBundle] pathForResource:@"no-network-connection" ofType:@"html"];
         NSString* htmlString = [NSString stringWithContentsOfFile:htmlFile encoding:NSUTF8StringEncoding error:nil];
         [self.myWebView loadHTMLString:htmlString baseURL:nil];
     }
-    
+
 }
 
 -(void)handleRefresh:(UIRefreshControl *)refresh {
     // Let this instance know it's refreshing
     currentlyRefreshing = YES;
-    
+
     // Reload my data
     NSString *fullURL = self.pageURL;
     NSURL *url = [NSURL URLWithString:fullURL];
@@ -327,7 +328,7 @@ andRootPageTabImageName:(NSString *)pageTabName
     NSMutableURLRequest *mutableRequest = [originalRequest mutableCopy];
     [mutableRequest addValue:[self applicationVersion] forHTTPHeaderField:@"x-version"];
     [mutableRequest addValue:[self deviceIdentifierHeader ] forHTTPHeaderField:@"x-device-info"];
-    
+
     // Now set our request variable with an (immutable) copy of the altered request
     originalRequest = [mutableRequest copy];
     return originalRequest;
@@ -337,33 +338,33 @@ andRootPageTabImageName:(NSString *)pageTabName
 -(UIColor*)colorWithHexString:(NSString*)hex
 {
     NSString *cString = [[hex stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] uppercaseString];
-    
+
     // String should be 6 or 8 characters
     if ([cString length] < 6) return [UIColor grayColor];
-    
+
     // strip 0X if it appears
     if ([cString hasPrefix:@"0X"]) cString = [cString substringFromIndex:2];
-    
+
     if ([cString length] != 6) return  [UIColor grayColor];
-    
+
     // Separate into r, g, b substrings
     NSRange range;
     range.location = 0;
     range.length = 2;
     NSString *rString = [cString substringWithRange:range];
-    
+
     range.location = 2;
     NSString *gString = [cString substringWithRange:range];
-    
+
     range.location = 4;
     NSString *bString = [cString substringWithRange:range];
-    
+
     // Scan values
     unsigned int r, g, b;
     [[NSScanner scannerWithString:rString] scanHexInt:&r];
     [[NSScanner scannerWithString:gString] scanHexInt:&g];
     [[NSScanner scannerWithString:bString] scanHexInt:&b];
-    
+
     return [UIColor colorWithRed:((float) r / 255.0f)
                            green:((float) g / 255.0f)
                             blue:((float) b / 255.0f)

@@ -29,7 +29,7 @@
 {
     [super viewDidLoad];
     [self.view setBackgroundColor:[UIColor whiteColor]];
-    
+
 }
 
 -(void) popBack {
@@ -39,13 +39,13 @@
 - (void) webViewDidFinishLoad:(UIWebView *)webView
 {
 
-    
+
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
 {
     [activityIndicator removeFromSuperview];
-    
+
     // Dont show error message for retries (-999)
     if([error code] == -1009){
         NSString *htmlFile = [[NSBundle mainBundle] pathForResource:@"no-network-connection" ofType:@"html"];

@@ -31,8 +31,7 @@
 @interface LMStackerWebViewController : UIViewController <UIWebViewDelegate> {
     UIActivityIndicatorView *activityIndicator;
     UIRefreshControl *refreshControl;
-    BOOL *currentlyRefreshing;
-    
+    BOOL currentlyRefreshing;
 }
 
 // Delegate property
@@ -47,7 +46,7 @@
 @property NSString *pageURL;
 @property NSNumber *requestCount;
 @property NSString *backgroundColor;
-@property BOOL *rootPage;
+@property BOOL rootPage;
 @property NSString *rootPageTitle;
 @property NSString *rootPageTabImageName;
 @property NSDictionary *buttonHandlers;
