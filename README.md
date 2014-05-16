@@ -17,11 +17,36 @@ Built for: iPhones & iOS7
 - Custom URL handlers
 - Easily jump back into native code when you need to
 
-## Getting Started
+## Running the Demo
 
-If you get stuck or want something a little more comprehensive, checkout out the [complete set up guide and tutorial](#)
+If you get stuck or want something a little more comprehensive: checkout out the [complete set up guide and tutorial](#)
+
+### 1. Run the demo web app
+
+The demo application is a very simple Rails app called [GameRoom](https://github.com/lokimeyburg/GameRoom). It doesn't really do anything other than showcase some of Stacker's features.
+
+```
+git clone https://github.com/lokimeyburg/GameRoom.git
+cd GameRoom
+bundle install
+rails s
+```
+
+Now open up a web browser and visit `http://localhost:3000`. You should see GameRoom running in your browser.
  
-### 1. Install Stacker
+### 2. Run the example iOS app
+
+Download Stacker and open the `GameRoom` iOS project which is in the `Examples` folder 
+
+```
+$ git clone https://github.com/lokimeyburg/Stacker.git
+$ cd Stacker/Example/GameRoom
+$ open GameRoom.xcodeproj
+```
+
+Now compile and run your iOS app in the simulator. That's it! You should be able to navigate around GameRoom. Look at the source code and change some of the URLs in the Rails app to see what happens.
+
+## Creating a StackerController
 
 **If you're using [CocoaPods:](http://cocoapods.org)**
 
@@ -34,46 +59,19 @@ And then run
 $ pod install
 ```
 
-**If you're using something else**
-
-Clone Stacker 
-
-```
-$ git clone https://github.com/lokimeyburg/Stacker.git
-```
-And import all the files from the `/lib` folder to your own XCode project
-
-### 2. Run the demo web app
-
-```
-git clone https://github.com/lokimeyburg/stackly-app.git
-cd stackly
-rails s
-```
-
-### 3. Point Stacker to your web app
-
-If you wantIn your iOS application in a file like AppDelegate.m:
+Now in your XCode project:
 
 ```
 // Import Stacker
-#import "StackerController.h"
+#import "LMStackerController.h"
 
 // Create a controller and point it to your web app's url
-StackerController *myController = [[StackerController alloc] initWithURL:@"http://localhost:3000/my_webapp"];
-
-// Give it a title
-myController.rootTitle = @"News Feed";
-
+LMStackerController *myController = [[LMStackerController alloc] initWithURL:@"http://localhost:3000?x_page_title=Home"];
 ```
-
-Now compile and run your iOS app.
 
 ## Next Steps:
 
-* Learn the special Stacker URLs
-* Run the demo
-* Build a complete Stacker App from scratch 
+* [Learn the special Stacker URLs](https://github.com/lokimeyburg/Stacker/wiki/Stacker-URL-Structure)
 
 ## Coming soon:
 
