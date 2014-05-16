@@ -39,7 +39,7 @@
 @property NSString *pageURL;
 @property UIImage *rootPageTitleImage;
 @property NSString *stackerBackgroundColor;
-@property BOOL *statusBarLight;
+@property BOOL statusBarLight;
 @property NSDictionary *buttonHandlers;
 @property NSDictionary *customURLHandlers;
 @property NSString *refreshSpinnerColor;
