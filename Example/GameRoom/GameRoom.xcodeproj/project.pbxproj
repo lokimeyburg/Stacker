@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0E070917192EFA6D001AA015 /* WebViewJavascriptBridge.js.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0E070915192EFA6D001AA015 /* WebViewJavascriptBridge.js.txt */; };
+		0E070918192EFA6D001AA015 /* WebViewJavascriptBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E070916192EFA6D001AA015 /* WebViewJavascriptBridge.m */; };
 		0E4FE81B1925B89E008DF208 /* LMRGBParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E4FE80D1925B89E008DF208 /* LMRGBParser.m */; };
 		0E4FE81C1925B89E008DF208 /* LMStackerBrowserController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E4FE80F1925B89E008DF208 /* LMStackerBrowserController.m */; };
 		0E4FE81D1925B89E008DF208 /* LMStackerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E4FE8111925B89E008DF208 /* LMStackerController.m */; };
@@ -44,6 +46,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0E070914192EFA6D001AA015 /* WebViewJavascriptBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewJavascriptBridge.h; sourceTree = "<group>"; };
+		0E070915192EFA6D001AA015 /* WebViewJavascriptBridge.js.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = WebViewJavascriptBridge.js.txt; sourceTree = "<group>"; };
+		0E070916192EFA6D001AA015 /* WebViewJavascriptBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewJavascriptBridge.m; sourceTree = "<group>"; };
 		0E4FE80C1925B89E008DF208 /* LMRGBParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMRGBParser.h; sourceTree = "<group>"; };
 		0E4FE80D1925B89E008DF208 /* LMRGBParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMRGBParser.m; sourceTree = "<group>"; };
 		0E4FE80E1925B89E008DF208 /* LMStackerBrowserController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LMStackerBrowserController.h; path = ../LMStackerBrowserController.h; sourceTree = "<group>"; };
@@ -105,6 +110,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0E070913192EFA6D001AA015 /* WebViewJavascriptBridge */ = {
+			isa = PBXGroup;
+			children = (
+				0E070914192EFA6D001AA015 /* WebViewJavascriptBridge.h */,
+				0E070915192EFA6D001AA015 /* WebViewJavascriptBridge.js.txt */,
+				0E070916192EFA6D001AA015 /* WebViewJavascriptBridge.m */,
+			);
+			name = WebViewJavascriptBridge;
+			path = ../WebViewJavascriptBridge;
+			sourceTree = "<group>";
+		};
 		0E4FE80B1925B89E008DF208 /* LMRGBParser */ = {
 			isa = PBXGroup;
 			children = (
@@ -127,6 +143,7 @@
 		0E4FE8221925B8AA008DF208 /* Stacker */ = {
 			isa = PBXGroup;
 			children = (
+				0E070913192EFA6D001AA015 /* WebViewJavascriptBridge */,
 				0E4FE80B1925B89E008DF208 /* LMRGBParser */,
 				0E4FE80E1925B89E008DF208 /* LMStackerBrowserController.h */,
 				0E4FE80F1925B89E008DF208 /* LMStackerBrowserController.m */,
@@ -285,6 +302,7 @@
 				0E4FE8281925B8FE008DF208 /* logo.png in Resources */,
 				0EBA9591192585DB00A1E4C2 /* Images.xcassets in Resources */,
 				0EBA9583192585DB00A1E4C2 /* InfoPlist.strings in Resources */,
+				0E070917192EFA6D001AA015 /* WebViewJavascriptBridge.js.txt in Resources */,
 				0E4FE82A1925B8FE008DF208 /* no-network-connection.html in Resources */,
 				0E4FE82C1925B8FE008DF208 /* tab-1@2x.png in Resources */,
 				0EBA958C192585DB00A1E4C2 /* Main.storyboard in Resources */,
@@ -308,6 +326,7 @@
 				0E4FE81D1925B89E008DF208 /* LMStackerController.m in Sources */,
 				0E4FE81E1925B89E008DF208 /* LMStackerCustomAction.m in Sources */,
 				0EBA958F192585DB00A1E4C2 /* ViewController.m in Sources */,
+				0E070918192EFA6D001AA015 /* WebViewJavascriptBridge.m in Sources */,
 				0E4FE81B1925B89E008DF208 /* LMRGBParser.m in Sources */,
 				0EBA9589192585DB00A1E4C2 /* AppDelegate.m in Sources */,
 				0E4FE8211925B89E008DF208 /* UIDevice+Hardware.m in Sources */,

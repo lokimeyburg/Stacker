@@ -8,6 +8,7 @@
 #import <UIKit/UIKit.h>
 #import "LMStackerWebViewController.h"
 #import "LMStackerBrowserController.h"
+#import "WebViewJavascriptBridge.h"
 
 // Create delegate so we can call parent navigation
 @protocol LMStackerControllerDelegate <UINavigationControllerDelegate>
@@ -18,7 +19,6 @@
     LMStackerBrowserController *browserNavController;
     NSString *browserViewURL;
 }
-
 
 // Initializers
 - (id)initWithURL:(NSString*)url;
@@ -33,17 +33,16 @@
 - (void) popPage;
 - (void) clearStack;
 
-
 // Properties
-@property UIWebView *myWebView;
-@property NSString *pageURL;
-@property UIImage *rootPageTitleImage;
-@property NSString *stackerBackgroundColor;
-@property BOOL statusBarLight;
-@property NSDictionary *buttonHandlers;
-@property NSDictionary *customURLHandlers;
-@property NSString *refreshSpinnerColor;
-@property NSString *loadingSpinnerColor;
-
+@property UIWebView                 *myWebView;
+@property NSString                  *pageURL;
+@property UIImage                   *rootPageTitleImage;
+@property NSString                  *stackerBackgroundColor;
+@property BOOL                      statusBarLight;
+@property NSDictionary              *buttonHandlers;
+@property NSDictionary              *customURLHandlers;
+@property NSString                  *refreshSpinnerColor;
+@property NSString                  *loadingSpinnerColor;
+@property WebViewJavascriptBridge   *bridge;
 
 @end

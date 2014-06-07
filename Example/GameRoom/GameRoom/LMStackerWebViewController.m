@@ -9,9 +9,10 @@
 #import "LMStackerURLParser.h"
 #import "LMStackerCustomAction.h"
 #import "UIDevice+Hardware.h"
+#import "WebViewJavascriptBridge.h"
 
 @interface LMStackerWebViewController ()
-
+@property WebViewJavascriptBridge* bridge;
 @end
 
 @implementation LMStackerWebViewController
@@ -52,9 +53,10 @@ andRootPageTabImageName:(NSString *)pageTabName
     return self;
 }
 
-- (void)viewDidAppear:(BOOL)animated
+-(void) viewWillAppear:(BOOL)animated
 {
-
+    [self setActiveBridge];
+    [super viewWillAppear:animated];
 }
 
 - (void)viewDidLoad
@@ -78,6 +80,9 @@ andRootPageTabImageName:(NSString *)pageTabName
     self.myWebView = [[UIWebView alloc] initWithFrame:self.view.bounds];
     self.myWebView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     [self loadWebView];
+    
+    // Setup Javascript Bridge
+    [self setUpJavascriptBridge];
 
     // Setup Refresh Control
     refreshControl = [[UIRefreshControl alloc] init];
@@ -89,9 +94,21 @@ andRootPageTabImageName:(NSString *)pageTabName
 }
 
 
+- (void)setActiveBridge
+{
+    self.delegate.bridge = _bridge;
+}
+
+- (void)setUpJavascriptBridge {
+    _bridge = [WebViewJavascriptBridge bridgeForWebView:self.myWebView
+                                        webViewDelegate:self
+                                                handler:^(id data, WVJBResponseCallback responseCallback) { /*..*/ }];
+    [self setActiveBridge];
+}
+
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
     NSString *requestedURL          = [[request URL] absoluteString];
-    LMStackerURLParser *parser        = [[LMStackerURLParser alloc] initWithURLString:requestedURL];
+    LMStackerURLParser *parser      = [[LMStackerURLParser alloc] initWithURLString:requestedURL];
     NSString *pushPageVariable      = [parser valueForVariable:@"x_push_page"];
 
     NSString *replacePageVariable   = [parser valueForVariable:@"x_replace_page"];
@@ -246,6 +263,7 @@ andRootPageTabImageName:(NSString *)pageTabName
 
 - (void) loadWebView
 {
+    
     // Clear any previous instances so we make some room in memory
     [self.myWebView removeFromSuperview];
 
@@ -266,7 +284,6 @@ andRootPageTabImageName:(NSString *)pageTabName
 
     // Lets show a loading indicator
     activityIndicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-//    [activityIndicator setActivityIndicatorViewStyle:UIActivityIndicatorViewStyleGray];
     activityIndicator.center = self.view.center;
     [activityIndicator startAnimating];
     if([self.delegate loadingSpinnerColor] != NULL){

@@ -19,13 +19,24 @@ NSString *DOMAIN_URL;
     
     // 1.) Create a StackerController
     self.homeNavController = [[LMStackerController alloc] initWithURL:
-                              [NSString stringWithFormat:@"%@%@", DOMAIN_URL, @"/design/index?x_right_button=search_button&x_page_title=News+Feed"]];
+                              [NSString stringWithFormat:@"%@%@", DOMAIN_URL, @"/design/index?x_right_button=bifrost_button&x_page_title=News+Feed"]];
     
     // 2.) Custom right button actions
     UIBarButtonItem *newPostButton  = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose target:self action:@selector(showNewPostPage)];
-    UIBarButtonItem *searchButton   = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(showSearchPage)];
-    NSDictionary *buttonHandlers    = @{ @"new_post": newPostButton, @"search_button": searchButton };
+    
+    // Bifrost Doodle -----------------
+    UIBarButtonItem *bifrostButton   = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(sendMessageToBridge)];
+    
+    // --------------------------------
+    
+    NSDictionary *buttonHandlers    = @{ @"new_post": newPostButton, @"bifrost_button": bifrostButton };
     self.homeNavController.buttonHandlers  = buttonHandlers;
+    
+    
+    [self.homeNavController.bridge send:@"A string sent from ObjC to JS" responseCallback:^(id response) {
+        NSLog(@"sendMessage got response: %@", response);
+    }];
+    
     
     // 3.) Custom URL Actions
     LMStackerCustomAction *myCustomAction = [[LMStackerCustomAction alloc] init];
@@ -125,7 +136,11 @@ NSString *DOMAIN_URL;
 -(void) showNewPostPage
 {
     [self.homeNavController pushNewPage:[NSString stringWithFormat:@"%@%@", DOMAIN_URL, @"/design/new_post?x_page_title=New+Post"]];
-    
+}
+
+-(void) sendMessageToBridge
+{
+    [self.homeNavController.bridge send:@"oh hai there!"];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
