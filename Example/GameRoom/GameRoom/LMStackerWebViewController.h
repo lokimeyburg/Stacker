@@ -26,6 +26,7 @@
 @property NSString                  *refreshSpinnerColor;
 @property NSString                  *loadingSpinnerColor;
 @property WebViewJavascriptBridge   *bridge;
+@property NSMutableDictionary       *messageHandlers;
 
 @end
 

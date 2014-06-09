@@ -19,23 +19,16 @@ NSString *DOMAIN_URL;
     
     // 1.) Create a StackerController
     self.homeNavController = [[LMStackerController alloc] initWithURL:
-                              [NSString stringWithFormat:@"%@%@", DOMAIN_URL, @"/design/index?x_right_button=bifrost_button&x_page_title=News+Feed"]];
+                              [NSString stringWithFormat:@"%@%@", DOMAIN_URL, @"/design/index?x_right_button=search_button&x_page_title=News+Feed"]];
     
     // 2.) Custom right button actions
     UIBarButtonItem *newPostButton  = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose target:self action:@selector(showNewPostPage)];
+    UIBarButtonItem *searchButton   = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(showSearchPage)];
+    UIBarButtonItem *saveProfile    = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(sendMessageToBridge)];
+    saveProfile.enabled = NO;
     
-    // Bifrost Doodle -----------------
-    UIBarButtonItem *bifrostButton   = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(sendMessageToBridge)];
-    
-    // --------------------------------
-    
-    NSDictionary *buttonHandlers    = @{ @"new_post": newPostButton, @"bifrost_button": bifrostButton };
+    NSDictionary *buttonHandlers    = @{ @"new_post": newPostButton, @"search_button": searchButton, @"save_profile": saveProfile  };
     self.homeNavController.buttonHandlers  = buttonHandlers;
-    
-    
-    [self.homeNavController.bridge send:@"A string sent from ObjC to JS" responseCallback:^(id response) {
-        NSLog(@"sendMessage got response: %@", response);
-    }];
     
     
     // 3.) Custom URL Actions
@@ -64,7 +57,6 @@ NSString *DOMAIN_URL;
     
     // 5.) Create some tabs in the footer of the app
     UITabBarController *tabBarController = [[UITabBarController alloc] init];
-    [tabBarController addChildViewController:self.homeNavController];
     
     [[UITabBar appearance] setTintColor:[rgbParser colorWithHexString:@"FFFFFF"]];
     [[UITabBar appearance] setBarTintColor:[rgbParser colorWithHexString:@"212D39"]];
@@ -72,14 +64,20 @@ NSString *DOMAIN_URL;
     
     
     // 6.) Some extra stuff for the demo
-    
     LMStackerController *profileNavController = [[LMStackerController alloc] initWithURL:
-                                                 [NSString stringWithFormat:@"%@%@", DOMAIN_URL, @"/design/profile?x_page_title=Profile&x_right_button=new_post"]];
-    profileNavController.tabBarItem.title = @"Profile";
-    profileNavController.tabBarItem.image      = [UIImage imageNamed:@"tab-1.png"];
+                                                 [NSString stringWithFormat:@"%@%@", DOMAIN_URL, @"/design/my_profile?x_page_title=Profile&x_right_button=save_profile"]];
+    profileNavController.tabBarItem.title       = @"Profile";
+    profileNavController.tabBarItem.image       = [UIImage imageNamed:@"tab-1.png"];
     profileNavController.stackerBackgroundColor =  @"F0F1F2";
+    profileNavController.buttonHandlers         = buttonHandlers;
     [profileNavController setCustomURLHandlers:customURLHandlers];
+    
+    [profileNavController registerHandler:@"enableSaveButton" handler:^(id data, WVJBResponseCallback responseCallback) {
+        saveProfile.enabled = YES;
+    }];
+    
     [tabBarController addChildViewController:profileNavController];
+    [tabBarController addChildViewController:self.homeNavController];
     
     
     // Alrighty, spin up the app!
@@ -115,17 +113,13 @@ NSString *DOMAIN_URL;
     // Put the main controller in some kind of naviation with a heading
     LMStackerBrowserController *newPostController = [[LMStackerBrowserController alloc] initWithRootViewController:myRootController];
     
-    //    [self.delegate showBrowserView:browserURL];
     // Show it
     [self.window.rootViewController presentViewController:newPostController animated:YES completion:NULL];
 }
 
 -(void) closeTheBrowserView
 {
-    //    NSLog(@"Trying to close");
     [self.window.rootViewController dismissViewControllerAnimated:YES completion:nil];
-    
-    //    [browserNavController dismissViewControllerAnimated:YES completion:nil];
 }
 
 -(void) showSearchPage

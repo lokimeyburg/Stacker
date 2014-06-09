@@ -32,6 +32,7 @@
 - (void) refreshPage;
 - (void) popPage;
 - (void) clearStack;
+- (void) registerHandler:(NSString*)handlerName handler:(WVJBHandler)handler;
 
 // Properties
 @property UIWebView                 *myWebView;
@@ -44,5 +45,6 @@
 @property NSString                  *refreshSpinnerColor;
 @property NSString                  *loadingSpinnerColor;
 @property WebViewJavascriptBridge   *bridge;
+@property NSMutableDictionary       *messageHandlers;
 
 @end

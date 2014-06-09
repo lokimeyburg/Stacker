@@ -97,6 +97,11 @@ andRootPageTabImageName:(NSString *)pageTabName
 - (void)setActiveBridge
 {
     self.delegate.bridge = _bridge;
+    for (id key in [self.delegate messageHandlers]) {
+        NSLog(@"key: %@ \n", key);
+    }
+    
+    [_bridge setMessageHandlers: self.delegate.messageHandlers];
 }
 
 - (void)setUpJavascriptBridge {
