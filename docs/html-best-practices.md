@@ -5,6 +5,8 @@ title: HTML Best Practices
 
 ## Add viewport constraint
 
+To make your web app respond nicely to the width of your iPhone set the viewport constraint in the `<head>` of your application
+
 ```
 <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
 ```
@@ -15,7 +17,7 @@ Use something like [FastClick](https://github.com/ftlabs/fastclick)
 
 ## Don't use JQuery
 
-Keep your javascript file tiny by using something like [Bifrost](https://github.com/lokimeyburg/Bifrost) because it doesn't have all the cruft that goes into supporting legacy browsers.
+Keep your Javascript file tiny by using something like [Speedball](https://github.com/lokimeyburg/Speedball) because it doesn't have all the cruft that goes into supporting legacy browsers.
 
 ## Lazy load images
 

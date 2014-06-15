@@ -18,8 +18,6 @@
   }
 }
 
-
-
 /* markdown-body */
 /* feature */
 .markdown-body,
@@ -115,9 +113,13 @@ font-size: 1.5em;
   float: none;
 }
 
+.feature-description code {
+  white-space: inherit;
+}
+
 /* code and pre */
 .highlight pre {
-    word-wrap: normal;
+  word-wrap: normal;
   overflow: auto;
 }
 
@@ -129,7 +131,7 @@ font-size: 1.5em;
 /* footer */
 footer {
   margin-top: 60px;
-  padding: 40px 0;
+  padding: 40px 15px;
   color: #9a9a9a;
   text-align: center;
   text-shadow: 0 1px 0 #fff;

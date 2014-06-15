@@ -3,7 +3,7 @@ layout: page
 title: Getting Started 
 ---
 
-Stacker is an iOS view-controller to kickstart development of hybrid native/web iOS apps. Stacker was built to keep your navigation native while the rest of your app is driven by webviews using [Stacker's special URLs.](https://github.com/lokimeyburg/Stacker/wiki/Stacker-URL-Structure)
+Stacker is an iOS view-controller to kickstart development of hybrid native/web iOS apps. Stacker was built to keep your navigation native while the rest of your app is driven by webviews using [Stacker's special URLs.]({{ site.baseurl }}/docs/url-structure)
 
 Inspired by this post by DHH: [Hybrid sweet spot: Native navigation, web content](http://signalvnoise.com/posts/3743-hybrid-sweet-spot-native-navigation-web-content)
 
@@ -11,7 +11,7 @@ Built for: iPhones & iOS 7 (iPad and iOS 8 support coming soon)
 
 ## Running the demo
 
-If you get stuck or want something a little more comprehensive: checkout out the [complete set up guide and tutorial](#). The demo application is a very simple Rails app called [GameRoom](https://github.com/lokimeyburg/GameRoom). It doesn't really do anything other than showcase some of Stacker's features.
+The demo application is a very simple Rails app called [GameRoom](https://github.com/lokimeyburg/GameRoom). It's designed to showcase Stacker's features:
 
 ### 1. Run the demo web app
 
@@ -61,9 +61,9 @@ LMStackerController *myController = [[LMStackerController alloc] initWithURL:@"h
 
 ## Next steps:
 
-* [Learn the special Stacker URLs](https://github.com/lokimeyburg/Stacker/wiki/Stacker-URL-Structure)
-* [Customize the look of Stacker](#)
-* [Build an app from scratch using Stacker](#)
+* [Learn the special Stacker URLs]({{ site.baseurl }}/docs/url-structure)
+* [Customize the look of Stacker]({{ site.baseurl }}/docs/theming)
+* [Learn how to use the Javascript bridge]({{ site.baseurl }}/docs/javascript-bridge)
 
 ## Coming soon:
 

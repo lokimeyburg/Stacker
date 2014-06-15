@@ -128,7 +128,7 @@
     <div class="col-sm-8">
       <div class="markdown-body">
         <h1>Getting Started</h1>
-        <p>Stacker is an iOS view-controller to kickstart development of hybrid native/web iOS apps. Stacker was built to keep your navigation native while the rest of your app is driven by webviews using <a href="https://github.com/lokimeyburg/Stacker/wiki/Stacker-URL-Structure">Stacker&#39;s special URLs.</a></p>
+        <p>Stacker is an iOS view-controller to kickstart development of hybrid native/web iOS apps. Stacker was built to keep your navigation native while the rest of your app is driven by webviews using <a href="/docs/url-structure">Stacker&#39;s special URLs.</a></p>
 
 <p>Inspired by this post by DHH: <a href="http://signalvnoise.com/posts/3743-hybrid-sweet-spot-native-navigation-web-content">Hybrid sweet spot: Native navigation, web content</a></p>
 
@@ -136,7 +136,7 @@
 
 <h2 id="running-the-demo">Running the demo</h2>
 
-<p>If you get stuck or want something a little more comprehensive: checkout out the <a href="#">complete set up guide and tutorial</a>. The demo application is a very simple Rails app called <a href="https://github.com/lokimeyburg/GameRoom">GameRoom</a>. It doesn&#39;t really do anything other than showcase some of Stacker&#39;s features.</p>
+<p>The demo application is a very simple Rails app called <a href="https://github.com/lokimeyburg/GameRoom">GameRoom</a>. It&#39;s designed to showcase Stacker&#39;s features:</p>
 
 <h3 id="1.-run-the-demo-web-app">1. Run the demo web app</h3>
 <div class="highlight"><pre><code class="language-text" data-lang="text">git clone https://github.com/lokimeyburg/GameRoom.git
@@ -178,9 +178,9 @@ LMStackerController *myController = [[LMStackerController alloc] initWithURL:@&q
 <h2 id="next-steps:">Next steps:</h2>
 
 <ul>
-<li><a href="https://github.com/lokimeyburg/Stacker/wiki/Stacker-URL-Structure">Learn the special Stacker URLs</a></li>
-<li><a href="#">Customize the look of Stacker</a></li>
-<li><a href="#">Build an app from scratch using Stacker</a></li>
+<li><a href="/docs/url-structure">Learn the special Stacker URLs</a></li>
+<li><a href="/docs/theming">Customize the look of Stacker</a></li>
+<li><a href="/docs/javascript-bridge">Learn how to use the Javascript bridge</a></li>
 </ul>
 
 <h2 id="coming-soon:">Coming soon:</h2>
@@ -193,7 +193,7 @@ LMStackerController *myController = [[LMStackerController alloc] initWithURL:@&q
       </div>
     </div>
     <div class="col-sm-4">
-      <ul class="nav nav-pills nav-stacked">
+      <ul id="sidebar" class="nav nav-pills nav-stacked">
         <!-- <li><a class="" href="/">Home</a></li> -->
 <!--  -->
 <!--  -->
@@ -276,6 +276,7 @@ LMStackerController *myController = [[LMStackerController alloc] initWithURL:@&q
     </div>
   </div>
 </div>
+
   <footer class="text-center">
   <a href="https://github.com/lokimeyburg/Stacker/blob/master/LICENSE">Licence</a>
   &#183;

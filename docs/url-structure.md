@@ -73,13 +73,13 @@ This will go back one page, replace the page with `/newsfeed` and change the tit
 
 ## Showing a button in the navigation bar
 
-If you've [registered a button with Stacker](#) in your iOS app then you can show that button by calling it in the URL like so:
+If you've [registered a button with Stacker]({{site.baseurl}}/docs/custom-buttons) in your iOS app then you can show that button by calling it in the URL like so:
 
 ```
 /profile?x_page_title=Profile&x_right_button=myNavButton
 ```
 
-This will show a button that you've registered called `myNavButton`. [Read about registering and using buttons.](https://github.com/lokimeyburg/Stacker/wiki/Custom-Navigation-Buttons)
+This will show a button that you've registered called `myNavButton`. [Read about registering and using buttons.]({{site.baseurl}}/docs/custom-buttons)
 
 ## Triggering a custom action
 
@@ -89,6 +89,6 @@ You can execute Objective-C functions by calling a URL that looks like this:
 inapp://capture?x_action=myAction
 ```
 
-This will execute the action you've registered with Stacker called `myAction`. [Read about registering custom actions.](#)
+This will execute the action you've registered with Stacker called `myAction`. [Read about registering custom actions.]({{site.baseurl}}/docs/custom-actions)
 
 Note: if you need anything more fancy you may need to look into integrating a [javascript bridge](https://github.com/marcuswestin/WebViewJavascriptBridge) into your StackerController. I've been meaning to do this myself but haven't found the time.

@@ -234,24 +234,24 @@ news.ca/some/article?1230-breaking-news-this-morning&amp;?mobile=1
 
 <h2 id="showing-a-button-in-the-navigation-bar">Showing a button in the navigation bar</h2>
 
-<p>If you&#39;ve <a href="#">registered a button with Stacker</a> in your iOS app then you can show that button by calling it in the URL like so:</p>
+<p>If you&#39;ve <a href="/docs/custom-buttons">registered a button with Stacker</a> in your iOS app then you can show that button by calling it in the URL like so:</p>
 <div class="highlight"><pre><code class="language-text" data-lang="text">/profile?x_page_title=Profile&amp;x_right_button=myNavButton
 </code></pre></div>
-<p>This will show a button that you&#39;ve registered called <code>myNavButton</code>. <a href="https://github.com/lokimeyburg/Stacker/wiki/Custom-Navigation-Buttons">Read about registering and using buttons.</a></p>
+<p>This will show a button that you&#39;ve registered called <code>myNavButton</code>. <a href="/docs/custom-buttons">Read about registering and using buttons.</a></p>
 
 <h2 id="triggering-a-custom-action">Triggering a custom action</h2>
 
 <p>You can execute Objective-C functions by calling a URL that looks like this:</p>
 <div class="highlight"><pre><code class="language-text" data-lang="text">inapp://capture?x_action=myAction
 </code></pre></div>
-<p>This will execute the action you&#39;ve registered with Stacker called <code>myAction</code>. <a href="#">Read about registering custom actions.</a></p>
+<p>This will execute the action you&#39;ve registered with Stacker called <code>myAction</code>. <a href="/docs/custom-actions">Read about registering custom actions.</a></p>
 
 <p>Note: if you need anything more fancy you may need to look into integrating a <a href="https://github.com/marcuswestin/WebViewJavascriptBridge">javascript bridge</a> into your StackerController. I&#39;ve been meaning to do this myself but haven&#39;t found the time.</p>
 
       </div>
     </div>
     <div class="col-sm-4">
-      <ul class="nav nav-pills nav-stacked">
+      <ul id="sidebar" class="nav nav-pills nav-stacked">
         <!-- <li><a class="" href="/">Home</a></li> -->
 <!--  -->
 <!--  -->
@@ -334,6 +334,7 @@ news.ca/some/article?1230-breaking-news-this-morning&amp;?mobile=1
     </div>
   </div>
 </div>
+
   <footer class="text-center">
   <a href="https://github.com/lokimeyburg/Stacker/blob/master/LICENSE">Licence</a>
   &#183;
