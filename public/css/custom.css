@@ -12,6 +12,13 @@
   }
 }
 
+@media (max-width: 768px) {
+  #sidebar {
+    display: none;
+  }
+}
+
+
 
 /* markdown-body */
 /* feature */
@@ -138,3 +145,4 @@ footer {
 .navbar-collapse.active {
   display: block;
 }
+
