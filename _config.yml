@@ -19,7 +19,7 @@ author:
   name:           'Loki Meyburg'
   url:            https://twitter.com/lokimeyburg
 
-baseurl:          '/'
+baseurl:          '/Stacker'
 
 # Custom vars
 version:          1.0.0
