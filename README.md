@@ -4,20 +4,20 @@ Stacker is an iOS view-controller to kickstart development of hybrid native/web 
 
 Inspired by this post by DHH: [Hybrid sweet spot: Native navigation, web content](http://signalvnoise.com/posts/3743-hybrid-sweet-spot-native-navigation-web-content)
 
-Built for: iPhones & iOS7
+Built for: iPhones & iOS7 (iPad and iOS8 support coming soon)
 
 ## Features
 
-- Easily build [URL-driven iOS apps](https://github.com/lokimeyburg/Stacker/wiki/Stacker-URL-Structure)
-- Browse external websites in a modal view
-- Theming
-- Pull to refresh on all pages
+- Build [URL-driven iOS apps](https://github.com/lokimeyburg/Stacker/wiki/Stacker-URL-Structure)
+- Send messages between Obj-C and JavaScript
 - Custom navigation button handlers
-- Display a page when there's no internet connection
-- Custom URL handlers
-- Easily jump back into native code when you need to
+- View external websites in a separate modal view
+- Theming options
+- Pull to refresh on all pages
+- Error pages
+- App version and device information sent in HTTP headers
 
-## Running the Demo
+## Running the demo
 
 If you get stuck or want something a little more comprehensive: checkout out the [complete set up guide and tutorial](#). The demo application is a very simple Rails app called [GameRoom](https://github.com/lokimeyburg/GameRoom). It doesn't really do anything other than showcase some of Stacker's features.
 
@@ -67,7 +67,7 @@ Now in your XCode project:
 LMStackerController *myController = [[LMStackerController alloc] initWithURL:@"http://localhost:3000?x_page_title=Home"];
 ```
 
-## Next Steps:
+## Next steps:
 
 * [Learn the special Stacker URLs](https://github.com/lokimeyburg/Stacker/wiki/Stacker-URL-Structure)
 * [Customize the look of Stacker](#)
