@@ -1,0 +1,71 @@
+.intro {
+  background: #58B283;
+}
+
+.intro .btn {
+  border: 2px solid #fff;
+  color: #fff;
+  padding: 15px 20px;
+  font-size: 17px;
+}
+
+body {
+ color: #5a5a5a;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #5a5a5a;
+}
+
+a, a:hover {
+  color: #40a977;
+}
+.navbar-default {
+  background-color: #58B283;
+  border-color: #79A480;
+  min-height: 60px;
+  margin-bottom: 50px;
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .navbar-header,
+  .navbar-brand {
+    float: none;
+  }
+}
+
+.navbar-brand {
+padding: 0px 15px;
+}
+
+.navbar-brand img {
+height: 40px;
+margin-top: 10px;
+}
+
+.nav.nav-pills.nav-stacked a:hover{
+  background: none;
+  color: #368F65;
+}
+
+.table {
+  width: 100%;
+  margin-bottom: @line-height-computed;
+}
+
+.markdown-body table > thead > tr > th,
+.markdown-body table > thead > tr > td,
+.markdown-body table > tbody > tr > th,
+.markdown-body table > tbody > tr > td,
+.markdown-body table > tfoot > tr > th,
+.markdown-body table > tfoot > tr > td {
+  vertical-align: top;
+  border-top: 1px solid #CCC;
+  padding: 5px;
+}
+
+.markdown-body table > thead > tr > th {
+  vertical-align: bottom;
+  border-bottom: 2px solid #ccc;
+}

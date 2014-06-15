@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+ <title>Stacker</title>
+ <link href="http://stacker.lokimeyburg.com/atom.xml" rel="self"/>
+ <link href="http://stacker.lokimeyburg.com/"/>
+ <updated>2014-06-15T13:15:36-07:00</updated>
+ <id>http://stacker.lokimeyburg.com</id>
+ <author>
+   <name>Loki Meyburg</name>
+   <email></email>
+ </author>
+
+ 
+ <entry>
+   <title>Example content</title>
+   <link href="http://stacker.lokimeyburg.com/2014/01/01/example-content/"/>
+   <updated>2014-01-01T00:00:00-08:00</updated>
+   <id>http://stacker.lokimeyburg.com/2014/01/01/example-content</id>
+   <content type="html">&lt;p&gt;Stacker is an iOS view-controller to kickstart development of hybrid native/web iOS apps. Stacker was built to keep your navigation native while the rest of your app is driven by webviews using &lt;a href=&quot;https://github.com/lokimeyburg/Stacker/wiki/Stacker-URL-Structure&quot;&gt;Stacker&amp;#39;s special URLs.&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Inspired by this post by DHH: &lt;a href=&quot;http://signalvnoise.com/posts/3743-hybrid-sweet-spot-native-navigation-web-content&quot;&gt;Hybrid sweet spot: Native navigation, web content&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Built for: iPhones &amp;amp; iOS7&lt;/p&gt;
+
+&lt;h2 id=&quot;features&quot;&gt;Features&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Easily build &lt;a href=&quot;https://github.com/lokimeyburg/Stacker/wiki/Stacker-URL-Structure&quot;&gt;URL-driven iOS apps&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Browse external websites in a modal view&lt;/li&gt;
+&lt;li&gt;Theming&lt;/li&gt;
+&lt;li&gt;Pull to refresh on all pages&lt;/li&gt;
+&lt;li&gt;Custom navigation button handlers&lt;/li&gt;
+&lt;li&gt;Display a page when there&amp;#39;s no internet connection&lt;/li&gt;
+&lt;li&gt;Custom URL handlers&lt;/li&gt;
+&lt;li&gt;Easily jump back into native code when you need to&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;running-the-demo&quot;&gt;Running the Demo&lt;/h2&gt;
+
+&lt;p&gt;If you get stuck or want something a little more comprehensive: checkout out the &lt;a href=&quot;#&quot;&gt;complete set up guide and tutorial&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;1.-run-the-demo-web-app&quot;&gt;1. Run the demo web app&lt;/h3&gt;
+
+&lt;p&gt;The demo application is a very simple Rails app called &lt;a href=&quot;https://github.com/lokimeyburg/GameRoom&quot;&gt;GameRoom&lt;/a&gt;. It doesn&amp;#39;t really do anything other than showcase some of Stacker&amp;#39;s features.&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;git clone https://github.com/lokimeyburg/GameRoom.git
+cd GameRoom
+bundle install
+rails s
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Now open up a web browser and visit &lt;code&gt;http://localhost:3000&lt;/code&gt;. You should see GameRoom running in your browser.&lt;/p&gt;
+
+&lt;h3 id=&quot;2.-run-the-example-ios-app&quot;&gt;2. Run the example iOS app&lt;/h3&gt;
+
+&lt;p&gt;Download Stacker and open the &lt;code&gt;GameRoom&lt;/code&gt; iOS project which is in the &lt;code&gt;Examples&lt;/code&gt; folder&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ git clone https://github.com/lokimeyburg/Stacker.git
+$ cd Stacker/Example/GameRoom
+$ open GameRoom.xcodeproj
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Now compile and run your iOS app in the simulator. That&amp;#39;s it! You should be able to navigate around GameRoom. Look at the source code and change some of the URLs in the Rails app to see what happens.&lt;/p&gt;
+
+&lt;h2 id=&quot;creating-a-stackercontroller&quot;&gt;Creating a StackerController&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;If you&amp;#39;re using &lt;a href=&quot;http://cocoapods.org&quot;&gt;CocoaPods:&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;In your Podile add:
+&lt;code&gt;
+pod &amp;#39;LMStacker&amp;#39;, :git =&amp;gt; &amp;#39;https://github.com/lokimeyburg/Stacker.git&amp;#39;
+&lt;/code&gt;
+And then run
+&lt;code&gt;
+$ pod install
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Now in your XCode project:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;// Import Stacker
+#import &amp;quot;LMStackerController.h&amp;quot;
+
+// Create a controller and point it to your web app&amp;#39;s url
+LMStackerController *myController = [[LMStackerController alloc] initWithURL:@&amp;quot;http://localhost:3000?x_page_title=Home&amp;quot;];
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&quot;next-steps:&quot;&gt;Next Steps:&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/lokimeyburg/Stacker/wiki/Stacker-URL-Structure&quot;&gt;Learn the special Stacker URLs&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;coming-soon:&quot;&gt;Coming soon:&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;iPad support&lt;/li&gt;
+&lt;li&gt;Multiple navigation buttons&lt;/li&gt;
+&lt;li&gt;PDF viewer&lt;/li&gt;
+&lt;li&gt;Custom &amp;quot;request has timed out&amp;quot; page&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+ </entry>
+ 
+
+</feed>

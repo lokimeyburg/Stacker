@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>
+    
+      Stacker URL Structure &middot; Stacker
+    
+  </title>
+
+  <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.css">
+  <link rel="stylesheet" href="/public/css/custom.css">
+  <link rel="stylesheet" href="/public/css/theme.css">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+<body>
+  <nav class="navbar navbar-default navbar-static-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-8">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/"><img src='/assets/logo-nav.png' /></a>
+    </div>
+
+
+    <div class="collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+        <!-- <li><a class="" href="/">Home</a></li> -->
+<!--  -->
+<!--  -->
+<!--    -->
+<!--      -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--      -->
+<!--       <li class=""><a href="/docs/custom-actions/">Custom URL Actions</a></li> -->
+<!--      -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--      -->
+<!--       <li class=""><a href="/docs/custom-buttons/">Custom Navigation Buttons</a></li> -->
+<!--      -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--      -->
+<!--       <li class=""><a href="/docs/getting-started/">Getting Started</a></li> -->
+<!--      -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--      -->
+<!--       <li class=""><a href="/docs/html-best-practices/">HTML Best Practices</a></li> -->
+<!--      -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--      -->
+<!--       <li class=""><a href="/docs/http-extras/">HTTP Extras</a></li> -->
+<!--      -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--      -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--      -->
+<!--       <li class=""><a href="/docs/javascript-bridge/">Javascript Bridge</a></li> -->
+<!--      -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--      -->
+<!--       <li class=""><a href="/docs/stacker-objc-api/">Obj-C API</a></li> -->
+<!--      -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--      -->
+<!--       <li class=""><a href="/docs/theming/">Theming Stacker</a></li> -->
+<!--      -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--      -->
+<!--       <li class=" active"><a href="/docs/url-structure/">Stacker URL Structure</a></li> -->
+<!--      -->
+<!--    -->
+<!--  -->
+
+<ul class="nav nav-pills nav-stacked">
+  <li class=""><a href="/docs/getting-started/">Getting Started</a></li>
+  <li class=""><a href="/docs/url-structure/">Stacker URL Structure</a></li>
+  <li class=""><a href="/docs/javascript-bridge/">Javascript Bridge</a></li>
+  <li class=""><a href="/docs/custom-buttons/">Custom Navigation Buttons</a></li>
+  <li class=""><a href="/docs/theming/">Theming Stacker</a></li>
+  <li class=""><a href="/docs/html-best-practices/">HTML Best Practices</a></li>
+  <li class=""><a href="/docs/http-extras/">HTTP Extras</a></li>
+  <li class=""><a href="/docs/stacker-objc-api/">Obj-C API</a></li>
+  <li class=""><a href="/docs/custom-actions/">Custom URL Actions</a></li>
+</ul>
+
+      </ul>
+    </div><!-- /.navbar-collapse -->
+
+  </div>
+</nav>
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-8">
+      <div class="markdown-body">
+        <h1>Stacker URL Structure</h1>
+        <p>Stacker lets you build what I call &quot;URL-driven iOS apps&quot;. That is: you drive your iOS application&#39;s navigation, page headings etc all through how you declare your urls. </p>
+
+<p>An example URL that will stack a new page and set the title to &#39;Profile&#39; will look like: <code>/profile?x_push_page=true&amp;x_title=Profile</code>. </p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>x_push_page</code></td>
+<td>stacks the page on top of the current page</td>
+</tr>
+<tr>
+<td><code>x_replace_page</code></td>
+<td>replaces the current page with the url</td>
+</tr>
+<tr>
+<td><code>x_pop_page</code></td>
+<td>goes back to the previous page</td>
+</tr>
+<tr>
+<td><code>x_pop_page_and_refresh</code></td>
+<td>goes back to the previous page and refreshes it</td>
+</tr>
+<tr>
+<td><code>x_pop_page_and_replace</code></td>
+<td>goes back to the previous page but replaces it with the url</td>
+</tr>
+<tr>
+<td><code>x_clear_stack</code></td>
+<td>goes back to the first page</td>
+</tr>
+<tr>
+<td><code>x_clear_stack_and_refresh</code></td>
+<td>goes back to the first page and refreshes it</td>
+</tr>
+<tr>
+<td><code>x_clear_stack_and_replace</code></td>
+<td>goes back to the first page but replaces it with the url</td>
+</tr>
+<tr>
+<td><code>x_external_page</code></td>
+<td>opens the page in a separate modal view</td>
+</tr>
+</tbody></table>
+
+<h5 id="these-parameters-are-for-custom-titles,-buttons-and-actions:">These parameters are for custom titles, buttons and actions:</h5>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>x_page_title=My+Profile</code></td>
+<td>sets the page&#39;s title to &quot;My Profile&quot;</td>
+</tr>
+<tr>
+<td><code>x_right_button=myButton</code></td>
+<td>shows a custom right-hand navigation button (see: <a href="#">custom button handlers</a>)</td>
+</tr>
+<tr>
+<td><code>x_left_button=myButton</code></td>
+<td>shows a custom left-hand navigation button (see: <a href="#">custom button handlers</a>)</td>
+</tr>
+<tr>
+<td><code>x_action=myAction</code></td>
+<td>will invoke your own custom method (see: <a href="#">custom url actions</a>)</td>
+</tr>
+</tbody></table>
+
+<h2 id="stacking-a-new-page">Stacking a new page</h2>
+
+<p>If you want to load a new webpage and have it &#39;stack&#39; (pushed) on top of your current page then you need to specify <code>x_push_page=true</code> and set the page title you wish to have displayed in the native iOS header like so <code>x_page_title=MyPageTitle</code>. If a page title has multiple words, then use <code>+</code> to seperate the words: <code>x_page_title=My+Profile</code></p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">myapp.com/profile/2?x_new_page=true&amp;
+                    x_page_title=My+Newsfeed
+</code></pre></div>
+<h2 id="open-an-external-website">Open an external website</h2>
+
+<p>Navigating to a URL that&#39;s external to your application should most likely be opened up in a separate browser. To open a link in a browser view just add the <code>x_external_page=true</code> parameter to the URL.</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">news.ca/some/article?x_external_page=true
+</code></pre></div>
+<p>Stacker will automatically strips out the custom parameter to make sure that the intended URL structure is preserved when viewing the web page:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">news.ca/some/article?1230-breaking-news-this-morning&amp;?mobile=1&amp;x_external_page=true
+
+will open:
+
+news.ca/some/article?1230-breaking-news-this-morning&amp;?mobile=1
+</code></pre></div>
+<h2 id="popping-back-one-page">Popping back one page</h2>
+
+<p>You can go back one page by specifying <code>x_pop_page=true</code>. </p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">/profile?x_pop_page=true
+</code></pre></div>
+<p>Sometimes you may post something to a server and want the page to go back and refresh to show the new content you created. You can redirect the page to a URL that includes <code>x_pop_page_and_refresh=true</code> and this Stacker will go back one page and refresh that page to reveal any changes. You can also replace the page with <code>x_pop_page_and_replace=true</code>.</p>
+
+<p>This will go back one page, replace the page with <code>/newsfeed</code> and change the title to <code>News Feed</code> in the navigation bar:
+<code>
+/newsfeed?x_pop_page_and_replace=true&amp;x_page_title=&quot;News+Feed&quot;
+</code></p>
+
+<h2 id="showing-a-button-in-the-navigation-bar">Showing a button in the navigation bar</h2>
+
+<p>If you&#39;ve <a href="#">registered a button with Stacker</a> in your iOS app then you can show that button by calling it in the URL like so:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">/profile?x_page_title=Profile&amp;x_right_button=myNavButton
+</code></pre></div>
+<p>This will show a button that you&#39;ve registered called <code>myNavButton</code>. <a href="https://github.com/lokimeyburg/Stacker/wiki/Custom-Navigation-Buttons">Read about registering and using buttons.</a></p>
+
+<h2 id="triggering-a-custom-action">Triggering a custom action</h2>
+
+<p>You can execute Objective-C functions by calling a URL that looks like this:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">inapp://capture?x_action=myAction
+</code></pre></div>
+<p>This will execute the action you&#39;ve registered with Stacker called <code>myAction</code>. <a href="#">Read about registering custom actions.</a></p>
+
+<p>Note: if you need anything more fancy you may need to look into integrating a <a href="https://github.com/marcuswestin/WebViewJavascriptBridge">javascript bridge</a> into your StackerController. I&#39;ve been meaning to do this myself but haven&#39;t found the time.</p>
+
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <ul class="nav nav-pills nav-stacked">
+        <!-- <li><a class="" href="/">Home</a></li> -->
+<!--  -->
+<!--  -->
+<!--    -->
+<!--      -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--      -->
+<!--       <li class=""><a href="/docs/custom-actions/">Custom URL Actions</a></li> -->
+<!--      -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--      -->
+<!--       <li class=""><a href="/docs/custom-buttons/">Custom Navigation Buttons</a></li> -->
+<!--      -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--      -->
+<!--       <li class=""><a href="/docs/getting-started/">Getting Started</a></li> -->
+<!--      -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--      -->
+<!--       <li class=""><a href="/docs/html-best-practices/">HTML Best Practices</a></li> -->
+<!--      -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--      -->
+<!--       <li class=""><a href="/docs/http-extras/">HTTP Extras</a></li> -->
+<!--      -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--      -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--      -->
+<!--       <li class=""><a href="/docs/javascript-bridge/">Javascript Bridge</a></li> -->
+<!--      -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--      -->
+<!--       <li class=""><a href="/docs/stacker-objc-api/">Obj-C API</a></li> -->
+<!--      -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--      -->
+<!--       <li class=""><a href="/docs/theming/">Theming Stacker</a></li> -->
+<!--      -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--      -->
+<!--       <li class=" active"><a href="/docs/url-structure/">Stacker URL Structure</a></li> -->
+<!--      -->
+<!--    -->
+<!--  -->
+
+<ul class="nav nav-pills nav-stacked">
+  <li class=""><a href="/docs/getting-started/">Getting Started</a></li>
+  <li class=""><a href="/docs/url-structure/">Stacker URL Structure</a></li>
+  <li class=""><a href="/docs/javascript-bridge/">Javascript Bridge</a></li>
+  <li class=""><a href="/docs/custom-buttons/">Custom Navigation Buttons</a></li>
+  <li class=""><a href="/docs/theming/">Theming Stacker</a></li>
+  <li class=""><a href="/docs/html-best-practices/">HTML Best Practices</a></li>
+  <li class=""><a href="/docs/http-extras/">HTTP Extras</a></li>
+  <li class=""><a href="/docs/stacker-objc-api/">Obj-C API</a></li>
+  <li class=""><a href="/docs/custom-actions/">Custom URL Actions</a></li>
+</ul>
+
+      </ul>
+    </div>
+  </div>
+</div>
+  <footer class="text-center">
+  <a href="https://github.com/lokimeyburg/Stacker/blob/master/LICENSE">Licence</a>
+  &#183;
+  <a href="https://github.com/lokimeyburg/Stacker">Download</a>
+  &#183;
+  <a href="/docs/getting-started">Documentation</a>
+  &#183;
+  <a href="http://www.lokimeyburg.com">Made with &#9825; by @LokiMeyburg</a>
+</footer>
+
+
+  <script src="/public/scripts/bifrost.js"></script>
+
+<script type="text/javascript">
+  $(".nav-toggle").click(function(e){
+    e.preventDefault();
+    if($(".nav-items").hasClass("hide")){
+      $(".nav-items").removeClass("hide");
+    } else {
+      $(".nav-items").addClass("hide");
+    }
+  });
+</script>
+
+</body>
+</html>
+
+

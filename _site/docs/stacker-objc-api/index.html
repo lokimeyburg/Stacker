@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>
+    
+      Obj-C API &middot; Stacker
+    
+  </title>
+
+  <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.css">
+  <link rel="stylesheet" href="/public/css/custom.css">
+  <link rel="stylesheet" href="/public/css/theme.css">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+<body>
+  <nav class="navbar navbar-default navbar-static-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-8">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/"><img src='/assets/logo-nav.png' /></a>
+    </div>
+
+
+    <div class="collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+        <!-- <li><a class="" href="/">Home</a></li> -->
+<!--  -->
+<!--  -->
+<!--    -->
+<!--      -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--      -->
+<!--       <li class=""><a href="/docs/custom-actions/">Custom URL Actions</a></li> -->
+<!--      -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--      -->
+<!--       <li class=""><a href="/docs/custom-buttons/">Custom Navigation Buttons</a></li> -->
+<!--      -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--      -->
+<!--       <li class=""><a href="/docs/getting-started/">Getting Started</a></li> -->
+<!--      -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--      -->
+<!--       <li class=""><a href="/docs/html-best-practices/">HTML Best Practices</a></li> -->
+<!--      -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--      -->
+<!--       <li class=""><a href="/docs/http-extras/">HTTP Extras</a></li> -->
+<!--      -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--      -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--      -->
+<!--       <li class=""><a href="/docs/javascript-bridge/">Javascript Bridge</a></li> -->
+<!--      -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--      -->
+<!--       <li class=" active"><a href="/docs/stacker-objc-api/">Obj-C API</a></li> -->
+<!--      -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--      -->
+<!--       <li class=""><a href="/docs/theming/">Theming Stacker</a></li> -->
+<!--      -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--      -->
+<!--       <li class=""><a href="/docs/url-structure/">Stacker URL Structure</a></li> -->
+<!--      -->
+<!--    -->
+<!--  -->
+
+<ul class="nav nav-pills nav-stacked">
+  <li class=""><a href="/docs/getting-started/">Getting Started</a></li>
+  <li class=""><a href="/docs/url-structure/">Stacker URL Structure</a></li>
+  <li class=""><a href="/docs/javascript-bridge/">Javascript Bridge</a></li>
+  <li class=""><a href="/docs/custom-buttons/">Custom Navigation Buttons</a></li>
+  <li class=""><a href="/docs/theming/">Theming Stacker</a></li>
+  <li class=""><a href="/docs/html-best-practices/">HTML Best Practices</a></li>
+  <li class=""><a href="/docs/http-extras/">HTTP Extras</a></li>
+  <li class=""><a href="/docs/stacker-objc-api/">Obj-C API</a></li>
+  <li class=""><a href="/docs/custom-actions/">Custom URL Actions</a></li>
+</ul>
+
+      </ul>
+    </div><!-- /.navbar-collapse -->
+
+  </div>
+</nav>
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-8">
+      <div class="markdown-body">
+        <h1>Obj-C API</h1>
+        <p>Even though the StackerController can mostly be driven by using the <a href="#">special url structures</a> sometimes you may need a little more control</p>
+
+<h2 id="go-back-to-the-root-page">Go back to the root page</h2>
+<div class="highlight"><pre><code class="language-text" data-lang="text"> -(void)goBackToRootView;
+ -(void)goBackToRootViewAndSetURL:(NSString*)newURL;
+</code></pre></div>
+<h2 id="refresh-the-current-page">Refresh the current page</h2>
+<div class="highlight"><pre><code class="language-text" data-lang="text"> -(void)refreshCurrentPage;
+</code></pre></div>
+<h2 id="change-the-current-page&#39;s-url">Change the current page&#39;s URL</h2>
+<div class="highlight"><pre><code class="language-text" data-lang="text"> -(void)refreshCurrentPageWithURL:(NSString*)newURL;
+</code></pre></div>
+<h2 id="stack-a-new-page">Stack a new page</h2>
+<div class="highlight"><pre><code class="language-text" data-lang="text"> -(void)stackNewPage:(NSString*)pageURL
+</code></pre></div>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <ul class="nav nav-pills nav-stacked">
+        <!-- <li><a class="" href="/">Home</a></li> -->
+<!--  -->
+<!--  -->
+<!--    -->
+<!--      -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--      -->
+<!--       <li class=""><a href="/docs/custom-actions/">Custom URL Actions</a></li> -->
+<!--      -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--      -->
+<!--       <li class=""><a href="/docs/custom-buttons/">Custom Navigation Buttons</a></li> -->
+<!--      -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--      -->
+<!--       <li class=""><a href="/docs/getting-started/">Getting Started</a></li> -->
+<!--      -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--      -->
+<!--       <li class=""><a href="/docs/html-best-practices/">HTML Best Practices</a></li> -->
+<!--      -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--      -->
+<!--       <li class=""><a href="/docs/http-extras/">HTTP Extras</a></li> -->
+<!--      -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--      -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--      -->
+<!--       <li class=""><a href="/docs/javascript-bridge/">Javascript Bridge</a></li> -->
+<!--      -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--      -->
+<!--       <li class=" active"><a href="/docs/stacker-objc-api/">Obj-C API</a></li> -->
+<!--      -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--      -->
+<!--       <li class=""><a href="/docs/theming/">Theming Stacker</a></li> -->
+<!--      -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--      -->
+<!--       <li class=""><a href="/docs/url-structure/">Stacker URL Structure</a></li> -->
+<!--      -->
+<!--    -->
+<!--  -->
+
+<ul class="nav nav-pills nav-stacked">
+  <li class=""><a href="/docs/getting-started/">Getting Started</a></li>
+  <li class=""><a href="/docs/url-structure/">Stacker URL Structure</a></li>
+  <li class=""><a href="/docs/javascript-bridge/">Javascript Bridge</a></li>
+  <li class=""><a href="/docs/custom-buttons/">Custom Navigation Buttons</a></li>
+  <li class=""><a href="/docs/theming/">Theming Stacker</a></li>
+  <li class=""><a href="/docs/html-best-practices/">HTML Best Practices</a></li>
+  <li class=""><a href="/docs/http-extras/">HTTP Extras</a></li>
+  <li class=""><a href="/docs/stacker-objc-api/">Obj-C API</a></li>
+  <li class=""><a href="/docs/custom-actions/">Custom URL Actions</a></li>
+</ul>
+
+      </ul>
+    </div>
+  </div>
+</div>
+  <footer class="text-center">
+  <a href="https://github.com/lokimeyburg/Stacker/blob/master/LICENSE">Licence</a>
+  &#183;
+  <a href="https://github.com/lokimeyburg/Stacker">Download</a>
+  &#183;
+  <a href="/docs/getting-started">Documentation</a>
+  &#183;
+  <a href="http://www.lokimeyburg.com">Made with &#9825; by @LokiMeyburg</a>
+</footer>
+
+
+  <script src="/public/scripts/bifrost.js"></script>
+
+<script type="text/javascript">
+  $(".nav-toggle").click(function(e){
+    e.preventDefault();
+    if($(".nav-items").hasClass("hide")){
+      $(".nav-items").removeClass("hide");
+    } else {
+      $(".nav-items").addClass("hide");
+    }
+  });
+</script>
+
+</body>
+</html>
+
+

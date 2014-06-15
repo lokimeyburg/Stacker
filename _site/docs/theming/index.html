@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>
+    
+      Theming Stacker &middot; Stacker
+    
+  </title>
+
+  <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.css">
+  <link rel="stylesheet" href="/public/css/custom.css">
+  <link rel="stylesheet" href="/public/css/theme.css">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+<body>
+  <nav class="navbar navbar-default navbar-static-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-8">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/"><img src='/assets/logo-nav.png' /></a>
+    </div>
+
+
+    <div class="collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+        <!-- <li><a class="" href="/">Home</a></li> -->
+<!--  -->
+<!--  -->
+<!--    -->
+<!--      -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--      -->
+<!--       <li class=""><a href="/docs/custom-actions/">Custom URL Actions</a></li> -->
+<!--      -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--      -->
+<!--       <li class=""><a href="/docs/custom-buttons/">Custom Navigation Buttons</a></li> -->
+<!--      -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--      -->
+<!--       <li class=""><a href="/docs/getting-started/">Getting Started</a></li> -->
+<!--      -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--      -->
+<!--       <li class=""><a href="/docs/html-best-practices/">HTML Best Practices</a></li> -->
+<!--      -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--      -->
+<!--       <li class=""><a href="/docs/http-extras/">HTTP Extras</a></li> -->
+<!--      -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--      -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--      -->
+<!--       <li class=""><a href="/docs/javascript-bridge/">Javascript Bridge</a></li> -->
+<!--      -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--      -->
+<!--       <li class=""><a href="/docs/stacker-objc-api/">Obj-C API</a></li> -->
+<!--      -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--      -->
+<!--       <li class=" active"><a href="/docs/theming/">Theming Stacker</a></li> -->
+<!--      -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--      -->
+<!--       <li class=""><a href="/docs/url-structure/">Stacker URL Structure</a></li> -->
+<!--      -->
+<!--    -->
+<!--  -->
+
+<ul class="nav nav-pills nav-stacked">
+  <li class=""><a href="/docs/getting-started/">Getting Started</a></li>
+  <li class=""><a href="/docs/url-structure/">Stacker URL Structure</a></li>
+  <li class=""><a href="/docs/javascript-bridge/">Javascript Bridge</a></li>
+  <li class=""><a href="/docs/custom-buttons/">Custom Navigation Buttons</a></li>
+  <li class=""><a href="/docs/theming/">Theming Stacker</a></li>
+  <li class=""><a href="/docs/html-best-practices/">HTML Best Practices</a></li>
+  <li class=""><a href="/docs/http-extras/">HTTP Extras</a></li>
+  <li class=""><a href="/docs/stacker-objc-api/">Obj-C API</a></li>
+  <li class=""><a href="/docs/custom-actions/">Custom URL Actions</a></li>
+</ul>
+
+      </ul>
+    </div><!-- /.navbar-collapse -->
+
+  </div>
+</nav>
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-8">
+      <div class="markdown-body">
+        <h1>Theming Stacker</h1>
+        <p>Stacking comes with several theming options to customize the look and feel of your application</p>
+
+<p>We&#39;ll create a Stacker controller called <code>myStackerController</code> and use it in the examples below:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">StackerController *myStackerController = [[StackerController alloc] initWithURL:@&quot;http://localhost:3000/&quot;];
+</code></pre></div>
+<h2 id="background-color">Background Color</h2>
+<div class="highlight"><pre><code class="language-text" data-lang="text">[myStackerController setWebViewBackgroundColor:@&quot;F0F1F2&quot;];
+</code></pre></div>
+<h2 id="title-of-the-first-page">Title of the first page</h2>
+<div class="highlight"><pre><code class="language-text" data-lang="text">myStackerController.rootTitle             = @&quot;News Feed&quot;;
+</code></pre></div>
+<h2 id="image-for-a-title">Image for a title</h2>
+<div class="highlight"><pre><code class="language-text" data-lang="text">myStackerController.rootPageTitleImage    = [UIImage imageNamed:@&quot;logo.png&quot;];
+</code></pre></div>
+<p>There should be two images in your applications directory, one retina and one non-retina. So in above example you need a <code>logo.png</code> &amp; <code>logo@2x.png</code> image.</p>
+
+<h2 id="setting-the-status-bar-color">Setting the status bar color</h2>
+
+<p>If you want a light status bar:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">myStackerController.statusBarLight        = YES;
+</code></pre></div>
+<h2 id="tab-icon">Tab Icon</h2>
+
+<p>Carried over from it&#39;s parent class, UINavigationController, you can set the tab bar image. Make sure to include both a retir</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">myStackerController.tabBarItem.image      = [UIImage imageNamed:@&quot;tab-1.png&quot;];
+</code></pre></div>
+<h2 id="header-colors">Header colors</h2>
+
+<p>This will set the background to <code>#47916B</code> and all the text to <code>#FFFFFF</code>. RGBParser comes with Stacker (or you can <a href="https://github.com/lokimeyburg/RGBParser">download it from Github.</a>). </p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">RGBParser *rgbParser = [[RGBParser alloc] init];
+myStackerController.navigationBar.barTintColor = [rgbParser colorWithHexString:@&quot;47916B&quot;];
+myStackerController.navigationBar.tintColor = [rgbParser colorWithHexString:@&quot;FFFFFF&quot;];
+[myStackerController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [rgbParser colorWithHexString:@&quot;FFFFFF&quot;]}];
+</code></pre></div>
+<h2 id="loading-and-refresh-spinner-color">Loading and Refresh Spinner Color</h2>
+<div class="highlight"><pre><code class="language-text" data-lang="text">myStackerController.refreshSpinnerColor   = @&quot;6F9FCD&quot;;
+myStackerController.loadingSpinnerColor   = @&quot;1C3347&quot;;
+</code></pre></div>
+<h2 id="error-pages">Error Pages</h2>
+
+<h4 id="no-network-connection-page">No Network Connection Page</h4>
+
+<p>Stacker comes with an html file called <code>no-network-connection.html</code> and will render it when your app has lost it&#39;s Internet connection. Find the file and edit it like you would a regular HTML file (remember, your app is no longer connected to the internet, so customize this HTML page with that in mind).</p>
+
+<h4 id="couldn&#39;t-find-page">Couldn&#39;t find page</h4>
+
+<p>Similar to above, it&#39;s called <code>not-found.html</code> and is shown if the server couldn&#39;t be reached.</p>
+
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <ul class="nav nav-pills nav-stacked">
+        <!-- <li><a class="" href="/">Home</a></li> -->
+<!--  -->
+<!--  -->
+<!--    -->
+<!--      -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--      -->
+<!--       <li class=""><a href="/docs/custom-actions/">Custom URL Actions</a></li> -->
+<!--      -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--      -->
+<!--       <li class=""><a href="/docs/custom-buttons/">Custom Navigation Buttons</a></li> -->
+<!--      -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--      -->
+<!--       <li class=""><a href="/docs/getting-started/">Getting Started</a></li> -->
+<!--      -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--      -->
+<!--       <li class=""><a href="/docs/html-best-practices/">HTML Best Practices</a></li> -->
+<!--      -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--      -->
+<!--       <li class=""><a href="/docs/http-extras/">HTTP Extras</a></li> -->
+<!--      -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--      -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--      -->
+<!--       <li class=""><a href="/docs/javascript-bridge/">Javascript Bridge</a></li> -->
+<!--      -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--      -->
+<!--       <li class=""><a href="/docs/stacker-objc-api/">Obj-C API</a></li> -->
+<!--      -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--      -->
+<!--       <li class=" active"><a href="/docs/theming/">Theming Stacker</a></li> -->
+<!--      -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--      -->
+<!--       <li class=""><a href="/docs/url-structure/">Stacker URL Structure</a></li> -->
+<!--      -->
+<!--    -->
+<!--  -->
+
+<ul class="nav nav-pills nav-stacked">
+  <li class=""><a href="/docs/getting-started/">Getting Started</a></li>
+  <li class=""><a href="/docs/url-structure/">Stacker URL Structure</a></li>
+  <li class=""><a href="/docs/javascript-bridge/">Javascript Bridge</a></li>
+  <li class=""><a href="/docs/custom-buttons/">Custom Navigation Buttons</a></li>
+  <li class=""><a href="/docs/theming/">Theming Stacker</a></li>
+  <li class=""><a href="/docs/html-best-practices/">HTML Best Practices</a></li>
+  <li class=""><a href="/docs/http-extras/">HTTP Extras</a></li>
+  <li class=""><a href="/docs/stacker-objc-api/">Obj-C API</a></li>
+  <li class=""><a href="/docs/custom-actions/">Custom URL Actions</a></li>
+</ul>
+
+      </ul>
+    </div>
+  </div>
+</div>
+  <footer class="text-center">
+  <a href="https://github.com/lokimeyburg/Stacker/blob/master/LICENSE">Licence</a>
+  &#183;
+  <a href="https://github.com/lokimeyburg/Stacker">Download</a>
+  &#183;
+  <a href="/docs/getting-started">Documentation</a>
+  &#183;
+  <a href="http://www.lokimeyburg.com">Made with &#9825; by @LokiMeyburg</a>
+</footer>
+
+
+  <script src="/public/scripts/bifrost.js"></script>
+
+<script type="text/javascript">
+  $(".nav-toggle").click(function(e){
+    e.preventDefault();
+    if($(".nav-items").hasClass("hide")){
+      $(".nav-items").removeClass("hide");
+    } else {
+      $(".nav-items").addClass("hide");
+    }
+  });
+</script>
+
+</body>
+</html>
+
+

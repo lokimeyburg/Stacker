@@ -1,0 +1,28 @@
+# Dependencies
+markdown:         redcarpet
+highlighter:      pygments
+
+#Customization of markdown handler
+redcarpet:
+  extensions: ["no_intra_emphasis", "fenced_code_blocks", "autolink", "tables", "with_toc_data"]
+# Permalinks
+permalink:        pretty
+
+# Setup
+title:            Stacker
+tagline:          'Kickstart development of hybrid iOS apps'
+description:      'Kickstart development of hybrid iOS apps'
+url:              http://stacker.lokimeyburg.com
+paginate:         2
+
+author:
+  name:           'Loki Meyburg'
+  url:            https://twitter.com/lokimeyburg
+
+baseurl:          '/'
+
+# Custom vars
+version:          1.0.0
+
+github:
+  repo:           https://github.com/lokimeyburg/home
