@@ -97,10 +97,6 @@ andRootPageTabImageName:(NSString *)pageTabName
 - (void)setActiveBridge
 {
     self.delegate.bridge = _bridge;
-    for (id key in [self.delegate messageHandlers]) {
-        NSLog(@"key: %@ \n", key);
-    }
-    
     [_bridge setMessageHandlers: self.delegate.messageHandlers];
 }
 
@@ -321,10 +317,15 @@ andRootPageTabImageName:(NSString *)pageTabName
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
 {
     [activityIndicator removeFromSuperview];
-
-    // Dont show error message for retries (-999)
+    
     if([error code] == -1009){
         NSString *htmlFile = [[NSBundle mainBundle] pathForResource:@"no-network-connection" ofType:@"html"];
+        NSString* htmlString = [NSString stringWithContentsOfFile:htmlFile encoding:NSUTF8StringEncoding error:nil];
+        [self.myWebView loadHTMLString:htmlString baseURL:nil];
+    }
+    
+    if([error code] == -1004){
+        NSString *htmlFile = [[NSBundle mainBundle] pathForResource:@"not-found" ofType:@"html"];
         NSString* htmlString = [NSString stringWithContentsOfFile:htmlFile encoding:NSUTF8StringEncoding error:nil];
         [self.myWebView loadHTMLString:htmlString baseURL:nil];
     }

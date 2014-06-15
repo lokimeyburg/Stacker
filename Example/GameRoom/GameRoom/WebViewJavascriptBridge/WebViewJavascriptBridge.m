@@ -79,7 +79,6 @@ static bool logging = false;
 
 - (void)setMessageHandlers:(NSMutableDictionary *)newMessageHandlers
 {
-    NSLog(@"setting message handler");
     _messageHandlers = newMessageHandlers;
 }
 
