@@ -1,12 +1,12 @@
 <script src="/public/scripts/bifrost.js"></script>
 
 <script type="text/javascript">
-  $(".nav-toggle").click(function(e){
+  $(".navbar-toggle").click(function(e){
     e.preventDefault();
-    if($(".nav-items").hasClass("hide")){
-      $(".nav-items").removeClass("hide");
+    if($(".navbar-collapse").hasClass("active")){
+      $(".navbar-collapse").removeClass("active");
     } else {
-      $(".nav-items").addClass("hide");
+      $(".navbar-collapse").addClass("active");
     }
   });
 </script>

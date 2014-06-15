@@ -129,3 +129,12 @@ footer {
   background-color: #f5f5f5;
   border-top: 1px solid #e5e5e5;
 }
+
+
+.navbar-collapse {
+  max-height: none;
+}
+
+.navbar-collapse.active {
+  display: block;
+}

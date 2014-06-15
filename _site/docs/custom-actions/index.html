@@ -6,19 +6,20 @@
 
   <!-- Enable responsiveness on mobile devices-->
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
+  <link rel="shortcut icon" href="/public/favicon.ico">
   <title>
     
       Custom URL Actions &middot; Stacker
     
   </title>
 
-  <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.css">
+  <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
   <link rel="stylesheet" href="/public/css/custom.css">
   <link rel="stylesheet" href="/public/css/theme.css">
 
   <!-- RSS -->
   <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+
 </head>
 
 <body>
@@ -105,7 +106,6 @@
 <!--    -->
 <!--  -->
 
-<ul class="nav nav-pills nav-stacked">
   <li class=""><a href="/docs/getting-started/">Getting Started</a></li>
   <li class=""><a href="/docs/url-structure/">Stacker URL Structure</a></li>
   <li class=""><a href="/docs/javascript-bridge/">Javascript Bridge</a></li>
@@ -115,7 +115,6 @@
   <li class=""><a href="/docs/http-extras/">HTTP Extras</a></li>
   <li class=""><a href="/docs/stacker-objc-api/">Obj-C API</a></li>
   <li class=""><a href="/docs/custom-actions/">Custom URL Actions</a></li>
-</ul>
 
       </ul>
     </div><!-- /.navbar-collapse -->
@@ -213,7 +212,6 @@ NSDictionary *customURLHandlers = @{ @&quot;open_cnn&quot; : openCNN };
 <!--    -->
 <!--  -->
 
-<ul class="nav nav-pills nav-stacked">
   <li class=""><a href="/docs/getting-started/">Getting Started</a></li>
   <li class=""><a href="/docs/url-structure/">Stacker URL Structure</a></li>
   <li class=""><a href="/docs/javascript-bridge/">Javascript Bridge</a></li>
@@ -223,7 +221,6 @@ NSDictionary *customURLHandlers = @{ @&quot;open_cnn&quot; : openCNN };
   <li class=""><a href="/docs/http-extras/">HTTP Extras</a></li>
   <li class=""><a href="/docs/stacker-objc-api/">Obj-C API</a></li>
   <li class=""><a href="/docs/custom-actions/">Custom URL Actions</a></li>
-</ul>
 
       </ul>
     </div>
@@ -243,12 +240,12 @@ NSDictionary *customURLHandlers = @{ @&quot;open_cnn&quot; : openCNN };
   <script src="/public/scripts/bifrost.js"></script>
 
 <script type="text/javascript">
-  $(".nav-toggle").click(function(e){
+  $(".navbar-toggle").click(function(e){
     e.preventDefault();
-    if($(".nav-items").hasClass("hide")){
-      $(".nav-items").removeClass("hide");
+    if($(".navbar-collapse").hasClass("active")){
+      $(".navbar-collapse").removeClass("active");
     } else {
-      $(".nav-items").addClass("hide");
+      $(".navbar-collapse").addClass("active");
     }
   });
 </script>

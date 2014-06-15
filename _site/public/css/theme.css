@@ -69,3 +69,29 @@ margin-top: 10px;
   vertical-align: bottom;
   border-bottom: 2px solid #ccc;
 }
+
+
+.navbar-default .navbar-toggle,
+.navbar-default .navbar-toggle:hover,
+.navbar-default .navbar-toggle:focus,
+.navbar-default .navbar-toggle:active {
+  border-color: transparent;
+  background-color: transparent;
+}
+
+.navbar-default .navbar-toggle .icon-bar {
+  background-color: #2D5B43;
+  height: 3px;
+}
+
+.navbar-default .navbar-collapse {
+  border: none;
+}
+
+.navbar-default .navbar-collapse > ul > li > a,
+.navbar-default .navbar-collapse > ul > li > a:hover,
+.navbar-default .navbar-collapse > ul > li > a:focus {
+  color: #fff;
+  text-decoration: none;
+}
+
