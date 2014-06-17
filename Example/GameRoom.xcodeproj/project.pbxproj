@@ -7,18 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0E4FE81B1925B89E008DF208 /* LMRGBParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E4FE80D1925B89E008DF208 /* LMRGBParser.m */; };
-		0E4FE81C1925B89E008DF208 /* LMStackerBrowserController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E4FE80F1925B89E008DF208 /* LMStackerBrowserController.m */; };
-		0E4FE81D1925B89E008DF208 /* LMStackerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E4FE8111925B89E008DF208 /* LMStackerController.m */; };
-		0E4FE81E1925B89E008DF208 /* LMStackerCustomAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E4FE8131925B89E008DF208 /* LMStackerCustomAction.m */; };
-		0E4FE81F1925B89E008DF208 /* LMStackerURLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E4FE8151925B89E008DF208 /* LMStackerURLParser.m */; };
-		0E4FE8201925B89E008DF208 /* LMStackerWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E4FE8171925B89E008DF208 /* LMStackerWebViewController.m */; };
-		0E4FE8211925B89E008DF208 /* UIDevice+Hardware.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E4FE81A1925B89E008DF208 /* UIDevice+Hardware.m */; };
 		0E4FE8281925B8FE008DF208 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E4FE8231925B8FE008DF208 /* logo.png */; };
 		0E4FE8291925B8FE008DF208 /* logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E4FE8241925B8FE008DF208 /* logo@2x.png */; };
-		0E4FE82A1925B8FE008DF208 /* no-network-connection.html in Resources */ = {isa = PBXBuildFile; fileRef = 0E4FE8251925B8FE008DF208 /* no-network-connection.html */; };
 		0E4FE82B1925B8FE008DF208 /* tab-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E4FE8261925B8FE008DF208 /* tab-1.png */; };
 		0E4FE82C1925B8FE008DF208 /* tab-1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E4FE8271925B8FE008DF208 /* tab-1@2x.png */; };
+		0EB8BBC7195083BB00FB0856 /* LMRGBParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EB8BBB4195083BB00FB0856 /* LMRGBParser.m */; };
+		0EB8BBC8195083BB00FB0856 /* LMStackerBrowserController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EB8BBB6195083BB00FB0856 /* LMStackerBrowserController.m */; };
+		0EB8BBC9195083BB00FB0856 /* LMStackerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EB8BBB8195083BB00FB0856 /* LMStackerController.m */; };
+		0EB8BBCA195083BB00FB0856 /* LMStackerCustomAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EB8BBBA195083BB00FB0856 /* LMStackerCustomAction.m */; };
+		0EB8BBCB195083BB00FB0856 /* LMStackerURLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EB8BBBC195083BB00FB0856 /* LMStackerURLParser.m */; };
+		0EB8BBCC195083BB00FB0856 /* LMStackerWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EB8BBBE195083BB00FB0856 /* LMStackerWebViewController.m */; };
+		0EB8BBCD195083BB00FB0856 /* LICENCE in Resources */ = {isa = PBXBuildFile; fileRef = 0EB8BBC0195083BB00FB0856 /* LICENCE */; };
+		0EB8BBCE195083BB00FB0856 /* UIDevice+Hardware.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EB8BBC2195083BB00FB0856 /* UIDevice+Hardware.m */; };
+		0EB8BBCF195083BB00FB0856 /* LICENCE in Resources */ = {isa = PBXBuildFile; fileRef = 0EB8BBC4195083BB00FB0856 /* LICENCE */; };
+		0EB8BBD0195083BB00FB0856 /* WebViewJavascriptBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EB8BBC6195083BB00FB0856 /* WebViewJavascriptBridge.m */; };
+		0EB8BBD5195083FF00FB0856 /* no-network-connection.html in Resources */ = {isa = PBXBuildFile; fileRef = 0EB8BBD2195083FF00FB0856 /* no-network-connection.html */; };
+		0EB8BBD6195083FF00FB0856 /* not-found.html in Resources */ = {isa = PBXBuildFile; fileRef = 0EB8BBD3195083FF00FB0856 /* not-found.html */; };
+		0EB8BBD7195083FF00FB0856 /* WebViewJavascriptBridge.js.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0EB8BBD4195083FF00FB0856 /* WebViewJavascriptBridge.js.txt */; };
 		0EBA9579192585DB00A1E4C2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EBA9578192585DB00A1E4C2 /* Foundation.framework */; };
 		0EBA957B192585DB00A1E4C2 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EBA957A192585DB00A1E4C2 /* CoreGraphics.framework */; };
 		0EBA957D192585DB00A1E4C2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EBA957C192585DB00A1E4C2 /* UIKit.framework */; };
@@ -26,7 +31,6 @@
 		0EBA9585192585DB00A1E4C2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EBA9584192585DB00A1E4C2 /* main.m */; };
 		0EBA9589192585DB00A1E4C2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EBA9588192585DB00A1E4C2 /* AppDelegate.m */; };
 		0EBA958C192585DB00A1E4C2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0EBA958A192585DB00A1E4C2 /* Main.storyboard */; };
-		0EBA958F192585DB00A1E4C2 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EBA958E192585DB00A1E4C2 /* ViewController.m */; };
 		0EBA9591192585DB00A1E4C2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0EBA9590192585DB00A1E4C2 /* Images.xcassets */; };
 		0EBA9598192585DB00A1E4C2 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EBA9597192585DB00A1E4C2 /* XCTest.framework */; };
 		0EBA9599192585DB00A1E4C2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EBA9578192585DB00A1E4C2 /* Foundation.framework */; };
@@ -44,25 +48,31 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0E4FE80C1925B89E008DF208 /* LMRGBParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMRGBParser.h; sourceTree = "<group>"; };
-		0E4FE80D1925B89E008DF208 /* LMRGBParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMRGBParser.m; sourceTree = "<group>"; };
-		0E4FE80E1925B89E008DF208 /* LMStackerBrowserController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LMStackerBrowserController.h; path = ../LMStackerBrowserController.h; sourceTree = "<group>"; };
-		0E4FE80F1925B89E008DF208 /* LMStackerBrowserController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LMStackerBrowserController.m; path = ../LMStackerBrowserController.m; sourceTree = "<group>"; };
-		0E4FE8101925B89E008DF208 /* LMStackerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LMStackerController.h; path = ../LMStackerController.h; sourceTree = "<group>"; };
-		0E4FE8111925B89E008DF208 /* LMStackerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LMStackerController.m; path = ../LMStackerController.m; sourceTree = "<group>"; };
-		0E4FE8121925B89E008DF208 /* LMStackerCustomAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LMStackerCustomAction.h; path = ../LMStackerCustomAction.h; sourceTree = "<group>"; };
-		0E4FE8131925B89E008DF208 /* LMStackerCustomAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LMStackerCustomAction.m; path = ../LMStackerCustomAction.m; sourceTree = "<group>"; };
-		0E4FE8141925B89E008DF208 /* LMStackerURLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LMStackerURLParser.h; path = ../LMStackerURLParser.h; sourceTree = "<group>"; };
-		0E4FE8151925B89E008DF208 /* LMStackerURLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LMStackerURLParser.m; path = ../LMStackerURLParser.m; sourceTree = "<group>"; };
-		0E4FE8161925B89E008DF208 /* LMStackerWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LMStackerWebViewController.h; path = ../LMStackerWebViewController.h; sourceTree = "<group>"; };
-		0E4FE8171925B89E008DF208 /* LMStackerWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LMStackerWebViewController.m; path = ../LMStackerWebViewController.m; sourceTree = "<group>"; };
-		0E4FE8191925B89E008DF208 /* UIDevice+Hardware.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+Hardware.h"; sourceTree = "<group>"; };
-		0E4FE81A1925B89E008DF208 /* UIDevice+Hardware.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+Hardware.m"; sourceTree = "<group>"; };
 		0E4FE8231925B8FE008DF208 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		0E4FE8241925B8FE008DF208 /* logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo@2x.png"; sourceTree = "<group>"; };
-		0E4FE8251925B8FE008DF208 /* no-network-connection.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "no-network-connection.html"; sourceTree = "<group>"; };
 		0E4FE8261925B8FE008DF208 /* tab-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab-1.png"; sourceTree = "<group>"; };
 		0E4FE8271925B8FE008DF208 /* tab-1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab-1@2x.png"; sourceTree = "<group>"; };
+		0EB8BBB3195083BB00FB0856 /* LMRGBParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMRGBParser.h; sourceTree = "<group>"; };
+		0EB8BBB4195083BB00FB0856 /* LMRGBParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMRGBParser.m; sourceTree = "<group>"; };
+		0EB8BBB5195083BB00FB0856 /* LMStackerBrowserController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMStackerBrowserController.h; sourceTree = "<group>"; };
+		0EB8BBB6195083BB00FB0856 /* LMStackerBrowserController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMStackerBrowserController.m; sourceTree = "<group>"; };
+		0EB8BBB7195083BB00FB0856 /* LMStackerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMStackerController.h; sourceTree = "<group>"; };
+		0EB8BBB8195083BB00FB0856 /* LMStackerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMStackerController.m; sourceTree = "<group>"; };
+		0EB8BBB9195083BB00FB0856 /* LMStackerCustomAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMStackerCustomAction.h; sourceTree = "<group>"; };
+		0EB8BBBA195083BB00FB0856 /* LMStackerCustomAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMStackerCustomAction.m; sourceTree = "<group>"; };
+		0EB8BBBB195083BB00FB0856 /* LMStackerURLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMStackerURLParser.h; sourceTree = "<group>"; };
+		0EB8BBBC195083BB00FB0856 /* LMStackerURLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMStackerURLParser.m; sourceTree = "<group>"; };
+		0EB8BBBD195083BB00FB0856 /* LMStackerWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMStackerWebViewController.h; sourceTree = "<group>"; };
+		0EB8BBBE195083BB00FB0856 /* LMStackerWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMStackerWebViewController.m; sourceTree = "<group>"; };
+		0EB8BBC0195083BB00FB0856 /* LICENCE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENCE; sourceTree = "<group>"; };
+		0EB8BBC1195083BB00FB0856 /* UIDevice+Hardware.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+Hardware.h"; sourceTree = "<group>"; };
+		0EB8BBC2195083BB00FB0856 /* UIDevice+Hardware.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+Hardware.m"; sourceTree = "<group>"; };
+		0EB8BBC4195083BB00FB0856 /* LICENCE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENCE; sourceTree = "<group>"; };
+		0EB8BBC5195083BB00FB0856 /* WebViewJavascriptBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewJavascriptBridge.h; sourceTree = "<group>"; };
+		0EB8BBC6195083BB00FB0856 /* WebViewJavascriptBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewJavascriptBridge.m; sourceTree = "<group>"; };
+		0EB8BBD2195083FF00FB0856 /* no-network-connection.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "no-network-connection.html"; sourceTree = "<group>"; };
+		0EB8BBD3195083FF00FB0856 /* not-found.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "not-found.html"; sourceTree = "<group>"; };
+		0EB8BBD4195083FF00FB0856 /* WebViewJavascriptBridge.js.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = WebViewJavascriptBridge.js.txt; sourceTree = "<group>"; };
 		0EBA9575192585DB00A1E4C2 /* GameRoom.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GameRoom.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0EBA9578192585DB00A1E4C2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		0EBA957A192585DB00A1E4C2 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -74,8 +84,6 @@
 		0EBA9587192585DB00A1E4C2 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		0EBA9588192585DB00A1E4C2 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		0EBA958B192585DB00A1E4C2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		0EBA958D192585DB00A1E4C2 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		0EBA958E192585DB00A1E4C2 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		0EBA9590192585DB00A1E4C2 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		0EBA9596192585DB00A1E4C2 /* GameRoomTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GameRoomTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0EBA9597192585DB00A1E4C2 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -105,43 +113,65 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0E4FE80B1925B89E008DF208 /* LMRGBParser */ = {
+		0EB8BBB1195083BB00FB0856 /* Lib */ = {
 			isa = PBXGroup;
 			children = (
-				0E4FE80C1925B89E008DF208 /* LMRGBParser.h */,
-				0E4FE80D1925B89E008DF208 /* LMRGBParser.m */,
+				0EB8BBB2195083BB00FB0856 /* LMRGBParser */,
+				0EB8BBB5195083BB00FB0856 /* LMStackerBrowserController.h */,
+				0EB8BBB6195083BB00FB0856 /* LMStackerBrowserController.m */,
+				0EB8BBB7195083BB00FB0856 /* LMStackerController.h */,
+				0EB8BBB8195083BB00FB0856 /* LMStackerController.m */,
+				0EB8BBB9195083BB00FB0856 /* LMStackerCustomAction.h */,
+				0EB8BBBA195083BB00FB0856 /* LMStackerCustomAction.m */,
+				0EB8BBBB195083BB00FB0856 /* LMStackerURLParser.h */,
+				0EB8BBBC195083BB00FB0856 /* LMStackerURLParser.m */,
+				0EB8BBBD195083BB00FB0856 /* LMStackerWebViewController.h */,
+				0EB8BBBE195083BB00FB0856 /* LMStackerWebViewController.m */,
+				0EB8BBBF195083BB00FB0856 /* UIDevice */,
+				0EB8BBC3195083BB00FB0856 /* WebViewJavascriptBridge */,
 			);
-			name = LMRGBParser;
+			name = Lib;
+			path = ../../Lib;
 			sourceTree = "<group>";
 		};
-		0E4FE8181925B89E008DF208 /* UIDevice */ = {
+		0EB8BBB2195083BB00FB0856 /* LMRGBParser */ = {
 			isa = PBXGroup;
 			children = (
-				0E4FE8191925B89E008DF208 /* UIDevice+Hardware.h */,
-				0E4FE81A1925B89E008DF208 /* UIDevice+Hardware.m */,
+				0EB8BBB3195083BB00FB0856 /* LMRGBParser.h */,
+				0EB8BBB4195083BB00FB0856 /* LMRGBParser.m */,
 			);
-			name = UIDevice;
-			path = ../UIDevice;
-			sourceTree = "<group>";
-		};
-		0E4FE8221925B8AA008DF208 /* Stacker */ = {
-			isa = PBXGroup;
-			children = (
-				0E4FE80B1925B89E008DF208 /* LMRGBParser */,
-				0E4FE80E1925B89E008DF208 /* LMStackerBrowserController.h */,
-				0E4FE80F1925B89E008DF208 /* LMStackerBrowserController.m */,
-				0E4FE8101925B89E008DF208 /* LMStackerController.h */,
-				0E4FE8111925B89E008DF208 /* LMStackerController.m */,
-				0E4FE8121925B89E008DF208 /* LMStackerCustomAction.h */,
-				0E4FE8131925B89E008DF208 /* LMStackerCustomAction.m */,
-				0E4FE8141925B89E008DF208 /* LMStackerURLParser.h */,
-				0E4FE8151925B89E008DF208 /* LMStackerURLParser.m */,
-				0E4FE8161925B89E008DF208 /* LMStackerWebViewController.h */,
-				0E4FE8171925B89E008DF208 /* LMStackerWebViewController.m */,
-				0E4FE8181925B89E008DF208 /* UIDevice */,
-			);
-			name = Stacker;
 			path = LMRGBParser;
+			sourceTree = "<group>";
+		};
+		0EB8BBBF195083BB00FB0856 /* UIDevice */ = {
+			isa = PBXGroup;
+			children = (
+				0EB8BBC0195083BB00FB0856 /* LICENCE */,
+				0EB8BBC1195083BB00FB0856 /* UIDevice+Hardware.h */,
+				0EB8BBC2195083BB00FB0856 /* UIDevice+Hardware.m */,
+			);
+			path = UIDevice;
+			sourceTree = "<group>";
+		};
+		0EB8BBC3195083BB00FB0856 /* WebViewJavascriptBridge */ = {
+			isa = PBXGroup;
+			children = (
+				0EB8BBC4195083BB00FB0856 /* LICENCE */,
+				0EB8BBC5195083BB00FB0856 /* WebViewJavascriptBridge.h */,
+				0EB8BBC6195083BB00FB0856 /* WebViewJavascriptBridge.m */,
+			);
+			path = WebViewJavascriptBridge;
+			sourceTree = "<group>";
+		};
+		0EB8BBD1195083FF00FB0856 /* assets */ = {
+			isa = PBXGroup;
+			children = (
+				0EB8BBD2195083FF00FB0856 /* no-network-connection.html */,
+				0EB8BBD3195083FF00FB0856 /* not-found.html */,
+				0EB8BBD4195083FF00FB0856 /* WebViewJavascriptBridge.js.txt */,
+			);
+			name = assets;
+			path = ../../assets;
 			sourceTree = "<group>";
 		};
 		0EBA956C192585DB00A1E4C2 = {
@@ -179,10 +209,8 @@
 				0EBA9587192585DB00A1E4C2 /* AppDelegate.h */,
 				0EBA9588192585DB00A1E4C2 /* AppDelegate.m */,
 				0EBA958A192585DB00A1E4C2 /* Main.storyboard */,
-				0EBA958D192585DB00A1E4C2 /* ViewController.h */,
-				0EBA958E192585DB00A1E4C2 /* ViewController.m */,
 				0EBA9590192585DB00A1E4C2 /* Images.xcassets */,
-				0E4FE8221925B8AA008DF208 /* Stacker */,
+				0EB8BBB1195083BB00FB0856 /* Lib */,
 				0EBA957F192585DB00A1E4C2 /* Supporting Files */,
 			);
 			path = GameRoom;
@@ -191,9 +219,9 @@
 		0EBA957F192585DB00A1E4C2 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				0EB8BBD1195083FF00FB0856 /* assets */,
 				0E4FE8231925B8FE008DF208 /* logo.png */,
 				0E4FE8241925B8FE008DF208 /* logo@2x.png */,
-				0E4FE8251925B8FE008DF208 /* no-network-connection.html */,
 				0E4FE8261925B8FE008DF208 /* tab-1.png */,
 				0E4FE8271925B8FE008DF208 /* tab-1@2x.png */,
 				0EBA9580192585DB00A1E4C2 /* GameRoom-Info.plist */,
@@ -280,14 +308,18 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0EB8BBCD195083BB00FB0856 /* LICENCE in Resources */,
 				0E4FE8291925B8FE008DF208 /* logo@2x.png in Resources */,
 				0E4FE82B1925B8FE008DF208 /* tab-1.png in Resources */,
 				0E4FE8281925B8FE008DF208 /* logo.png in Resources */,
+				0EB8BBD5195083FF00FB0856 /* no-network-connection.html in Resources */,
 				0EBA9591192585DB00A1E4C2 /* Images.xcassets in Resources */,
+				0EB8BBCF195083BB00FB0856 /* LICENCE in Resources */,
 				0EBA9583192585DB00A1E4C2 /* InfoPlist.strings in Resources */,
-				0E4FE82A1925B8FE008DF208 /* no-network-connection.html in Resources */,
+				0EB8BBD7195083FF00FB0856 /* WebViewJavascriptBridge.js.txt in Resources */,
 				0E4FE82C1925B8FE008DF208 /* tab-1@2x.png in Resources */,
 				0EBA958C192585DB00A1E4C2 /* Main.storyboard in Resources */,
+				0EB8BBD6195083FF00FB0856 /* not-found.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -305,16 +337,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0E4FE81D1925B89E008DF208 /* LMStackerController.m in Sources */,
-				0E4FE81E1925B89E008DF208 /* LMStackerCustomAction.m in Sources */,
-				0EBA958F192585DB00A1E4C2 /* ViewController.m in Sources */,
-				0E4FE81B1925B89E008DF208 /* LMRGBParser.m in Sources */,
+				0EB8BBC9195083BB00FB0856 /* LMStackerController.m in Sources */,
+				0EB8BBCA195083BB00FB0856 /* LMStackerCustomAction.m in Sources */,
+				0EB8BBD0195083BB00FB0856 /* WebViewJavascriptBridge.m in Sources */,
+				0EB8BBC7195083BB00FB0856 /* LMRGBParser.m in Sources */,
 				0EBA9589192585DB00A1E4C2 /* AppDelegate.m in Sources */,
-				0E4FE8211925B89E008DF208 /* UIDevice+Hardware.m in Sources */,
-				0E4FE81F1925B89E008DF208 /* LMStackerURLParser.m in Sources */,
+				0EB8BBCE195083BB00FB0856 /* UIDevice+Hardware.m in Sources */,
+				0EB8BBCB195083BB00FB0856 /* LMStackerURLParser.m in Sources */,
 				0EBA9585192585DB00A1E4C2 /* main.m in Sources */,
-				0E4FE81C1925B89E008DF208 /* LMStackerBrowserController.m in Sources */,
-				0E4FE8201925B89E008DF208 /* LMStackerWebViewController.m in Sources */,
+				0EB8BBC8195083BB00FB0856 /* LMStackerBrowserController.m in Sources */,
+				0EB8BBCC195083BB00FB0856 /* LMStackerWebViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
