@@ -26,6 +26,9 @@
     LMStackerWebViewController *rootViewController = [[LMStackerWebViewController alloc] init];
     rootViewController.pageURL = url;
     rootViewController.rootPage = YES;
+    
+    // init message handlers for the Javascript Bridge
+    self.messageHandlers = [NSMutableDictionary dictionary];
 
     self = [self initWithRootViewController:rootViewController];
 
@@ -177,6 +180,9 @@
     [currentViewController reloadWebViewInPlace];
 }
 
+- (void)registerHandler:(NSString *)handlerName handler:(WVJBHandler)handler {
+    self.messageHandlers[handlerName] = [handler copy];
+}
 
 
 @end
