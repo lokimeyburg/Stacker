@@ -30,7 +30,7 @@ Download Stacker and open the `GameRoom` iOS project which is in the `Examples` 
 
 ```
 $ git clone https://github.com/lokimeyburg/Stacker.git
-$ cd Stacker/Example/GameRoom
+$ cd Stacker/Example
 $ open GameRoom.xcodeproj
 ```
 
