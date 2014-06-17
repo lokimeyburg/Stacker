@@ -71,6 +71,8 @@ andRootPageTabImageName:(NSString *)pageTabName
 
     if([self.delegate stackerBackgroundColor] != NULL){
         [self.view setBackgroundColor: [self colorWithHexString:[self.delegate stackerBackgroundColor]]];
+    } else {
+        [self.view setBackgroundColor: [self colorWithHexString:@"FFFFFF"]];
     }
 
     // Setup Navigation Items
@@ -80,7 +82,7 @@ andRootPageTabImageName:(NSString *)pageTabName
     self.myWebView = [[UIWebView alloc] initWithFrame:self.view.bounds];
     self.myWebView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     [self loadWebView];
-    
+
     // Setup Javascript Bridge
     [self setUpJavascriptBridge];
 
@@ -264,7 +266,7 @@ andRootPageTabImageName:(NSString *)pageTabName
 
 - (void) loadWebView
 {
-    
+
     // Clear any previous instances so we make some room in memory
     [self.myWebView removeFromSuperview];
 
@@ -317,13 +319,13 @@ andRootPageTabImageName:(NSString *)pageTabName
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
 {
     [activityIndicator removeFromSuperview];
-    
+
     if([error code] == -1009){
         NSString *htmlFile = [[NSBundle mainBundle] pathForResource:@"no-network-connection" ofType:@"html"];
         NSString* htmlString = [NSString stringWithContentsOfFile:htmlFile encoding:NSUTF8StringEncoding error:nil];
         [self.myWebView loadHTMLString:htmlString baseURL:nil];
     }
-    
+
     if([error code] == -1004){
         NSString *htmlFile = [[NSBundle mainBundle] pathForResource:@"not-found" ofType:@"html"];
         NSString* htmlString = [NSString stringWithContentsOfFile:htmlFile encoding:NSUTF8StringEncoding error:nil];
