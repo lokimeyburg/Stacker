@@ -80,12 +80,13 @@ margin-top: 10px;
 }
 
 .navbar-default .navbar-toggle .icon-bar {
-  background-color: #2D5B43;
+  background-color: #ffffff;
   height: 3px;
 }
 
 .navbar-default .navbar-collapse {
   border: none;
+  box-shadow: none;
 }
 
 .navbar-default .navbar-collapse > ul > li > a,

@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Getting Started 
+title: Getting Started
 ---
 
 Stacker is an iOS view-controller to kickstart development of hybrid native/web iOS apps. Stacker was built to keep your navigation native while the rest of your app is driven by webviews using [Stacker's special URLs.]({{ site.baseurl }}/docs/url-structure)
@@ -11,7 +11,7 @@ Built for: iPhones & iOS 7 (iPad and iOS 8 support coming soon)
 
 ## Running the demo
 
-The demo application is a very simple Rails app called [GameRoom](https://github.com/lokimeyburg/GameRoom). It's designed to showcase Stacker's features:
+The demo application is a very simple Rails app called [GameRoom](https://github.com/lokimeyburg/GameRoom). It's designed to showcase Stacker's features.
 
 ### 1. Run the demo web app
 
@@ -23,10 +23,10 @@ rails s
 ```
 
 Now open up a web browser and visit `http://localhost:3000`. You should see GameRoom running in your browser.
- 
+
 ### 2. Run the example iOS app
 
-Download Stacker and open the `GameRoom` iOS project which is in the `Examples` folder 
+Download Stacker and open the `GameRoom` iOS project which is in the `Examples` folder
 
 ```
 $ git clone https://github.com/lokimeyburg/Stacker.git
@@ -58,6 +58,10 @@ Now in your XCode project:
 // Create a controller and point it to your web app's url
 LMStackerController *myController = [[LMStackerController alloc] initWithURL:@"http://localhost:3000?x_page_title=Home"];
 ```
+
+**If you're not using CocoaPods** (you really should)
+
+[Download Stacker from Github](https://github.com/lokimeyburg/Stacker), and then copy everything in the `Lib` folder into your XCode project. Finally copy and paste everything form the `assets` folder into your `Supporting Files` folder.
 
 ## Next steps:
 

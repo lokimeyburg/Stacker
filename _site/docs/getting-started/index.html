@@ -136,7 +136,7 @@
 
 <h2 id="running-the-demo">Running the demo</h2>
 
-<p>The demo application is a very simple Rails app called <a href="https://github.com/lokimeyburg/GameRoom">GameRoom</a>. It&#39;s designed to showcase Stacker&#39;s features:</p>
+<p>The demo application is a very simple Rails app called <a href="https://github.com/lokimeyburg/GameRoom">GameRoom</a>. It&#39;s designed to showcase Stacker&#39;s features.</p>
 
 <h3 id="1.-run-the-demo-web-app">1. Run the demo web app</h3>
 <div class="highlight"><pre><code class="language-text" data-lang="text">git clone https://github.com/lokimeyburg/GameRoom.git
@@ -148,7 +148,7 @@ rails s
 
 <h3 id="2.-run-the-example-ios-app">2. Run the example iOS app</h3>
 
-<p>Download Stacker and open the <code>GameRoom</code> iOS project which is in the <code>Examples</code> folder </p>
+<p>Download Stacker and open the <code>GameRoom</code> iOS project which is in the <code>Examples</code> folder</p>
 <div class="highlight"><pre><code class="language-text" data-lang="text">$ git clone https://github.com/lokimeyburg/Stacker.git
 $ cd Stacker/Example/GameRoom
 $ open GameRoom.xcodeproj
@@ -175,6 +175,10 @@ $ pod install
 // Create a controller and point it to your web app&#39;s url
 LMStackerController *myController = [[LMStackerController alloc] initWithURL:@&quot;http://localhost:3000?x_page_title=Home&quot;];
 </code></pre></div>
+<p><strong>If you&#39;re not using CocoaPods</strong> (you really should)</p>
+
+<p><a href="https://github.com/lokimeyburg/Stacker">Download Stacker from Github</a>, and then copy everything in the <code>Lib</code> folder into your XCode project. Finally copy and paste everything form the <code>assets</code> folder into your <code>Supporting Files</code> folder.</p>
+
 <h2 id="next-steps:">Next steps:</h2>
 
 <ul>
