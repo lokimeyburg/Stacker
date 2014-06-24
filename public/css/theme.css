@@ -96,3 +96,9 @@ margin-top: 10px;
   text-decoration: none;
 }
 
+/* feature images */
+#bridge-illustration,
+#more-illustration{
+  width: 455px;
+  height: 455px;
+}
