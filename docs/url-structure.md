@@ -5,7 +5,7 @@ title: Stacker URL Structure
 
 Stacker lets you build what I call "URL-driven iOS apps". That is: you drive your iOS application's navigation, page headings etc all through how you declare your urls. 
 
-An example URL that will stack a new page and set the title to 'Profile' will look like: `/profile?x_push_page=true&x_title=Profile`. 
+An example URL that will stack a new page and set the title to 'Profile' will look like: `/profile?x_push_page=true&x_page_title=Profile`. 
 
 Parameter  | Description
 ------------- | -------------
