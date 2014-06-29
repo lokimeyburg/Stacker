@@ -100,6 +100,11 @@ margin-top: 10px;
 #bridge-illustration,
 #more-illustration,
 #stacker-illustration{
-  width: 455px;
-  height: 455px;
+  width: 100%;
 }
+
+/* @media (max-width: 768px) { */
+/*   #stacker-illustration { */
+/*     width: 100%; */
+/*   } */
+/* } */
