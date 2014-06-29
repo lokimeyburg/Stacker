@@ -98,7 +98,8 @@ margin-top: 10px;
 
 /* feature images */
 #bridge-illustration,
-#more-illustration{
+#more-illustration,
+#stacker-illustration{
   width: 455px;
   height: 455px;
 }
