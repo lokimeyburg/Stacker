@@ -114,7 +114,8 @@ font-size: 1.5em;
 }
 
 .feature-description code {
-  white-space: inherit;
+  white-space: initial;
+  word-wrap: break-word;
 }
 
 /* code and pre */
