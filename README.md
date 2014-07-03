@@ -23,7 +23,7 @@ Built for: iPhones & iOS7 (iPad and iOS8 support coming soon)
 
 **If you're using [CocoaPods:](http://cocoapods.org)**
 
-In your Podile add:
+In your Podfile add:
 ```
 pod 'LMStacker', :git => 'https://github.com/lokimeyburg/Stacker.git'
 ```
