@@ -99,7 +99,8 @@ margin-top: 10px;
 /* feature images */
 #bridge-illustration,
 #more-illustration,
-#stacker-illustration{
+#stacker-illustration,
+#book-mock{
   width: 100%;
 }
 
