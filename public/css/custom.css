@@ -95,6 +95,12 @@ font-size: 1.5em;
   margin-bottom: 9px;
 }
 
+.intro .hero-video-link {
+   text-decoration: underline;
+   color: #fff;
+    font-size: 12px;
+}
+
 .call-to-action {
   margin-top: 40px;
 }
