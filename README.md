@@ -2,7 +2,7 @@
 
 Stacker is an iOS view-controller to kickstart development of hybrid native/web iOS apps. Stacker was built to keep your navigation native while the rest of your app is driven by webviews using [Stacker's special URLs.](http://www.lokimeyburg.com/Stacker/docs/url-structure/)
 
-Built for: iPhones & iOS7 (iPad and iOS8 support coming soon)
+Built for: iPhones running iOS 7 & iOS 8 (iPad support coming soon)
 
 ## Features
 
