@@ -32,20 +32,7 @@
 		0EBA9589192585DB00A1E4C2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EBA9588192585DB00A1E4C2 /* AppDelegate.m */; };
 		0EBA958C192585DB00A1E4C2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0EBA958A192585DB00A1E4C2 /* Main.storyboard */; };
 		0EBA9591192585DB00A1E4C2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0EBA9590192585DB00A1E4C2 /* Images.xcassets */; };
-		0EBA9598192585DB00A1E4C2 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EBA9597192585DB00A1E4C2 /* XCTest.framework */; };
-		0EBA9599192585DB00A1E4C2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EBA9578192585DB00A1E4C2 /* Foundation.framework */; };
-		0EBA959A192585DB00A1E4C2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EBA957C192585DB00A1E4C2 /* UIKit.framework */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		0EBA959B192585DB00A1E4C2 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 0EBA956D192585DB00A1E4C2 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 0EBA9574192585DB00A1E4C2;
-			remoteInfo = GameRoom;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		0E4FE8231925B8FE008DF208 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
@@ -85,8 +72,6 @@
 		0EBA9588192585DB00A1E4C2 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		0EBA958B192585DB00A1E4C2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0EBA9590192585DB00A1E4C2 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		0EBA9596192585DB00A1E4C2 /* GameRoomTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GameRoomTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		0EBA9597192585DB00A1E4C2 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,16 +82,6 @@
 				0EBA957B192585DB00A1E4C2 /* CoreGraphics.framework in Frameworks */,
 				0EBA957D192585DB00A1E4C2 /* UIKit.framework in Frameworks */,
 				0EBA9579192585DB00A1E4C2 /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		0EBA9593192585DB00A1E4C2 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				0EBA9598192585DB00A1E4C2 /* XCTest.framework in Frameworks */,
-				0EBA959A192585DB00A1E4C2 /* UIKit.framework in Frameworks */,
-				0EBA9599192585DB00A1E4C2 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -187,7 +162,6 @@
 			isa = PBXGroup;
 			children = (
 				0EBA9575192585DB00A1E4C2 /* GameRoom.app */,
-				0EBA9596192585DB00A1E4C2 /* GameRoomTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -198,7 +172,6 @@
 				0EBA9578192585DB00A1E4C2 /* Foundation.framework */,
 				0EBA957A192585DB00A1E4C2 /* CoreGraphics.framework */,
 				0EBA957C192585DB00A1E4C2 /* UIKit.framework */,
-				0EBA9597192585DB00A1E4C2 /* XCTest.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -252,24 +225,6 @@
 			productReference = 0EBA9575192585DB00A1E4C2 /* GameRoom.app */;
 			productType = "com.apple.product-type.application";
 		};
-		0EBA9595192585DB00A1E4C2 /* GameRoomTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 0EBA95AA192585DB00A1E4C2 /* Build configuration list for PBXNativeTarget "GameRoomTests" */;
-			buildPhases = (
-				0EBA9592192585DB00A1E4C2 /* Sources */,
-				0EBA9593192585DB00A1E4C2 /* Frameworks */,
-				0EBA9594192585DB00A1E4C2 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				0EBA959C192585DB00A1E4C2 /* PBXTargetDependency */,
-			);
-			name = GameRoomTests;
-			productName = GameRoomTests;
-			productReference = 0EBA9596192585DB00A1E4C2 /* GameRoomTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -278,11 +233,6 @@
 			attributes = {
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Loki Meyburg";
-				TargetAttributes = {
-					0EBA9595192585DB00A1E4C2 = {
-						TestTargetID = 0EBA9574192585DB00A1E4C2;
-					};
-				};
 			};
 			buildConfigurationList = 0EBA9570192585DB00A1E4C2 /* Build configuration list for PBXProject "GameRoom" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -298,7 +248,6 @@
 			projectRoot = "";
 			targets = (
 				0EBA9574192585DB00A1E4C2 /* GameRoom */,
-				0EBA9595192585DB00A1E4C2 /* GameRoomTests */,
 			);
 		};
 /* End PBXProject section */
@@ -323,13 +272,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		0EBA9594192585DB00A1E4C2 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -350,22 +292,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		0EBA9592192585DB00A1E4C2 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		0EBA959C192585DB00A1E4C2 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 0EBA9574192585DB00A1E4C2 /* GameRoom */;
-			targetProxy = 0EBA959B192585DB00A1E4C2 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		0EBA9581192585DB00A1E4C2 /* InfoPlist.strings */ = {
@@ -483,46 +410,6 @@
 			};
 			name = Release;
 		};
-		0EBA95AB192585DB00A1E4C2 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/GameRoom.app/GameRoom";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "GameRoom/GameRoom-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "GameRoomTests/GameRoomTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Debug;
-		};
-		0EBA95AC192585DB00A1E4C2 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/GameRoom.app/GameRoom";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "GameRoom/GameRoom-Prefix.pch";
-				INFOPLIST_FILE = "GameRoomTests/GameRoomTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -540,15 +427,6 @@
 			buildConfigurations = (
 				0EBA95A8192585DB00A1E4C2 /* Debug */,
 				0EBA95A9192585DB00A1E4C2 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		0EBA95AA192585DB00A1E4C2 /* Build configuration list for PBXNativeTarget "GameRoomTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				0EBA95AB192585DB00A1E4C2 /* Debug */,
-				0EBA95AC192585DB00A1E4C2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
