@@ -7,7 +7,7 @@ Stacker is an iOS view-controller to kickstart development of hybrid native/web 
 
 Inspired by this post by DHH: [Hybrid sweet spot: Native navigation, web content](http://signalvnoise.com/posts/3743-hybrid-sweet-spot-native-navigation-web-content)
 
-Built for: iPhones & iOS 7 (iPad and iOS 8 support coming soon)
+Built for: iPhones running iOS 7 & 8 (iPad support coming soon)
 
 ## Running the demo
 
@@ -71,5 +71,6 @@ LMStackerController *myController = [[LMStackerController alloc] initWithURL:@"h
 
 ## Coming soon:
 
-* iPad & iOS 8 support
+* iPad support
 * More than one right-hand navigation buttons
+* More robust ObjC API to interface with Stacker
