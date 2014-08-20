@@ -6,7 +6,7 @@ Built for: iPhones running iOS 7 & iOS 8 (iPad support coming soon)
 
 ## Features
 
-- Build [URL-driven iOS apps](https://github.com/lokimeyburg/Stacker/wiki/Stacker-URL-Structure)
+- Build [URL-driven iOS apps](http://www.lokimeyburg.com/Stacker/docs/url-structure/)
 - Send messages between Obj-C and JavaScript
 - Custom navigation button handlers
 - View external websites in a separate modal view
