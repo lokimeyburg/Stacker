@@ -13,7 +13,7 @@ Let's imagine you're creating a button to post a comment:
 UIBarButtonItem *postCommentButton = [[UIBarButtonItem alloc] initWithTitle:@"Post" style:UIBarButtonItemStyleBordered target:self action:@selector(postComment)];
 ```
 
-What this will do is create a button named "postCommentButton", with the text: "Post". The target is "self" which means that it will call a method named "postComment" in the file that this line is found. If you want to call a method on another object use that object as the target instead.
+What this will do is create a button named "postCommentButton", with the text "Post". The target is "self" which means that it will call a method named "postComment" in the file that this line is found. If you want to call a method on another object use that object as the target instead.
 
 ## 2. Register the button with Stacker
 

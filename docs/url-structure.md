@@ -64,7 +64,7 @@ You can go back one page by specifying `x_pop_page=true`.
 /profile?x_pop_page=true
 ```
 
-Sometimes you may post something to a server and want the page to go back and refresh to show the new content you created. You can redirect the page to a URL that includes `x_pop_page_and_refresh=true` and this Stacker will go back one page and refresh that page to reveal any changes. You can also replace the page with `x_pop_page_and_replace=true`.
+Sometimes you may post something to a server and want the page to go back and refresh to show the new content you created. You can redirect the page to a URL that includes `x_pop_page_and_refresh=true` and this cause Stacker to go back one page and refresh that page to reveal any changes. You can also replace the page with `x_pop_page_and_replace=true`.
 
 This will go back one page, replace the page with `/newsfeed` and change the title to `News Feed` in the navigation bar:
 

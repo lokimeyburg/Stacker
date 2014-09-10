@@ -49,7 +49,7 @@ myStackerController.tabBarItem.image = [UIImage imageNamed:@"tab-1.png"];
 
 ## Header colors
 
-This will set the background to `#47916B` and all the text to `#FFFFFF`. RGBParser comes with Stacker (or you can [download it from Github.](https://github.com/lokimeyburg/RGBParser)). 
+This will set the background to `#47916B` and all the text to `#FFFFFF`. `RGBParser` comes with Stacker (or you can [download it from Github](https://github.com/lokimeyburg/RGBParser)).
 
 ```
 RGBParser *rgbParser = [[RGBParser alloc] init];
