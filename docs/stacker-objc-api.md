@@ -3,7 +3,7 @@ layout: page
 title: Obj-C API 
 ---
 
-Even though the StackerController can mostly be driven by using the [special url structures](#) sometimes you may need a little more control
+Even though the StackerController can mostly be driven by using the [special url structures]({{ site.baseurl }}/docs/url-structure) sometimes you may need a little more control
 
 ## Go back to the root page
 
