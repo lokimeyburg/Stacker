@@ -41,3 +41,7 @@ Now in your XCode project:
 // Create a controller and point it to your web app's url
 LMStackerController *myController = [[LMStackerController alloc] initWithURL:@"http://localhost:3000?x_page_title=Home"];
 ```
+
+### How to update the documentation
+
+The [documentation site](http://www.lokimeyburg.com/Stacker/) is being created with [Github Pages](https://pages.github.com/) and so it can be found by checking out the "[gh-pages](https://github.com/lokimeyburg/Stacker/tree/gh-pages)" branch. The actual documentation is in the `/docs` folder. If you find a spelling mistake or any errors in the documentation please submit a pull request to the branch.
