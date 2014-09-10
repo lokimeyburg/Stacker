@@ -2,7 +2,7 @@
 layout: page
 title: Theming Stacker 
 ---
-Stacking comes with several theming options to customize the look and feel of your application
+Stacker comes with several theming options to customize the look and feel of your application
 
 We'll create a Stacker controller called `myStackerController` and use it in the examples below:
 
