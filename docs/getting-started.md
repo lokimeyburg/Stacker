@@ -41,9 +41,11 @@ Now compile and run your iOS app for an iPhone in the simulator. That's it! You 
 **If you're using [CocoaPods:](http://cocoapods.org)**
 
 In your Podile add:
+
 ```
 pod 'LMStacker', :git => 'https://github.com/lokimeyburg/Stacker.git'
 ```
+
 And then run
 ```
 $ pod install
