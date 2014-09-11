@@ -21,7 +21,7 @@ document.addEventListener('WebViewJavascriptBridgeReady', function(event) {
 
 ## Calling JS from ObjC
 
-To register a handler in Javascript called `testJavascriptHandler` and sending a response:
+To register a handler in Javascript called `testJavascriptHandler` (and send the response):
 
 ```
 bridge.registerHandler('testJavascriptHandler', function(data, responseCallback) {
@@ -48,7 +48,7 @@ Alternatively you can do something with the callback:
 
 ## Calling ObjC from JS
 
-First register a handler in ObjC, let's call it `testObjcCallback`
+First register a handler in ObjC, let's call it `testObjcCallback`:
 
 ```
 [myStackerController.registerHandler:@"testObjcCallback" handler:^(id data, WVJBResponseCallback responseCallback) {
@@ -57,7 +57,7 @@ First register a handler in ObjC, let's call it `testObjcCallback`
 }];
 ```
 
-No call it from your JS:
+Now call it from your JS:
 
 ```
 bridge.callHandler('testObjcCallback', {'foo': 'bar'}, function(response) {

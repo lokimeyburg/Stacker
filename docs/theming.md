@@ -2,7 +2,7 @@
 layout: page
 title: Theming Stacker 
 ---
-Stacking comes with several theming options to customize the look and feel of your application
+Stacker comes with several theming options to customize the look and feel of your application
 
 We'll create a Stacker controller called `myStackerController` and use it in the examples below:
 
@@ -19,13 +19,13 @@ StackerController *myStackerController = [[StackerController alloc] initWithURL:
 ## Title of the first page
 
 ```
-myStackerController.rootTitle             = @"News Feed";
+myStackerController.rootTitle = @"News Feed";
 ```
 
 ## Image for a title
 
 ```
-myStackerController.rootPageTitleImage    = [UIImage imageNamed:@"logo.png"];
+myStackerController.rootPageTitleImage = [UIImage imageNamed:@"logo.png"];
 ```
 
 There should be two images in your applications directory, one retina and one non-retina. So in above example you need a `logo.png` & `logo@2x.png` image.
@@ -35,21 +35,21 @@ There should be two images in your applications directory, one retina and one no
 If you want a light status bar:
 
 ```
-myStackerController.statusBarLight        = YES;
+myStackerController.statusBarLight = YES;
 ```
 
 
 ## Tab Icon
 
-Carried over from it's parent class, UINavigationController, you can set the tab bar image. Make sure to include both a retir
+Carried over from it's parent class, `UINavigationController`, you can set the tab bar image. Make sure to include both a retir
 
 ```
-myStackerController.tabBarItem.image      = [UIImage imageNamed:@"tab-1.png"];
+myStackerController.tabBarItem.image = [UIImage imageNamed:@"tab-1.png"];
 ```
 
 ## Header colors
 
-This will set the background to `#47916B` and all the text to `#FFFFFF`. RGBParser comes with Stacker (or you can [download it from Github.](https://github.com/lokimeyburg/RGBParser)). 
+This will set the background to `#47916B` and all the text to `#FFFFFF`. `RGBParser` comes with Stacker (or you can [download it from Github](https://github.com/lokimeyburg/RGBParser)).
 
 ```
 RGBParser *rgbParser = [[RGBParser alloc] init];
@@ -61,8 +61,8 @@ myStackerController.navigationBar.tintColor = [rgbParser colorWithHexString:@"FF
 ## Loading and Refresh Spinner Color
 
 ```
-myStackerController.refreshSpinnerColor   = @"6F9FCD";
-myStackerController.loadingSpinnerColor   = @"1C3347";
+myStackerController.refreshSpinnerColor = @"6F9FCD";
+myStackerController.loadingSpinnerColor = @"1C3347";
 ```
 
 ## Error Pages
