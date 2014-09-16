@@ -8,8 +8,6 @@
 #import "LMStackerWebViewController.h"
 #import "LMStackerURLParser.h"
 #import "LMStackerCustomAction.h"
-//#import "UIDevice+Hardware.h"
-//#import "WebViewJavascriptBridge.h"
 #import <UIDevice-Hardware/UIDevice-Hardware.h>
 
 @interface LMStackerWebViewController ()
@@ -100,7 +98,9 @@ andRootPageTabImageName:(NSString *)pageTabName
 - (void)setActiveBridge
 {
     self.delegate.bridge = _bridge;
-    [_bridge setMessageHandlers: self.delegate.messageHandlers];
+    for (NSString *handlerName in self.delegate.messageHandlers) {
+        [_bridge registerHandler:handlerName handler:self.delegate.messageHandlers[handlerName]];
+    }
 }
 
 - (void)setUpJavascriptBridge {
