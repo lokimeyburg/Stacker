@@ -7,7 +7,7 @@
 
 #import "LMStackerController.h"
 #import "LMStackerWebViewController.h"
-#import "LMRGBParser.h"
+#import <HexColors/HexColor.h>
 
 @interface LMStackerController ()
 
@@ -96,9 +96,8 @@
 
     // Put the main controller in some kind of naviation with a heading
     browserNavController = [[LMStackerBrowserController alloc] initWithRootViewController:myRootController];
-    LMRGBParser *rgbParser = [[LMRGBParser alloc] init];
-    browserNavController.navigationBar.barTintColor = [rgbParser colorWithHexString:@"EBEBEB"];
-    browserNavController.navigationBar.tintColor = [rgbParser colorWithHexString:@"666666"];
+    browserNavController.navigationBar.barTintColor = [UIColor colorWithHexString:@"EBEBEB"];
+    browserNavController.navigationBar.tintColor = [UIColor colorWithHexString:@"666666"];
     browserNavController.navigationBar.translucent = YES;
 
     // Show it

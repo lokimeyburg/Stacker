@@ -8,8 +8,9 @@
 #import "LMStackerWebViewController.h"
 #import "LMStackerURLParser.h"
 #import "LMStackerCustomAction.h"
-#import "UIDevice+Hardware.h"
-#import "WebViewJavascriptBridge.h"
+//#import "UIDevice+Hardware.h"
+//#import "WebViewJavascriptBridge.h"
+#import <UIDevice-Hardware/UIDevice-Hardware.h>
 
 @interface LMStackerWebViewController ()
 @property WebViewJavascriptBridge* bridge;
@@ -410,7 +411,7 @@ andRootPageTabImageName:(NSString *)pageTabName
 -(NSString*)deviceIdentifierHeader
 {
     UIDevice* device = [UIDevice currentDevice];
-    return [NSString stringWithFormat:@"%@;%@;%@ %@", device.platformString, device.platform, device.systemName, device.systemVersion];
+    return [NSString stringWithFormat:@"%@;%@;%@ %@", [device modelName], [device modelIdentifier], device.systemName, device.systemVersion];
 }
 
 - (NSString*)applicationVersion
