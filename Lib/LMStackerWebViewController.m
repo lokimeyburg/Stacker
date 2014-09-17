@@ -9,6 +9,7 @@
 #import "LMStackerURLParser.h"
 #import "LMStackerCustomAction.h"
 #import <UIDevice-Hardware/UIDevice-Hardware.h>
+#import <HexColors/HexColor.h>
 
 @interface LMStackerWebViewController ()
 @property WebViewJavascriptBridge* bridge;
@@ -68,10 +69,10 @@ andRootPageTabImageName:(NSString *)pageTabName
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@" " style:UIBarButtonItemStyleDone target:nil action:nil];
     [self.navigationItem setBackBarButtonItem:backButton];
 
-    if([self.delegate stackerBackgroundColor] != NULL){
-        [self.view setBackgroundColor: [self colorWithHexString:[self.delegate stackerBackgroundColor]]];
+    if ([self.delegate stackerBackgroundColor] != NULL) {
+        [self.view setBackgroundColor:[UIColor colorWithHexString:[self.delegate stackerBackgroundColor]]];
     } else {
-        [self.view setBackgroundColor: [self colorWithHexString:@"FFFFFF"]];
+        [self.view setBackgroundColor:[UIColor colorWithHexString:@"FFFFFF"]];
     }
 
     // Setup Navigation Items
@@ -88,8 +89,8 @@ andRootPageTabImageName:(NSString *)pageTabName
     // Setup Refresh Control
     refreshControl = [[UIRefreshControl alloc] init];
     [refreshControl addTarget:self action:@selector(handleRefresh:) forControlEvents:UIControlEventValueChanged];
-    if([self.delegate refreshSpinnerColor] != NULL){
-     refreshControl.tintColor = [self colorWithHexString:[self.delegate refreshSpinnerColor]];
+    if ([self.delegate refreshSpinnerColor] != NULL) {
+        refreshControl.tintColor = [UIColor colorWithHexString:[self.delegate refreshSpinnerColor]];
     }
     [self.myWebView.scrollView addSubview:refreshControl];
 }
@@ -291,7 +292,7 @@ andRootPageTabImageName:(NSString *)pageTabName
     activityIndicator.center = self.view.center;
     [activityIndicator startAnimating];
     if([self.delegate loadingSpinnerColor] != NULL){
-        [activityIndicator setColor:[self colorWithHexString:[self.delegate loadingSpinnerColor]]];
+        [activityIndicator setColor:[UIColor colorWithHexString:[self.delegate loadingSpinnerColor]]];
     } else {
         [activityIndicator setColor:[UIColor blackColor]];
     }
@@ -358,43 +359,6 @@ andRootPageTabImageName:(NSString *)pageTabName
     // Now set our request variable with an (immutable) copy of the altered request
     originalRequest = [mutableRequest copy];
     return originalRequest;
-}
-
-// Example usage: [self.view setBackgroundColor: [self colorWithHexString:@"EDEFF7"]];
--(UIColor*)colorWithHexString:(NSString*)hex
-{
-    NSString *cString = [[hex stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] uppercaseString];
-
-    // String should be 6 or 8 characters
-    if ([cString length] < 6) return [UIColor grayColor];
-
-    // strip 0X if it appears
-    if ([cString hasPrefix:@"0X"]) cString = [cString substringFromIndex:2];
-
-    if ([cString length] != 6) return  [UIColor grayColor];
-
-    // Separate into r, g, b substrings
-    NSRange range;
-    range.location = 0;
-    range.length = 2;
-    NSString *rString = [cString substringWithRange:range];
-
-    range.location = 2;
-    NSString *gString = [cString substringWithRange:range];
-
-    range.location = 4;
-    NSString *bString = [cString substringWithRange:range];
-
-    // Scan values
-    unsigned int r, g, b;
-    [[NSScanner scannerWithString:rString] scanHexInt:&r];
-    [[NSScanner scannerWithString:gString] scanHexInt:&g];
-    [[NSScanner scannerWithString:bString] scanHexInt:&b];
-
-    return [UIColor colorWithRed:((float) r / 255.0f)
-                           green:((float) g / 255.0f)
-                            blue:((float) b / 255.0f)
-                           alpha:1.0f];
 }
 
 -(BOOL)stringIsNilOrEmpty:(NSString*)aString {
