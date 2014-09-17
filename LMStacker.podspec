@@ -14,8 +14,8 @@ Pod::Spec.new do |s|
 
   s.requires_arc = true
   s.platform     = :ios, "6.0"
-  s.source_files = 'Lib/*.{h,m,js}'
-  s.resources    = 'Assets/*.{html,txt}'
+  s.source_files = 'Lib/*.{h,m}'
+  s.resources    = 'Assets/*.{html}'
 
   s.dependency "UIDevice-Hardware", "~> 0.1.3"
   s.dependency "HexColors", "~> 2.2.1"
