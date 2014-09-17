@@ -1,0 +1,9 @@
+[submodule "Lib/HexColors"]
+	path = Lib/HexColors
+	url = https://github.com/mRs-/HexColors.git
+[submodule "Lib/UIDevice-Hardware"]
+	path = Lib/UIDevice-Hardware
+	url = https://github.com/monospacecollective/UIDevice-Hardware.git
+[submodule "Lib/WebViewJavascriptBridge"]
+	path = Lib/WebViewJavascriptBridge
+	url = https://github.com/marcuswestin/WebViewJavascriptBridge.git
