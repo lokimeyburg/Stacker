@@ -4,7 +4,8 @@
 //
 
 #import "AppDelegate.h"
-#import "LMRGBParser.h"
+
+#import <HexColors/HexColor.h>
 #import "LMStackerController.h"
 #import "LMStackerCustomAction.h"
 
@@ -55,16 +56,15 @@ NSString *DOMAIN_URL;
     self.homeNavController.loadingSpinnerColor   = @"1C3347";
     
     // 5.5) Extra theming (but not really Stacker specific)
-    LMRGBParser *rgbParser = [[LMRGBParser alloc] init];
     self.homeNavController.tabBarItem.title             = @"News Feed";
     self.homeNavController.tabBarItem.image             = [UIImage imageNamed:@"tab-1.png"];
-    self.homeNavController.navigationBar.barTintColor   = [rgbParser colorWithHexString:@"357ebd"];
-    self.homeNavController.navigationBar.tintColor      = [rgbParser colorWithHexString:@"FFFFFF"];
-    [self.homeNavController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [rgbParser colorWithHexString:@"FFFFFF"]}];
+    self.homeNavController.navigationBar.barTintColor   = [UIColor colorWithHexString:@"357ebd"];
+    self.homeNavController.navigationBar.tintColor      = [UIColor colorWithHexString:@"FFFFFF"];
+    [self.homeNavController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor colorWithHexString:@"FFFFFF"]}];
 
     UITabBarController *tabBarController = [[UITabBarController alloc] init];
-    [[UITabBar appearance] setTintColor:[rgbParser colorWithHexString:@"FFFFFF"]];
-    [[UITabBar appearance] setBarTintColor:[rgbParser colorWithHexString:@"131313"]];
+    [[UITabBar appearance] setTintColor:[UIColor colorWithHexString:@"FFFFFF"]];
+    [[UITabBar appearance] setBarTintColor:[UIColor colorWithHexString:@"131313"]];
     [tabBarController addChildViewController:self.homeNavController];
     
     
