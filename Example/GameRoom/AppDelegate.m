@@ -11,6 +11,9 @@
 @implementation AppDelegate
 
 NSString *DOMAIN_URL;
+LMStackerController *homeNavController;
+LMStackerController *welcomeController;
+//BOOL welcomeModalVisible = NO;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -18,88 +21,120 @@ NSString *DOMAIN_URL;
     DOMAIN_URL = @"http://localhost:3000";
     
     // 1.) Create a StackerController
-    self.homeNavController = [[LMStackerController alloc] initWithURL:
-                              [NSString stringWithFormat:@"%@%@", DOMAIN_URL, @"/design/index?x_right_button=search_button&x_left_button=bridge_demo&x_page_title=News+Feed"]];
+    homeNavController = [[LMStackerController alloc] initWithURL:
+                              [NSString stringWithFormat:@"%@%@", DOMAIN_URL, @"/design/index?x_right_button=reload_button&x_page_title=News+Feed"]];
     
     // 2.) Custom right button actions
-    UIBarButtonItem *newPostButton  = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose target:self action:@selector(showNewPostPage)];
-    UIBarButtonItem *searchButton   = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(showSearchPage)];
-    UIBarButtonItem *bridgeDemoButton     = [[UIBarButtonItem alloc] initWithTitle:@"Bridge" style:UIBarButtonItemStyleBordered target:self action:@selector(showJSBridgePage)];
-    UIBarButtonItem *sendMessageToBridge     = [[UIBarButtonItem alloc] initWithTitle:@"Fire" style:UIBarButtonItemStyleBordered target:self action:@selector(sendMessageToBridge)];
-    
-    NSDictionary *buttonHandlers    = @{ @"new_post": newPostButton,
-                                         @"search_button": searchButton,
-                                         @"bridge_demo": bridgeDemoButton,
-                                         @"send_msg_to_bridge": sendMessageToBridge  };
-    self.homeNavController.buttonHandlers  = buttonHandlers;
-    
-    // 3.) Javascript Bridge handler
-    [self.homeNavController registerHandler:@"testObjcCallback" handler:^(id data, WVJBResponseCallback responseCallback) {
-        NSLog(@"testObjcCallback called: %@", data);
-        responseCallback(@"Response from testObjcCallback");
-    }];
-    
-    // 4.) Custom URL Actions
-    LMStackerCustomAction *myCustomAction = [[LMStackerCustomAction alloc] init];
-    [myCustomAction addTarget:self action:@selector(showCustomActionPage:) withParameter:self ];
-    
-    NSDictionary *customURLHandlers = @{ @"myAction" : myCustomAction };
-    [self.homeNavController setCustomURLHandlers:customURLHandlers];
-    
+    UIBarButtonItem *reloadPageButton  = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(reloadMainPage)];
+    NSDictionary *buttonHandlers    = @{ @"reload_button": reloadPageButton };
+    homeNavController.buttonHandlers  = buttonHandlers;
     
     // 5.) Theme the controller
-    self.homeNavController.stackerBackgroundColor =  @"F0F1F2";
-    self.homeNavController.rootPageTitleImage    = [UIImage imageNamed:@"logo.png"];
-    self.homeNavController.statusBarLight        = YES;
-    self.homeNavController.refreshSpinnerColor   = @"6F9FCD";
-    self.homeNavController.loadingSpinnerColor   = @"1C3347";
+    homeNavController.stackerBackgroundColor =  @"F0F1F2";
+    homeNavController.rootPageTitleImage    = [UIImage imageNamed:@"logo.png"];
+    homeNavController.statusBarLight        = YES;
+    homeNavController.refreshSpinnerColor   = @"6F9FCD";
+    homeNavController.loadingSpinnerColor   = @"1C3347";
     
     // 5.5) Extra theming (but not really Stacker specific)
     LMRGBParser *rgbParser = [[LMRGBParser alloc] init];
-    self.homeNavController.tabBarItem.title             = @"News Feed";
-    self.homeNavController.tabBarItem.image             = [UIImage imageNamed:@"tab-1.png"];
-    self.homeNavController.navigationBar.barTintColor   = [rgbParser colorWithHexString:@"357ebd"];
-    self.homeNavController.navigationBar.tintColor      = [rgbParser colorWithHexString:@"FFFFFF"];
-    [self.homeNavController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [rgbParser colorWithHexString:@"FFFFFF"]}];
+    homeNavController.tabBarItem.title             = @"News Feed";
+    homeNavController.tabBarItem.image             = [UIImage imageNamed:@"tab-1.png"];
+    homeNavController.navigationBar.barTintColor   = [rgbParser colorWithHexString:@"357ebd"];
+    homeNavController.navigationBar.tintColor      = [rgbParser colorWithHexString:@"FFFFFF"];
+    [homeNavController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [rgbParser colorWithHexString:@"FFFFFF"]}];
 
     UITabBarController *tabBarController = [[UITabBarController alloc] init];
     [[UITabBar appearance] setTintColor:[rgbParser colorWithHexString:@"FFFFFF"]];
     [[UITabBar appearance] setBarTintColor:[rgbParser colorWithHexString:@"131313"]];
-    [tabBarController addChildViewController:self.homeNavController];
+    [tabBarController addChildViewController:homeNavController];
+    
+    
+    // Welcome Controller
+    welcomeController = [[LMStackerController alloc] initWithURL:
+                              [NSString stringWithFormat:@"%@%@", DOMAIN_URL, @"/users/sign_in?x_page_title=Log+In&x_right_button=show_signup_page"]];
+    welcomeController.stackerBackgroundColor = @"F0F1F2";
+    welcomeController.statusBarLight        = YES;
+    welcomeController.navigationBar.barTintColor   = [rgbParser colorWithHexString:@"0F76C5"];
+    welcomeController.navigationBar.tintColor      = [rgbParser colorWithHexString:@"FFFFFF"];
+    [welcomeController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [rgbParser colorWithHexString:@"FFFFFF"]}];
+
+    
+    [[NSNotificationCenter defaultCenter]
+     addObserver:self
+     selector:@selector(checkLogInStatus)
+     name:NSHTTPCookieManagerCookiesChangedNotification
+     object:nil];
+    
+    UIBarButtonItem *showSignUpPageButton   = [[UIBarButtonItem alloc] initWithTitle:@"Sign Up"
+                                                                        style:UIBarButtonItemStyleBordered
+                                                                       target:self
+                                                                       action:@selector(showLoginPage)];
+    NSDictionary *welcomeButtonHandlers    = @{ @"show_signup_page": showSignUpPageButton };
+    welcomeController.buttonHandlers  = welcomeButtonHandlers;
     
     
     // Alrighty, spin up the app!
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.rootViewController = tabBarController;
     [self.window makeKeyAndVisible];
-    
+    [self.window.rootViewController presentViewController:welcomeController animated:NO completion:NULL];
     return YES;
 }
 
-// Functions for the purpose of the demo:
-// --------------------------------------
-
--(void)showCustomActionPage:(id)sender
+- (void)reloadMainPage
 {
-    UIViewController *myRootController = [[UIViewController alloc] init];
-    myRootController.title = @"Custom Action";
-    
-    myRootController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStyleBordered target:self action:@selector(closeCustomActionPage)];
-    
-    UIWebView *myWebView = [[UIWebView alloc] initWithFrame:myRootController.view.bounds];
-    myWebView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    NSURL *url = [[NSURL alloc]initWithString:[NSString stringWithFormat:@"%@%@", DOMAIN_URL, @"/design/custom_action"]];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    [myWebView loadRequest:request];
-    [myWebView setScalesPageToFit:YES];
-    [myWebView setBackgroundColor:[UIColor clearColor]];
-    [myWebView setOpaque:NO];
-    myWebView.scrollView.bounces = YES;
-    [myRootController.view addSubview:myWebView];
-    
-    LMStackerBrowserController *newPostController = [[LMStackerBrowserController alloc] initWithRootViewController:myRootController];
+    NSLog(@"-- Reloading page");
+    [homeNavController refreshPage];
+}
 
-    [self.window.rootViewController presentViewController:newPostController animated:YES completion:NULL];
+- (void)applicationWillEnterForeground:(UIApplication *)application
+{
+    NSLog(@"--- Entering foreground. Checking logged in state...");
+}
+
+-(void) checkLogInStatus
+{
+    BOOL welcomeModalVisible = welcomeController.isViewLoaded && welcomeController.view.window;
+    BOOL isOnline = NO;
+    
+    NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies];
+    for (NSHTTPCookie *cookie in cookies) {
+        if([cookie.name isEqualToString:@"signed_in"] && [cookie.value isEqualToString:@"1"]){
+            isOnline = YES;
+        }
+    }
+    
+    if (isOnline){
+        // You are online
+        if(welcomeModalVisible) {
+            [self closeWelcomeModal];
+        }
+    } else {
+        // You are offline
+        if(!welcomeModalVisible) {
+            [self showWelcomeModal];
+        }
+    }
+}
+
+-(void) closeWelcomeModal
+{
+    [self.window.rootViewController dismissViewControllerAnimated:YES completion:nil];
+    [homeNavController clearStack];
+    [homeNavController refreshPage];
+}
+
+-(void) showWelcomeModal
+{
+    [self.window.rootViewController presentViewController:welcomeController animated:YES completion:NULL];
+    [welcomeController clearStack];
+    [welcomeController refreshPage];
+}
+
+-(void) showLoginPage
+{
+    [welcomeController pushNewPage:[NSString stringWithFormat:@"%@%@", DOMAIN_URL, @"/users/sign_up?x_page_title=Sign+Up"]];
 }
 
 -(void) closeCustomActionPage
@@ -109,22 +144,22 @@ NSString *DOMAIN_URL;
 
 -(void) showSearchPage
 {
-    [self.homeNavController pushNewPage:[NSString stringWithFormat:@"%@%@", DOMAIN_URL, @"/design/search?x_page_title=Search"]];
+    [homeNavController pushNewPage:[NSString stringWithFormat:@"%@%@", DOMAIN_URL, @"/design/search?x_page_title=Search"]];
 }
 
 -(void) showJSBridgePage
 {
-    [self.homeNavController pushNewPage:[NSString stringWithFormat:@"%@%@", DOMAIN_URL, @"/design/bridge?x_page_title=JS+Bridge+Demo&x_right_button=send_msg_to_bridge"]];
+    [homeNavController pushNewPage:[NSString stringWithFormat:@"%@%@", DOMAIN_URL, @"/design/bridge?x_page_title=JS+Bridge+Demo&x_right_button=send_msg_to_bridge"]];
 }
 
 -(void) showNewPostPage
 {
-    [self.homeNavController pushNewPage:[NSString stringWithFormat:@"%@%@", DOMAIN_URL, @"/design/new_post?x_page_title=New+Post"]];
+    [homeNavController pushNewPage:[NSString stringWithFormat:@"%@%@", DOMAIN_URL, @"/design/new_post?x_page_title=New+Post"]];
 }
 
 -(void) sendMessageToBridge
 {
-    [self.homeNavController.bridge callHandler:@"testJavascriptHandler" data:@{ @"foo":@"before ready" }];
+    [homeNavController.bridge callHandler:@"testJavascriptHandler" data:@{ @"foo":@"before ready" }];
 }
 
 

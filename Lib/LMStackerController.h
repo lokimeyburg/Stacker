@@ -18,6 +18,8 @@
 @interface LMStackerController : UINavigationController <LMStackerWebViewControllerDelegate, UIActionSheetDelegate> {
     LMStackerBrowserController *browserNavController;
     NSString *browserViewURL;
+    
+    void (^_afterLoadCallbackHandler)();
 }
 
 // Initializers
@@ -33,6 +35,7 @@
 - (void) popPage;
 - (void) clearStack;
 - (void) registerHandler:(NSString*)handlerName handler:(WVJBHandler)handler;
+- (void) afterPageLoadCallback:(void(^)())handler;
 
 // Properties
 @property UIWebView                 *myWebView;
