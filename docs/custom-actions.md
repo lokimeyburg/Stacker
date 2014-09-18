@@ -2,7 +2,7 @@
 layout: page
 title: Custom URL Actions 
 ---
-An alternative to using the [Javascript Bridge]() to call custom Objective-C code is to simple call it by registering a custom URL that when triggered will run the function.
+An alternative to using the [Javascript Bridge]({{ site.baseurl }}/docs/javascript-bridge) to call custom Objective-C code is to simply call it by registering a custom URL that when triggered will run the function.
 
 A custom function might look like:
 

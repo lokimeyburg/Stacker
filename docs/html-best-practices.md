@@ -5,7 +5,7 @@ title: HTML Best Practices
 
 ## Add viewport constraint
 
-To make your web app respond nicely to the width of your iPhone set the viewport constraint in the `<head>` of your application
+To make your web app respond nicely to the width of your iPhone set the viewport constraint in the `<head>` of your application:
 
 ```
 <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
@@ -13,7 +13,7 @@ To make your web app respond nicely to the width of your iPhone set the viewport
 
 ## Remove 300ms touch delay
 
-Use something like [FastClick](https://github.com/ftlabs/fastclick)
+Use something like [FastClick](https://github.com/ftlabs/fastclick).
 
 ## Don't use JQuery
 
