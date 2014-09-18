@@ -6,9 +6,9 @@ Pod::Spec.new do |s|
                         Stacker is an iOS view-controller to kickstart development of hybrid native/web iOS apps.
                         Stacker was built to keep your navigation native while the rest of your app is driven by webviews
                        DESC
-  s.homepage         = "https://github.com/lokimeyburg/Stacker"
+  s.homepage         = "http://www.lokimeyburg.com/Stacker/"
   s.license          = 'MIT'
-  s.author           = { "lokimeyburg" => "loki@aristolabs.com" }
+  s.author           = { "lokimeyburg" => "loki@lokimeyburg.com" }
   s.source           = { :git => "https://github.com/lokimeyburg/Stacker.git", :tag => s.version.to_s }
   s.social_media_url = 'https://twitter.com/lokimeyburg'
 
