@@ -17,7 +17,7 @@ Use something like [FastClick](https://github.com/ftlabs/fastclick)
 
 ## Don't use JQuery
 
-Keep your Javascript file tiny by using something like [Speedball](https://github.com/lokimeyburg/Speedball) because it doesn't have all the cruft that goes into supporting legacy browsers.
+Keep your Javascript file tiny by using something like [Zepto.JS](http://zeptojs.com/) because it doesn't have all the cruft that goes into supporting legacy browsers.
 
 ## Lazy load images
 

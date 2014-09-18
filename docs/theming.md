@@ -49,13 +49,16 @@ myStackerController.tabBarItem.image      = [UIImage imageNamed:@"tab-1.png"];
 
 ## Header colors
 
-This will set the background to `#47916B` and all the text to `#FFFFFF`. RGBParser comes with Stacker (or you can [download it from Github.](https://github.com/lokimeyburg/RGBParser)). 
+This will set the background to `#47916B` and all the text to `#FFFFFF`. HexColors is used by Stacker, but you may have to import it yourself (you can [download it from Github.](https://github.com/mRs-/HexColors)). 
 
 ```
-RGBParser *rgbParser = [[RGBParser alloc] init];
-myStackerController.navigationBar.barTintColor = [rgbParser colorWithHexString:@"47916B"];
-myStackerController.navigationBar.tintColor = [rgbParser colorWithHexString:@"FFFFFF"];
-[myStackerController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [rgbParser colorWithHexString:@"FFFFFF"]}];
+#import <HexColors/HexColor.h>
+
+// ....
+
+myStackerController.navigationBar.barTintColor = [UIColor colorWithHexString:@"47916B"];
+myStackerController.navigationBar.tintColor = [UIColor colorWithHexString:@"FFFFFF"];
+[myStackerController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor colorWithHexString:@"FFFFFF"]}];
 ```
 
 ## Loading and Refresh Spinner Color

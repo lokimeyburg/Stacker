@@ -31,7 +31,7 @@ Download Stacker and open the `GameRoom` iOS project which is in the `Examples` 
 ```
 $ git clone https://github.com/lokimeyburg/Stacker.git
 $ cd Stacker/Example
-$ open GameRoom.xcodeproj
+$ open GameRoom.xcworkspace
 ```
 
 Now compile and run your iOS app for an iPhone in the simulator. That's it! You should be able to navigate around GameRoom. Look at the source code and change some of the URLs in the Rails app to see what happens.
