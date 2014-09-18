@@ -1,1 +1,10 @@
-This is an example iOS app called GameRoom that's designed to showcase the features of Stacker. It also requires the GameRoom web app which can be found here: https://github.com/lokimeyburg/GameRoom. Read the getting started section in the documentation for instructions on setting it up: http://lokimeyburg.github.io/Stacker/docs/getting-started/
+# Example
+
+This is an example iOS app called `GameRoom` that's designed to showcase the features of `Stacker`. It also requires the `GameRoom` web app which can be found here: https://github.com/lokimeyburg/GameRoom. Read the getting started section in the documentation for instructions on setting it up: http://lokimeyburg.github.io/Stacker/docs/getting-started.
+
+## Setup
+
+1. `$ open GameRoom.xcworkspace`.
+2. Run the main project.
+3. Enjoy it!.
+4. Install [CocoaPods](http://cocoapods.org) if you want.

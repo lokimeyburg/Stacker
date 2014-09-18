@@ -6,7 +6,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "WebViewJavascriptBridge.h"
+#import <WebViewJavascriptBridge/WebViewJavascriptBridge.h>
 
 // Create delegate so we can call parent navigation
 @protocol LMStackerWebViewControllerDelegate <NSObject>
