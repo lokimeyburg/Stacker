@@ -17,8 +17,15 @@ LMStackerController *welcomeController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookieAcceptPolicy];
+    
+    NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies];
+    for (NSHTTPCookie *cookie in cookies) {
+        NSLog(@"%@ => %@ ", cookie.name, cookie.value);
+    }
+    
     // URL of the web app
-    DOMAIN_URL = @"http://localhost:3000";
+    DOMAIN_URL = @"http://10.0.1.5:3000";
     
     // 1.) Create a StackerController
     homeNavController = [[LMStackerController alloc] initWithURL:
@@ -60,12 +67,6 @@ LMStackerController *welcomeController;
     [welcomeController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [rgbParser colorWithHexString:@"FFFFFF"]}];
 
     
-    [[NSNotificationCenter defaultCenter]
-     addObserver:self
-     selector:@selector(checkLogInStatus)
-     name:NSHTTPCookieManagerCookiesChangedNotification
-     object:nil];
-    
     UIBarButtonItem *showSignUpPageButton   = [[UIBarButtonItem alloc] initWithTitle:@"Sign Up"
                                                                         style:UIBarButtonItemStyleBordered
                                                                        target:self
@@ -74,11 +75,18 @@ LMStackerController *welcomeController;
     welcomeController.buttonHandlers  = welcomeButtonHandlers;
     
     
+    // Register cookieChange observer 
+    [[NSNotificationCenter defaultCenter]
+     addObserver:self
+     selector:@selector(checkLogInStatus)
+     name:NSHTTPCookieManagerCookiesChangedNotification
+     object:nil];
+    
+    
     // Alrighty, spin up the app!
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.rootViewController = tabBarController;
     [self.window makeKeyAndVisible];
-    [self.window.rootViewController presentViewController:welcomeController animated:NO completion:NULL];
     return YES;
 }
 
@@ -120,16 +128,16 @@ LMStackerController *welcomeController;
 
 -(void) closeWelcomeModal
 {
-    [self.window.rootViewController dismissViewControllerAnimated:YES completion:nil];
     [homeNavController clearStack];
     [homeNavController refreshPage];
+    [self.window.rootViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
 -(void) showWelcomeModal
 {
-    [self.window.rootViewController presentViewController:welcomeController animated:YES completion:NULL];
     [welcomeController clearStack];
     [welcomeController refreshPage];
+    [self.window.rootViewController presentViewController:welcomeController animated:YES completion:NULL];
 }
 
 -(void) showLoginPage

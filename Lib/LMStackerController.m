@@ -170,7 +170,9 @@
 -(void)refreshPage
 {
     LMStackerWebViewController *currentViewController = self.viewControllers.lastObject;
-    [currentViewController reloadWebViewInPlace];
+    if(currentViewController.requestCount > 0){
+        [currentViewController reloadWebViewInPlace];
+    }
 }
 
 -(void)replacePage:(NSString*)newURL
