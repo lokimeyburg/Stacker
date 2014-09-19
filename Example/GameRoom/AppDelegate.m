@@ -25,16 +25,12 @@ LMStackerController *welcomeController;
     }
     
     // URL of the web app
-    DOMAIN_URL = @"http://10.0.1.5:3000";
+    DOMAIN_URL = @"http://localhost:3000";
     
     // 1.) Create a StackerController
     homeNavController = [[LMStackerController alloc] initWithURL:
-                              [NSString stringWithFormat:@"%@%@", DOMAIN_URL, @"/design/index?x_right_button=reload_button&x_page_title=News+Feed"]];
+                              [NSString stringWithFormat:@"%@%@", DOMAIN_URL, @"/design/index?x_page_title=News+Feed"]];
     
-    // 2.) Custom right button actions
-    UIBarButtonItem *reloadPageButton  = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(reloadMainPage)];
-    NSDictionary *buttonHandlers    = @{ @"reload_button": reloadPageButton };
-    homeNavController.buttonHandlers  = buttonHandlers;
     
     // 5.) Theme the controller
     homeNavController.stackerBackgroundColor =  @"F0F1F2";
@@ -50,21 +46,32 @@ LMStackerController *welcomeController;
     homeNavController.navigationBar.barTintColor   = [rgbParser colorWithHexString:@"357ebd"];
     homeNavController.navigationBar.tintColor      = [rgbParser colorWithHexString:@"FFFFFF"];
     [homeNavController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [rgbParser colorWithHexString:@"FFFFFF"]}];
+    
+    LMStackerController *settingsController = [[LMStackerController alloc] initWithURL:
+                                               [NSString stringWithFormat:@"%@%@", DOMAIN_URL, @"/design/settings?x_page_title=Settings"]];
+    settingsController.tabBarItem.title             = @"Settings";
+    settingsController.navigationBar.barTintColor   = [rgbParser colorWithHexString:@"357ebd"];
+    settingsController.navigationBar.tintColor      = [rgbParser colorWithHexString:@"FFFFFF"];
+    [settingsController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [rgbParser colorWithHexString:@"FFFFFF"]}];
+    settingsController.tabBarItem.image             = [UIImage imageNamed:@"tab-1.png"];
+    settingsController.statusBarLight        = YES;
 
     UITabBarController *tabBarController = [[UITabBarController alloc] init];
     [[UITabBar appearance] setTintColor:[rgbParser colorWithHexString:@"FFFFFF"]];
     [[UITabBar appearance] setBarTintColor:[rgbParser colorWithHexString:@"131313"]];
     [tabBarController addChildViewController:homeNavController];
+    [tabBarController addChildViewController:settingsController];
     
     
     // Welcome Controller
     welcomeController = [[LMStackerController alloc] initWithURL:
-                              [NSString stringWithFormat:@"%@%@", DOMAIN_URL, @"/users/sign_in?x_page_title=Log+In&x_right_button=show_signup_page"]];
+                              [NSString stringWithFormat:@"%@%@", DOMAIN_URL, @"/users/sign_in?x_page_title=Welcome&x_right_button=show_signup_page"]];
     welcomeController.stackerBackgroundColor = @"F0F1F2";
     welcomeController.statusBarLight        = YES;
-    welcomeController.navigationBar.barTintColor   = [rgbParser colorWithHexString:@"0F76C5"];
+    welcomeController.navigationBar.barTintColor   = [rgbParser colorWithHexString:@"357ebd"];
     welcomeController.navigationBar.tintColor      = [rgbParser colorWithHexString:@"FFFFFF"];
     [welcomeController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [rgbParser colorWithHexString:@"FFFFFF"]}];
+    
 
     
     UIBarButtonItem *showSignUpPageButton   = [[UIBarButtonItem alloc] initWithTitle:@"Sign Up"
