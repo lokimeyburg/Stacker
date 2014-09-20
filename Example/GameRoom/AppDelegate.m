@@ -12,6 +12,7 @@
 @implementation AppDelegate
 
 NSString *DOMAIN_URL;
+LMStackerController *homeNavController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -19,7 +20,7 @@ NSString *DOMAIN_URL;
     DOMAIN_URL = @"http://localhost:3000";
     
     // 1.) Create a StackerController
-    self.homeNavController = [[LMStackerController alloc] initWithURL:
+    homeNavController = [[LMStackerController alloc] initWithURL:
                               [NSString stringWithFormat:@"%@%@", DOMAIN_URL, @"/design/index?x_right_button=search_button&x_left_button=bridge_demo&x_page_title=News+Feed"]];
     
     // 2.) Custom right button actions
@@ -32,10 +33,10 @@ NSString *DOMAIN_URL;
                                          @"search_button": searchButton,
                                          @"bridge_demo": bridgeDemoButton,
                                          @"send_msg_to_bridge": sendMessageToBridge  };
-    self.homeNavController.buttonHandlers  = buttonHandlers;
+    homeNavController.buttonHandlers  = buttonHandlers;
     
     // 3.) Javascript Bridge handler
-    [self.homeNavController registerHandler:@"testObjcCallback" handler:^(id data, WVJBResponseCallback responseCallback) {
+    [homeNavController registerHandler:@"testObjcCallback" handler:^(id data, WVJBResponseCallback responseCallback) {
         NSLog(@"testObjcCallback called: %@", data);
         responseCallback(@"Response from testObjcCallback");
     }];
@@ -45,27 +46,27 @@ NSString *DOMAIN_URL;
     [myCustomAction addTarget:self action:@selector(showCustomActionPage:) withParameter:self ];
     
     NSDictionary *customURLHandlers = @{ @"myAction" : myCustomAction };
-    [self.homeNavController setCustomURLHandlers:customURLHandlers];
+    [homeNavController setCustomURLHandlers:customURLHandlers];
     
     
     // 5.) Theme the controller
-    self.homeNavController.stackerBackgroundColor =  @"F0F1F2";
-    self.homeNavController.rootPageTitleImage    = [UIImage imageNamed:@"logo.png"];
-    self.homeNavController.statusBarLight        = YES;
-    self.homeNavController.refreshSpinnerColor   = @"6F9FCD";
-    self.homeNavController.loadingSpinnerColor   = @"1C3347";
+    homeNavController.stackerBackgroundColor =  @"F0F1F2";
+    homeNavController.rootPageTitleImage    = [UIImage imageNamed:@"logo.png"];
+    homeNavController.statusBarLight        = YES;
+    homeNavController.refreshSpinnerColor   = @"6F9FCD";
+    homeNavController.loadingSpinnerColor   = @"1C3347";
     
     // 5.5) Extra theming (but not really Stacker specific)
-    self.homeNavController.tabBarItem.title             = @"News Feed";
-    self.homeNavController.tabBarItem.image             = [UIImage imageNamed:@"tab-1.png"];
-    self.homeNavController.navigationBar.barTintColor   = [UIColor colorWithHexString:@"357ebd"];
-    self.homeNavController.navigationBar.tintColor      = [UIColor colorWithHexString:@"FFFFFF"];
-    [self.homeNavController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor colorWithHexString:@"FFFFFF"]}];
+    homeNavController.tabBarItem.title             = @"News Feed";
+    homeNavController.tabBarItem.image             = [UIImage imageNamed:@"tab-1.png"];
+    homeNavController.navigationBar.barTintColor   = [UIColor colorWithHexString:@"357ebd"];
+    homeNavController.navigationBar.tintColor      = [UIColor colorWithHexString:@"FFFFFF"];
+    [homeNavController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor colorWithHexString:@"FFFFFF"]}];
 
     UITabBarController *tabBarController = [[UITabBarController alloc] init];
     [[UITabBar appearance] setTintColor:[UIColor colorWithHexString:@"FFFFFF"]];
     [[UITabBar appearance] setBarTintColor:[UIColor colorWithHexString:@"131313"]];
-    [tabBarController addChildViewController:self.homeNavController];
+    [tabBarController addChildViewController:homeNavController];
     
     
     // Alrighty, spin up the app!
@@ -109,22 +110,22 @@ NSString *DOMAIN_URL;
 
 -(void) showSearchPage
 {
-    [self.homeNavController pushNewPage:[NSString stringWithFormat:@"%@%@", DOMAIN_URL, @"/design/search?x_page_title=Search"]];
+    [homeNavController pushNewPage:[NSString stringWithFormat:@"%@%@", DOMAIN_URL, @"/design/search?x_page_title=Search"]];
 }
 
 -(void) showJSBridgePage
 {
-    [self.homeNavController pushNewPage:[NSString stringWithFormat:@"%@%@", DOMAIN_URL, @"/design/bridge?x_page_title=JS+Bridge+Demo&x_right_button=send_msg_to_bridge"]];
+    [homeNavController pushNewPage:[NSString stringWithFormat:@"%@%@", DOMAIN_URL, @"/design/bridge?x_page_title=JS+Bridge+Demo&x_right_button=send_msg_to_bridge"]];
 }
 
 -(void) showNewPostPage
 {
-    [self.homeNavController pushNewPage:[NSString stringWithFormat:@"%@%@", DOMAIN_URL, @"/design/new_post?x_page_title=New+Post"]];
+    [homeNavController pushNewPage:[NSString stringWithFormat:@"%@%@", DOMAIN_URL, @"/design/new_post?x_page_title=New+Post"]];
 }
 
 -(void) sendMessageToBridge
 {
-    [self.homeNavController.bridge callHandler:@"testJavascriptHandler" data:@{ @"foo":@"before ready" }];
+    [homeNavController.bridge callHandler:@"testJavascriptHandler" data:@{ @"foo":@"before ready" }];
 }
 
 

@@ -14,8 +14,6 @@
 
 @property (strong, nonatomic) ViewController *viewController;
 
-@property LMStackerController *homeNavController;
-
 @end
 
 
