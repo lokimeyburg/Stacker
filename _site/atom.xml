@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
  <title>Stacker</title>
- <link href="http://stacker.lokimeyburg.com/atom.xml" rel="self"/>
- <link href="http://stacker.lokimeyburg.com/"/>
- <updated>2014-08-05T15:37:49-07:00</updated>
- <id>http://stacker.lokimeyburg.com</id>
+ <link href="http://www.lokimeyburg.com/Stacker//atom.xml" rel="self"/>
+ <link href="http://www.lokimeyburg.com/Stacker//"/>
+ <updated>2014-09-19T18:00:35-07:00</updated>
+ <id>http://www.lokimeyburg.com/Stacker/</id>
  <author>
    <name>Loki Meyburg</name>
    <email></email>
@@ -13,86 +13,224 @@
 
  
  <entry>
-   <title>Example content</title>
-   <link href="http://stacker.lokimeyburg.com/2014/01/01/example-content/"/>
-   <updated>2014-01-01T00:00:00-08:00</updated>
-   <id>http://stacker.lokimeyburg.com/2014/01/01/example-content</id>
-   <content type="html">&lt;p&gt;Stacker is an iOS view-controller to kickstart development of hybrid native/web iOS apps. Stacker was built to keep your navigation native while the rest of your app is driven by webviews using &lt;a href=&quot;https://github.com/lokimeyburg/Stacker/wiki/Stacker-URL-Structure&quot;&gt;Stacker&amp;#39;s special URLs.&lt;/a&gt;&lt;/p&gt;
+   <title>Tutorial: creating a login screen</title>
+   <link href="http://www.lokimeyburg.com/Stacker//2014/09/22/hybrid-app-authentication/"/>
+   <updated>2014-09-22T00:00:00-07:00</updated>
+   <id>http://www.lokimeyburg.com/Stacker//2014/09/22/hybrid-app-authentication</id>
+   <content type="html">&lt;p&gt;Out of the box, &lt;a href=&quot;http://www.lokimeyburg.com/Stacker/&quot;&gt;Stacker&lt;/a&gt; comes with a pretty good example app that can serve as a basis for your own iPhone apps. But what about getting users to log in to your app?&lt;/p&gt;
 
-&lt;p&gt;Inspired by this post by DHH: &lt;a href=&quot;http://signalvnoise.com/posts/3743-hybrid-sweet-spot-native-navigation-web-content&quot;&gt;Hybrid sweet spot: Native navigation, web content&lt;/a&gt;&lt;/p&gt;
+&lt;div style=&quot;text-align: center; padding: 20px 0px;&quot;&gt;
+  &lt;img src=&#39;/assets/blog/stacker-authentication.gif&#39; style=&#39;width: 50%;&#39; /&gt;
+&lt;/div&gt;
 
-&lt;p&gt;Built for: iPhones &amp;amp; iOS7&lt;/p&gt;
+&lt;p&gt;I&amp;#39;m going to show you a very simple technique I like to use to show a &amp;quot;welcome screen&amp;quot; that asks a user to log in (or sign up). Even though the server code is written in Rails, the technique is simple enough that it can be applied to most other frameworks without a lot of effort. We&amp;#39;ll be building off of the example app, called GameRoom, so be sure to try to get the demo working by following the &lt;a href=&quot;http://www.lokimeyburg.com/Stacker/docs/getting-started/&quot;&gt;getting started documentation.&lt;/a&gt;&lt;/p&gt;
 
-&lt;h2 id=&quot;features&quot;&gt;Features&lt;/h2&gt;
+&lt;!--more--&gt;
 
-&lt;ul&gt;
-&lt;li&gt;Easily build &lt;a href=&quot;https://github.com/lokimeyburg/Stacker/wiki/Stacker-URL-Structure&quot;&gt;URL-driven iOS apps&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Browse external websites in a modal view&lt;/li&gt;
-&lt;li&gt;Theming&lt;/li&gt;
-&lt;li&gt;Pull to refresh on all pages&lt;/li&gt;
-&lt;li&gt;Custom navigation button handlers&lt;/li&gt;
-&lt;li&gt;Display a page when there&amp;#39;s no internet connection&lt;/li&gt;
-&lt;li&gt;Custom URL handlers&lt;/li&gt;
-&lt;li&gt;Easily jump back into native code when you need to&lt;/li&gt;
-&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;You can checkout the complete example - which includes a few extra things - by visiting the &lt;code&gt;authentication-example&lt;/code&gt; branch for both the &lt;a href=&quot;https://github.com/lokimeyburg/GameRoom/tree/authentication-example&quot;&gt;Rails app&lt;/a&gt; and the &lt;a href=&quot;https://github.com/lokimeyburg/Stacker/tree/authentication-example&quot;&gt;iOS app&lt;/a&gt; on Github.&lt;/p&gt;
+&lt;/blockquote&gt;
 
-&lt;h2 id=&quot;running-the-demo&quot;&gt;Running the Demo&lt;/h2&gt;
+&lt;p&gt;There are many ways to authenticate a user in an iOS app but since Stacker uses WebViews, signing in to your app in one WebView means you&amp;#39;ll be signed in on your other pages because your session and cookies are shared between pages in your app. This makes our lives a lot easier.&lt;/p&gt;
 
-&lt;p&gt;If you get stuck or want something a little more comprehensive: checkout out the &lt;a href=&quot;#&quot;&gt;complete set up guide and tutorial&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&quot;the-cookie-technique&quot;&gt;The cookie technique&lt;/h2&gt;
 
-&lt;h3 id=&quot;1.-run-the-demo-web-app&quot;&gt;1. Run the demo web app&lt;/h3&gt;
+&lt;p&gt;The first things we need to do is decide how we&amp;#39;re going to tell our iOS app that a user has signed in from the web app. We need to know this in order to show or hide the &amp;quot;sign in&amp;quot; page. The way we&amp;#39;re going to do this is by setting a cookie called &amp;quot;signed_in&amp;quot; (and delete it when you log out).&lt;/p&gt;
 
-&lt;p&gt;The demo application is a very simple Rails app called &lt;a href=&quot;https://github.com/lokimeyburg/GameRoom&quot;&gt;GameRoom&lt;/a&gt;. It doesn&amp;#39;t really do anything other than showcase some of Stacker&amp;#39;s features.&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;git clone https://github.com/lokimeyburg/GameRoom.git
-cd GameRoom
-bundle install
-rails s
+&lt;p&gt;Apple gives us a nice way to monitor changes to our iOS app&amp;#39;s cookies using the &lt;code&gt;NSNotificationCenter&lt;/code&gt;. This means that all our server has to do is set a cookie called &lt;code&gt;signed_in&lt;/code&gt; after we&amp;#39;ve successfully signed in and we&amp;#39;ll know to hide the &amp;quot;sign in&amp;quot; screen. And visa versa: we&amp;#39;ll know when the cookie gets deleted so we&amp;#39;ll present the &amp;quot;sign in&amp;quot; page again.&lt;/p&gt;
+
+&lt;p&gt;We&amp;#39;re going to break this tutorial up into two sections: first the server (Rails) side, followed by the iOS app. I&amp;#39;ll try to explain what I&amp;#39;m doing on the server side in a manner that can be applied to any framework besides Rails.&lt;/p&gt;
+
+&lt;p&gt;[ show image of listening for cookie ]&lt;/p&gt;
+
+&lt;p&gt;[ show image of setting and deleting cookie ]&lt;/p&gt;
+
+&lt;h2 id=&quot;setting-up-the-server-side&quot;&gt;Setting up the server side&lt;/h2&gt;
+
+&lt;p&gt;Download &lt;a href=&quot;https://github.com/lokimeyburg/GameRoom&quot;&gt;GameRoom&lt;/a&gt;, the example Rails app that is designed to showcase Stacker. Make sure you&amp;#39;ve tried to run it at least once by following the &lt;a href=&quot;http://www.lokimeyburg.com/Stacker/docs/getting-started/&quot;&gt;Getting Started&lt;/a&gt; documentation.&lt;/p&gt;
+
+&lt;h3 id=&quot;setup&quot;&gt;Setup&lt;/h3&gt;
+
+&lt;p&gt;We&amp;#39;re going to use &lt;a href=&quot;https://github.com/plataformatec/devise&quot;&gt;Devise&lt;/a&gt; as our authentication solution because it&amp;#39;s easy to set up.&lt;/p&gt;
+
+&lt;p&gt;In your &lt;code&gt;Gemfile&lt;/code&gt; add the line&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;gem devise
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Now open up a web browser and visit &lt;code&gt;http://localhost:3000&lt;/code&gt;. You should see GameRoom running in your browser.&lt;/p&gt;
+&lt;p&gt;Now install the library &lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;bundle install
+rails generate devise:install
+rails generate devise User
+rails generate devise:views
+rake db:migrate
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Great! What we&amp;#39;ve done is installed the library, created a &lt;code&gt;User&lt;/code&gt; model, generated all the neccessary views and updated our databse by adding the &lt;code&gt;users&lt;/code&gt; table. &lt;/p&gt;
 
-&lt;h3 id=&quot;2.-run-the-example-ios-app&quot;&gt;2. Run the example iOS app&lt;/h3&gt;
+&lt;p&gt;Try running the app with the &lt;code&gt;rails server&lt;/code&gt; command in your terminal and visiting &lt;code&gt;http://localhost:3000/users/sign_up&lt;/code&gt; and see if you can create your first user.&lt;/p&gt;
 
-&lt;p&gt;Download Stacker and open the &lt;code&gt;GameRoom&lt;/code&gt; iOS project which is in the &lt;code&gt;Examples&lt;/code&gt; folder&lt;/p&gt;
+&lt;p&gt;In &lt;code&gt;/app/controllers/application_controller.rb&lt;/code&gt; you should add a &lt;code&gt;before_filter&lt;/code&gt; to ensure the user is always authenticated - if they&amp;#39;re not they will be redirected to the sign in screen.&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;class ApplicationController &amp;lt; ActionController::Base
+    before_filter :authenticate_user!
+end
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3 id=&quot;setting-and-deleting-your-cookie&quot;&gt;Setting and deleting your cookie&lt;/h3&gt;
+
+&lt;p&gt;Remember: the key thing we want to do is set a &lt;code&gt;signed_in&lt;/code&gt; cookie right after we&amp;#39;ve signed in and delete it when we log off. This way our iOS app can easily tell whether to display or hide the &amp;quot;sign in&amp;quot; screen. &lt;/p&gt;
+
+&lt;p&gt;In Rails we will do this using middleware callbacks, however if you&amp;#39;re using another framework you may choose to do it differently. What&amp;#39;s important is that the cookie is being set and deleted appropriately.&lt;/p&gt;
+
+&lt;p&gt;In &lt;code&gt;config/initializers/devise.rb&lt;/code&gt; add the following to configure Devise:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;Devise.setup do |config|
+
+  ... other code ... 
+
+  Warden::Manager.after_set_user do |user,auth,opts|
+    auth.cookies[:signed_in] = 1
+  end
+
+  Warden::Manager.before_logout do |user,auth,opts|
+    auth.cookies.delete :signed_in
+  end
+
+ end
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;[ Show picture of Chrome with cookie being set ]&lt;/p&gt;
+
+&lt;p&gt;Awesome! Now we&amp;#39;ve got an app that sets a cookie that our iOS app can read to detect if we&amp;#39;re logged in. &lt;/p&gt;
+
+&lt;h3 id=&quot;adding-a-sign-out-link&quot;&gt;Adding a sign out link&lt;/h3&gt;
+
+&lt;p&gt;At this point, it&amp;#39;s a good idea to add a &amp;quot;sign out&amp;quot; link on every page just to help us log out while we&amp;#39;re developing. We can remove it after we&amp;#39;re finished by placing it in on a different page where it might be more appropriate to have the link.&lt;/p&gt;
+
+&lt;p&gt;In &lt;code&gt;app/views/layouts/application.html.erb&lt;/code&gt; right after the &lt;code&gt;&amp;lt;body&amp;gt;&lt;/code&gt; add:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&amp;lt;%= link_to &amp;quot;Sign out&amp;quot;, destroy_user_session_path, :method =&amp;gt; :delete if current_user.present? %&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3 id=&quot;using-database-sessions&quot;&gt;Using database sessions&lt;/h3&gt;
+
+&lt;p&gt;Since we&amp;#39;re relying heavily on sessions for authentication I&amp;#39;ve found using cookies to store your session information to be unreliable [1]. Also, storing sensitive information in a cookie is generally a bad idea for several reasons, lack of encryption (or weak encryption) being only one of them. Instead, let&amp;#39;s use the database to store session information.&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;gem &amp;#39;activerecord-session_store&amp;#39;, github: &amp;#39;rails/activerecord-session_store&amp;#39;
+rails generate active_record:session_migration
+rake db:migrate
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;in &lt;code&gt;config/initializers/session-store.rb&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;Rails.application.config.session_store :active_record_store
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3 id=&quot;testing-it-out&quot;&gt;Testing it out&lt;/h3&gt;
+
+&lt;p&gt;Spin up the Rails server with the &lt;code&gt;rails server&lt;/code&gt; command in your terminal. Visit &lt;code&gt;http://localhost:3000/users/sign_up&lt;/code&gt; in Chrome 
+and try to create your first user. Open the inspector and visit the &amp;quot;resources&amp;quot; tab and see if you can see the &lt;code&gt;signed_in&lt;/code&gt; cookie being created and destroyed properly.&lt;/p&gt;
+
+&lt;p&gt;Great! What we&amp;#39;ve built is a simple authentication system that sets a cookie to indicate when we&amp;#39;re logged in. Next we&amp;#39;re going to build the iOS side and use that cookie to display or hide the sign in screen.&lt;/p&gt;
+
+&lt;h2 id=&quot;ios-app-side&quot;&gt;iOS app side&lt;/h2&gt;
+
+&lt;p&gt;We&amp;#39;re going to be building off of the GameRoom app that comes with Stacker. &lt;a href=&quot;http://www.lokimeyburg.com/Stacker/docs/getting-started/&quot;&gt;Download Stacker&lt;/a&gt; and open the &lt;code&gt;GameRoom&lt;/code&gt; iOS workspace in Xcode (it&amp;#39;s in the &lt;code&gt;Examples&lt;/code&gt; folder).&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ git clone https://github.com/lokimeyburg/Stacker.git
-$ cd Stacker/Example/GameRoom
-$ open GameRoom.xcodeproj
+$ cd Stacker/Example
+$ open GameRoom.xcworkspace
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Now compile and run your iOS app in the simulator. That&amp;#39;s it! You should be able to navigate around GameRoom. Look at the source code and change some of the URLs in the Rails app to see what happens.&lt;/p&gt;
+&lt;h3 id=&quot;creating-our-welcome-controller&quot;&gt;Creating our welcome controller&lt;/h3&gt;
 
-&lt;h2 id=&quot;creating-a-stackercontroller&quot;&gt;Creating a StackerController&lt;/h2&gt;
+&lt;p&gt;We want the sign in page to be in a new &lt;code&gt;StackerController&lt;/code&gt; which we will call our &lt;code&gt;welcomeController&lt;/code&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;If you&amp;#39;re using &lt;a href=&quot;http://cocoapods.org&quot;&gt;CocoaPods:&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;In &lt;code&gt;AppDelegate.m&lt;/code&gt;, first add our &lt;code&gt;welcomeController&lt;/code&gt; variable&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;@implementation AppDelegate
 
-&lt;p&gt;In your Podile add:
+NSString *welcomeController;
+NSString *DOMAIN_URL;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Now let&amp;#39;s create our controller:&lt;/p&gt;
+
+&lt;p&gt;In &lt;code&gt;AppDelegate.m&lt;/code&gt; in the &lt;code&gt;didFinishLaunchingWithOptions&lt;/code&gt; method add:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;welcomeController = [[LMStackerController alloc] initWithURL: @&amp;quot;http://localhost:3000/users/sign_in?x_page_title=Log+In&amp;quot;];
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3 id=&quot;listening-for-cookie-notifications&quot;&gt;Listening for cookie notifications&lt;/h3&gt;
+
+&lt;p&gt;Apple lets us listen to changes made to our cookies using the Notification Center. The (very long) event name is &lt;code&gt;NSHTTPCookieManagerCookiesChangedNotification&lt;/code&gt;. What we&amp;#39;re going to do is run a method called &lt;code&gt;checkLogInStatus&lt;/code&gt; everytime a cookie gets created or destroyed [2].&lt;/p&gt;
+
+&lt;p&gt;In &lt;code&gt;AppDelegate.m&lt;/code&gt; just below our &lt;code&gt;welcomeController&lt;/code&gt; create the observer:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;[[NSNotificationCenter defaultCenter]
+  addObserver:self
+  selector:@selector(checkLogInStatus)
+  name:NSHTTPCookieManagerCookiesChangedNotification
+  object:nil];
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Great! Now let&amp;#39;s write the &lt;code&gt;checkLogInStatus&lt;/code&gt; method. What we&amp;#39;re going to do is iterate through our cookies and check for the &lt;code&gt;signed_in&lt;/code&gt; cookie. This will tell us if the user has signed in. Also, we&amp;#39;ll check if our &lt;code&gt;welcomeController&lt;/code&gt; is visible so that we now when to show or hide it.&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;-(void) checkLogInStatus
+{
+    BOOL welcomeModalVisible = welcomeController.isViewLoaded &amp;amp;&amp;amp; welcomeController.view.window;
+    BOOL isOnline = NO;
+
+    NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies];
+    for (NSHTTPCookie *cookie in cookies) {
+        if([cookie.name isEqualToString:@&amp;quot;signed_in&amp;quot;] &amp;amp;&amp;amp; [cookie.value isEqualToString:@&amp;quot;1&amp;quot;]){
+            isOnline = YES;
+        }
+    }
+
+    if (isOnline){
+        // You are online
+        if(welcomeModalVisible) {
+            [self closeWelcomeModal];
+        }
+    } else {
+        // You are offline
+        if(!welcomeModalVisible) {
+            [self showWelcomeModal];
+        }
+    }
+}
+
+-(void) closeWelcomeModal
+{
+    [homeNavController clearStack];
+    [homeNavController refreshPage];
+    [self.window.rootViewController dismissViewControllerAnimated:YES completion:nil];
+}
+
+-(void) showWelcomeModal
+{
+    [welcomeController clearStack];
+    [welcomeController refreshPage];
+    [self.window.rootViewController presentViewController:welcomeController animated:YES completion:NULL];
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Now run the app in your simulator to try it out. Your app should load and then the &amp;quot;Log In&amp;quot; screen should slide up. Log in and it should slide down and away. If everything is working then the rest is just polish!&lt;/p&gt;
+
+&lt;p&gt;Congratulations - you&amp;#39;ve built a super simple sign in page for your hybrid iOS app. You can checkout the example - which includes styling and a sign up page  by visiting the &lt;code&gt;authentication-example&lt;/code&gt; branch for both the &lt;a href=&quot;https://github.com/lokimeyburg/GameRoom/tree/authentication-example&quot;&gt;Rails app&lt;/a&gt; and the &lt;a href=&quot;https://github.com/lokimeyburg/Stacker/tree/authentication-example&quot;&gt;iOS app&lt;/a&gt; on Github.&lt;/p&gt;
+
+&lt;h2 id=&quot;more-details&quot;&gt;More Details&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Persisting cookies&lt;/li&gt;
+&lt;li&gt;Adding another cookie check&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;persistent-cookies&quot;&gt;Persistent cookies&lt;/h3&gt;
+
+&lt;p&gt;For extra points, you may wish to do another check on every request to ensure the user is truly logged in (because some applications may have a feature where they allow a user to log themselves out from another device).&lt;/p&gt;
+
+&lt;p&gt;In &lt;code&gt;app/controllers/application_controller.rb&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;# This is Devise&amp;#39;s authentication
+before_filter :authenticate_user!
+before_filter :delete_signed_in_token_logged_out
+
+private
+
+def delete_signed_in_token_logged_out
+  cookies.delete :signed_in unless current_user.present?
+end
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;In Devise.rb
 &lt;code&gt;
-pod &amp;#39;LMStacker&amp;#39;, :git =&amp;gt; &amp;#39;https://github.com/lokimeyburg/Stacker.git&amp;#39;
-&lt;/code&gt;
-And then run
-&lt;code&gt;
-$ pod install
+config.remember_for = 2.weeks
 &lt;/code&gt;&lt;/p&gt;
 
-&lt;p&gt;Now in your XCode project:&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;// Import Stacker
-#import &amp;quot;LMStackerController.h&amp;quot;
-
-// Create a controller and point it to your web app&amp;#39;s url
-LMStackerController *myController = [[LMStackerController alloc] initWithURL:@&amp;quot;http://localhost:3000?x_page_title=Home&amp;quot;];
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h2 id=&quot;next-steps:&quot;&gt;Next Steps:&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/lokimeyburg/Stacker/wiki/Stacker-URL-Structure&quot;&gt;Learn the special Stacker URLs&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;coming-soon:&quot;&gt;Coming soon:&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;iPad support&lt;/li&gt;
-&lt;li&gt;Multiple navigation buttons&lt;/li&gt;
-&lt;li&gt;PDF viewer&lt;/li&gt;
-&lt;li&gt;Custom &amp;quot;request has timed out&amp;quot; page&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;In User.rb
+&lt;code&gt;
+  def remember_me
+    true
+  end
+&lt;/code&gt;&lt;/p&gt;
 </content>
  </entry>
  

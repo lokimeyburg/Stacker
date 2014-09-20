@@ -49,6 +49,10 @@
 <!--  -->
 <!--    -->
 <!--      -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--      -->
 <!--       <li class=""><a href="/docs/custom-actions/">Custom URL Actions</a></li> -->
 <!--      -->
 <!--    -->
@@ -74,6 +78,12 @@
 <!--    -->
 <!--      -->
 <!--       <li class=""><a href="/docs/http-extras/">HTTP Extras</a></li> -->
+<!--      -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--      -->
+<!--       <li class=""><a href="/blog/">Blog</a></li> -->
 <!--      -->
 <!--    -->
 <!--  -->
@@ -115,6 +125,9 @@
   <li class=""><a href="/docs/http-extras/">HTTP Extras</a></li>
   <li class=""><a href="/docs/stacker-objc-api/">Obj-C API</a></li>
   <li class=""><a href="/docs/custom-actions/">Custom URL Actions</a></li>
+  <li class="divider"></li>
+  <li class=""><a href="/blog/">Blog</a></li>
+
 
       </ul>
     </div><!-- /.navbar-collapse -->
@@ -128,6 +141,7 @@
     <div class="col-sm-8">
       <div class="markdown-body">
         <h1>Getting Started</h1>
+        
         <p>Stacker is an iOS view-controller to kickstart development of hybrid native/web iOS apps. Stacker was built to keep your navigation native while the rest of your app is driven by webviews using <a href="/docs/url-structure">Stacker&#39;s special URLs.</a></p>
 
 <p>Inspired by this post by DHH: <a href="http://signalvnoise.com/posts/3743-hybrid-sweet-spot-native-navigation-web-content">Hybrid sweet spot: Native navigation, web content</a></p>
@@ -151,7 +165,7 @@ rails s
 <p>Download Stacker and open the <code>GameRoom</code> iOS project which is in the <code>Examples</code> folder</p>
 <div class="highlight"><pre><code class="language-text" data-lang="text">$ git clone https://github.com/lokimeyburg/Stacker.git
 $ cd Stacker/Example
-$ open GameRoom.xcodeproj
+$ open GameRoom.xcworkspace
 </code></pre></div>
 <p>Now compile and run your iOS app for an iPhone in the simulator. That&#39;s it! You should be able to navigate around GameRoom. Look at the source code and change some of the URLs in the Rails app to see what happens.</p>
 
@@ -159,11 +173,10 @@ $ open GameRoom.xcodeproj
 
 <p><strong>If you&#39;re using <a href="http://cocoapods.org">CocoaPods:</a></strong></p>
 
-<p>In your Podile add:
-<code>
-pod &#39;LMStacker&#39;, :git =&gt; &#39;https://github.com/lokimeyburg/Stacker.git&#39;
-</code>
-And then run
+<p>In your Podile add:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">pod &#39;LMStacker&#39;, :git =&gt; &#39;https://github.com/lokimeyburg/Stacker.git&#39;
+</code></pre></div>
+<p>And then run
 <code>
 $ pod install
 </code></p>
@@ -210,6 +223,10 @@ LMStackerController *myController = [[LMStackerController alloc] initWithURL:@&q
 <!--  -->
 <!--    -->
 <!--      -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--      -->
 <!--       <li class=""><a href="/docs/custom-actions/">Custom URL Actions</a></li> -->
 <!--      -->
 <!--    -->
@@ -235,6 +252,12 @@ LMStackerController *myController = [[LMStackerController alloc] initWithURL:@&q
 <!--    -->
 <!--      -->
 <!--       <li class=""><a href="/docs/http-extras/">HTTP Extras</a></li> -->
+<!--      -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--      -->
+<!--       <li class=""><a href="/blog/">Blog</a></li> -->
 <!--      -->
 <!--    -->
 <!--  -->
@@ -276,6 +299,9 @@ LMStackerController *myController = [[LMStackerController alloc] initWithURL:@&q
   <li class=""><a href="/docs/http-extras/">HTTP Extras</a></li>
   <li class=""><a href="/docs/stacker-objc-api/">Obj-C API</a></li>
   <li class=""><a href="/docs/custom-actions/">Custom URL Actions</a></li>
+  <li class="divider"></li>
+  <li class=""><a href="/blog/">Blog</a></li>
+
 
       </ul>
     </div>

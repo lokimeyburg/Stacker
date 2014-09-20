@@ -49,6 +49,10 @@
 <!--  -->
 <!--    -->
 <!--      -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--      -->
 <!--       <li class=""><a href="/docs/custom-actions/">Custom URL Actions</a></li> -->
 <!--      -->
 <!--    -->
@@ -74,6 +78,12 @@
 <!--    -->
 <!--      -->
 <!--       <li class=""><a href="/docs/http-extras/">HTTP Extras</a></li> -->
+<!--      -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--      -->
+<!--       <li class=""><a href="/blog/">Blog</a></li> -->
 <!--      -->
 <!--    -->
 <!--  -->
@@ -115,6 +125,9 @@
   <li class=""><a href="/docs/http-extras/">HTTP Extras</a></li>
   <li class=""><a href="/docs/stacker-objc-api/">Obj-C API</a></li>
   <li class=""><a href="/docs/custom-actions/">Custom URL Actions</a></li>
+  <li class="divider"></li>
+  <li class=""><a href="/blog/">Blog</a></li>
+
 
       </ul>
     </div><!-- /.navbar-collapse -->
@@ -128,7 +141,8 @@
     <div class="col-sm-8">
       <div class="markdown-body">
         <h1>Theming Stacker</h1>
-        <p>Stacking comes with several theming options to customize the look and feel of your application</p>
+        
+        <p>Stacker comes with several theming options to customize the look and feel of your application</p>
 
 <p>We&#39;ll create a Stacker controller called <code>myStackerController</code> and use it in the examples below:</p>
 <div class="highlight"><pre><code class="language-text" data-lang="text">StackerController *myStackerController = [[StackerController alloc] initWithURL:@&quot;http://localhost:3000/&quot;];
@@ -137,34 +151,37 @@
 <div class="highlight"><pre><code class="language-text" data-lang="text">[myStackerController setWebViewBackgroundColor:@&quot;F0F1F2&quot;];
 </code></pre></div>
 <h2 id="title-of-the-first-page">Title of the first page</h2>
-<div class="highlight"><pre><code class="language-text" data-lang="text">myStackerController.rootTitle             = @&quot;News Feed&quot;;
+<div class="highlight"><pre><code class="language-text" data-lang="text">myStackerController.rootTitle = @&quot;News Feed&quot;;
 </code></pre></div>
 <h2 id="image-for-a-title">Image for a title</h2>
-<div class="highlight"><pre><code class="language-text" data-lang="text">myStackerController.rootPageTitleImage    = [UIImage imageNamed:@&quot;logo.png&quot;];
+<div class="highlight"><pre><code class="language-text" data-lang="text">myStackerController.rootPageTitleImage = [UIImage imageNamed:@&quot;logo.png&quot;];
 </code></pre></div>
 <p>There should be two images in your applications directory, one retina and one non-retina. So in above example you need a <code>logo.png</code> &amp; <code>logo@2x.png</code> image.</p>
 
 <h2 id="setting-the-status-bar-color">Setting the status bar color</h2>
 
 <p>If you want a light status bar:</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">myStackerController.statusBarLight        = YES;
+<div class="highlight"><pre><code class="language-text" data-lang="text">myStackerController.statusBarLight = YES;
 </code></pre></div>
 <h2 id="tab-icon">Tab Icon</h2>
 
-<p>Carried over from it&#39;s parent class, UINavigationController, you can set the tab bar image. Make sure to include both a retir</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">myStackerController.tabBarItem.image      = [UIImage imageNamed:@&quot;tab-1.png&quot;];
+<p>Carried over from it&#39;s parent class, <code>UINavigationController</code>, you can set the tab bar image. Make sure to include both a retir</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">myStackerController.tabBarItem.image = [UIImage imageNamed:@&quot;tab-1.png&quot;];
 </code></pre></div>
 <h2 id="header-colors">Header colors</h2>
 
-<p>This will set the background to <code>#47916B</code> and all the text to <code>#FFFFFF</code>. RGBParser comes with Stacker (or you can <a href="https://github.com/lokimeyburg/RGBParser">download it from Github.</a>). </p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">RGBParser *rgbParser = [[RGBParser alloc] init];
-myStackerController.navigationBar.barTintColor = [rgbParser colorWithHexString:@&quot;47916B&quot;];
-myStackerController.navigationBar.tintColor = [rgbParser colorWithHexString:@&quot;FFFFFF&quot;];
-[myStackerController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [rgbParser colorWithHexString:@&quot;FFFFFF&quot;]}];
+<p>This will set the background to <code>#47916B</code> and all the text to <code>#FFFFFF</code>. HexColors is used by Stacker but you may have to import it yourself (you can <a href="https://github.com/mRs-/HexColors">download it from Github.</a>).</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">#import &lt;HexColors/HexColor.h&gt;
+
+// ....
+
+myStackerController.navigationBar.barTintColor = [UIColor colorWithHexString:@&quot;47916B&quot;];
+myStackerController.navigationBar.tintColor = [UIColor colorWithHexString:@&quot;FFFFFF&quot;];
+[myStackerController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor colorWithHexString:@&quot;FFFFFF&quot;]}];
 </code></pre></div>
 <h2 id="loading-and-refresh-spinner-color">Loading and Refresh Spinner Color</h2>
-<div class="highlight"><pre><code class="language-text" data-lang="text">myStackerController.refreshSpinnerColor   = @&quot;6F9FCD&quot;;
-myStackerController.loadingSpinnerColor   = @&quot;1C3347&quot;;
+<div class="highlight"><pre><code class="language-text" data-lang="text">myStackerController.refreshSpinnerColor = @&quot;6F9FCD&quot;;
+myStackerController.loadingSpinnerColor = @&quot;1C3347&quot;;
 </code></pre></div>
 <h2 id="error-pages">Error Pages</h2>
 
@@ -191,6 +208,10 @@ myStackerController.loadingSpinnerColor   = @&quot;1C3347&quot;;
 <!--  -->
 <!--    -->
 <!--      -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--      -->
 <!--       <li class=""><a href="/docs/custom-actions/">Custom URL Actions</a></li> -->
 <!--      -->
 <!--    -->
@@ -216,6 +237,12 @@ myStackerController.loadingSpinnerColor   = @&quot;1C3347&quot;;
 <!--    -->
 <!--      -->
 <!--       <li class=""><a href="/docs/http-extras/">HTTP Extras</a></li> -->
+<!--      -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--      -->
+<!--       <li class=""><a href="/blog/">Blog</a></li> -->
 <!--      -->
 <!--    -->
 <!--  -->
@@ -257,6 +284,9 @@ myStackerController.loadingSpinnerColor   = @&quot;1C3347&quot;;
   <li class=""><a href="/docs/http-extras/">HTTP Extras</a></li>
   <li class=""><a href="/docs/stacker-objc-api/">Obj-C API</a></li>
   <li class=""><a href="/docs/custom-actions/">Custom URL Actions</a></li>
+  <li class="divider"></li>
+  <li class=""><a href="/blog/">Blog</a></li>
+
 
       </ul>
     </div>

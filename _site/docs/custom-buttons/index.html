@@ -49,6 +49,10 @@
 <!--  -->
 <!--    -->
 <!--      -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--      -->
 <!--       <li class=""><a href="/docs/custom-actions/">Custom URL Actions</a></li> -->
 <!--      -->
 <!--    -->
@@ -74,6 +78,12 @@
 <!--    -->
 <!--      -->
 <!--       <li class=""><a href="/docs/http-extras/">HTTP Extras</a></li> -->
+<!--      -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--      -->
+<!--       <li class=""><a href="/blog/">Blog</a></li> -->
 <!--      -->
 <!--    -->
 <!--  -->
@@ -115,6 +125,9 @@
   <li class=""><a href="/docs/http-extras/">HTTP Extras</a></li>
   <li class=""><a href="/docs/stacker-objc-api/">Obj-C API</a></li>
   <li class=""><a href="/docs/custom-actions/">Custom URL Actions</a></li>
+  <li class="divider"></li>
+  <li class=""><a href="/blog/">Blog</a></li>
+
 
       </ul>
     </div><!-- /.navbar-collapse -->
@@ -128,6 +141,7 @@
     <div class="col-sm-8">
       <div class="markdown-body">
         <h1>Custom Navigation Buttons</h1>
+        
         <p>Sometimes you want to show a button in the navigation bar of your app. In order to do this with Stacker you first need to create your native button, register it with your StackerController, and then finally call it from a URL in your web app.</p>
 
 <p>Let&#39;s imagine you&#39;re creating a button to post a comment:</p>
@@ -135,22 +149,22 @@
 <h2 id="1.-create-the-button">1. Create the button</h2>
 <div class="highlight"><pre><code class="language-text" data-lang="text">UIBarButtonItem *postCommentButton = [[UIBarButtonItem alloc] initWithTitle:@&quot;Post&quot; style:UIBarButtonItemStyleBordered target:self action:@selector(postComment)];
 </code></pre></div>
-<p>What this will do is create a button named &quot;postCommentButton&quot;, with the text: &quot;Post&quot;. The target is &quot;self&quot; which means that it will call a method named &quot;postComment&quot; in the file that this line is found. If you want to call a method on another object use that object as the target instead.</p>
+<p>What this will do is create a button named <code>postCommentButton</code>, with the text &quot;Post&quot;. The target is <code>self</code> which means that it will call a method named <code>postComment</code> on the object that this method is declared. If you want to call a method on another object then use that object as the target instead.</p>
 
 <h2 id="2.-register-the-button-with-stacker">2. Register the button with Stacker</h2>
 
-<p>A StackerController has <code>buttonHandlers</code>: a list of button names and the button they correspond with. If the button is called from a URL, Stacker will look up the button and the buttonHandler dictionary and display the one with the corresponding name. </p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">NSDictionary *buttonHandlers = @{   @&quot;post_comment_button&quot; : postCommentButton,
-                                    @&quot;edit_comment_button&quot; : editCommentButton
-                                 };
+<p>A StackerController has <code>buttonHandlers</code>: a list of button names and the button they correspond with. If the button is called from a URL, Stacker will look up the button and the <code>buttonHandler</code> dictionary and display the one with the corresponding name.</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">NSDictionary *buttonHandlers = @{ @&quot;post_comment_button&quot; : postCommentButton,
+                                  @&quot;edit_comment_button&quot; : editCommentButton
+                                  };
 
 myStackerController.buttonHandlers = buttonHandlers;
 </code></pre></div>
-<p>This registers two buttons with Stacker. The one we just created, postCommentButton, will be registered under the name <code>post_comment_button</code>.</p>
+<p>This registers two buttons with Stacker. The one we just created, <code>postCommentButton</code>, will be registered under the name &quot;post_comment_button&quot;.</p>
 
 <h2 id="3.-reference-the-button-in-the-url">3. Reference the button in the URL</h2>
 
-<p>Now you can make the &quot;postCommentButton&quot; appear by calling it from a url like so:</p>
+<p>Now you can make the <code>postCommentButton</code> appear by calling it from a url like so:</p>
 <div class="highlight"><pre><code class="language-text" data-lang="text">/comment/new?x_page_title=Comment&amp;x_right_button=post_comment_button
 </code></pre></div>
 <p>You can also make it appear on the left hand side with <code>x_left_button</code>, but this will only work on the first page.</p>
@@ -170,6 +184,10 @@ myStackerController.buttonHandlers = buttonHandlers;
 <!--  -->
 <!--    -->
 <!--      -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--      -->
 <!--       <li class=""><a href="/docs/custom-actions/">Custom URL Actions</a></li> -->
 <!--      -->
 <!--    -->
@@ -195,6 +213,12 @@ myStackerController.buttonHandlers = buttonHandlers;
 <!--    -->
 <!--      -->
 <!--       <li class=""><a href="/docs/http-extras/">HTTP Extras</a></li> -->
+<!--      -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--      -->
+<!--       <li class=""><a href="/blog/">Blog</a></li> -->
 <!--      -->
 <!--    -->
 <!--  -->
@@ -236,6 +260,9 @@ myStackerController.buttonHandlers = buttonHandlers;
   <li class=""><a href="/docs/http-extras/">HTTP Extras</a></li>
   <li class=""><a href="/docs/stacker-objc-api/">Obj-C API</a></li>
   <li class=""><a href="/docs/custom-actions/">Custom URL Actions</a></li>
+  <li class="divider"></li>
+  <li class=""><a href="/blog/">Blog</a></li>
+
 
       </ul>
     </div>

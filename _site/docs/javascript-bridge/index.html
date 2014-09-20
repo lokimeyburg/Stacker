@@ -49,6 +49,10 @@
 <!--  -->
 <!--    -->
 <!--      -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--      -->
 <!--       <li class=""><a href="/docs/custom-actions/">Custom URL Actions</a></li> -->
 <!--      -->
 <!--    -->
@@ -74,6 +78,12 @@
 <!--    -->
 <!--      -->
 <!--       <li class=""><a href="/docs/http-extras/">HTTP Extras</a></li> -->
+<!--      -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--      -->
+<!--       <li class=""><a href="/blog/">Blog</a></li> -->
 <!--      -->
 <!--    -->
 <!--  -->
@@ -115,6 +125,9 @@
   <li class=""><a href="/docs/http-extras/">HTTP Extras</a></li>
   <li class=""><a href="/docs/stacker-objc-api/">Obj-C API</a></li>
   <li class=""><a href="/docs/custom-actions/">Custom URL Actions</a></li>
+  <li class="divider"></li>
+  <li class=""><a href="/blog/">Blog</a></li>
+
 
       </ul>
     </div><!-- /.navbar-collapse -->
@@ -128,6 +141,7 @@
     <div class="col-sm-8">
       <div class="markdown-body">
         <h1>Javascript Bridge</h1>
+        
         <p>Stacker comes with a Javascript bridge which lets you send messages between Objective-C and Javascript code. Stacker&#39;s bridge is based on the popular <a href="https://github.com/marcuswestin/WebViewJavascriptBridge">WebViewJavascriptBridge</a> project which is also used by Facebook.</p>
 
 <h2 id="setting-up-your-web-app">Setting up your web app</h2>
@@ -142,7 +156,7 @@
 </code></pre></div>
 <h2 id="calling-js-from-objc">Calling JS from ObjC</h2>
 
-<p>To register a handler in Javascript called <code>testJavascriptHandler</code> and sending a response:</p>
+<p>To register a handler in Javascript called <code>testJavascriptHandler</code> (and send the response):</p>
 <div class="highlight"><pre><code class="language-text" data-lang="text">bridge.registerHandler(&#39;testJavascriptHandler&#39;, function(data, responseCallback) {
   log(&#39;ObjC called testJavascriptHandler with&#39;, data)
   var responseData = { &#39;Javascript Says&#39;:&#39;Right back atcha!&#39; }
@@ -160,13 +174,13 @@
 </code></pre></div>
 <h2 id="calling-objc-from-js">Calling ObjC from JS</h2>
 
-<p>First register a handler in ObjC, let&#39;s call it <code>testObjcCallback</code></p>
+<p>First register a handler in ObjC, let&#39;s call it <code>testObjcCallback</code>:</p>
 <div class="highlight"><pre><code class="language-text" data-lang="text">[myStackerController.registerHandler:@&quot;testObjcCallback&quot; handler:^(id data, WVJBResponseCallback responseCallback) {
   NSLog(@&quot;testObjcCallback called: %@&quot;, data);
   responseCallback(@&quot;Response from testObjcCallback&quot;);
 }];
 </code></pre></div>
-<p>No call it from your JS:</p>
+<p>Now call it from your JS:</p>
 <div class="highlight"><pre><code class="language-text" data-lang="text">bridge.callHandler(&#39;testObjcCallback&#39;, {&#39;foo&#39;: &#39;bar&#39;}, function(response) {
   log(&#39;JS got response&#39;, response)
 })
@@ -186,6 +200,10 @@
 <!--  -->
 <!--    -->
 <!--      -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--      -->
 <!--       <li class=""><a href="/docs/custom-actions/">Custom URL Actions</a></li> -->
 <!--      -->
 <!--    -->
@@ -211,6 +229,12 @@
 <!--    -->
 <!--      -->
 <!--       <li class=""><a href="/docs/http-extras/">HTTP Extras</a></li> -->
+<!--      -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--      -->
+<!--       <li class=""><a href="/blog/">Blog</a></li> -->
 <!--      -->
 <!--    -->
 <!--  -->
@@ -252,6 +276,9 @@
   <li class=""><a href="/docs/http-extras/">HTTP Extras</a></li>
   <li class=""><a href="/docs/stacker-objc-api/">Obj-C API</a></li>
   <li class=""><a href="/docs/custom-actions/">Custom URL Actions</a></li>
+  <li class="divider"></li>
+  <li class=""><a href="/blog/">Blog</a></li>
+
 
       </ul>
     </div>

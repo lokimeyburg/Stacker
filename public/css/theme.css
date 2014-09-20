@@ -96,6 +96,33 @@ margin-top: 10px;
   text-decoration: none;
 }
 
+.nav-stacked .divider {
+  border-bottom: #EBF2F6 1px solid;
+  margin-bottom: 5px;
+  padding-top: 5px;
+}
+
+
+h2.post-title {
+  border-bottom: 0px;
+  margin-top: 0px;
+ }
+
+.post-meta {
+  display: inline-block;
+  margin: 0 0 5px 0;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1.5rem;
+  color: #9EABB3;
+}
+
+.post {
+  margin: 4rem auto;
+  padding-bottom: 4rem;
+  border-bottom: #EBF2F6 1px solid;
+}
+
+
 /* feature images */
 #bridge-illustration,
 #more-illustration,

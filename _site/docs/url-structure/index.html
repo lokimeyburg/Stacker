@@ -49,6 +49,10 @@
 <!--  -->
 <!--    -->
 <!--      -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--      -->
 <!--       <li class=""><a href="/docs/custom-actions/">Custom URL Actions</a></li> -->
 <!--      -->
 <!--    -->
@@ -74,6 +78,12 @@
 <!--    -->
 <!--      -->
 <!--       <li class=""><a href="/docs/http-extras/">HTTP Extras</a></li> -->
+<!--      -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--      -->
+<!--       <li class=""><a href="/blog/">Blog</a></li> -->
 <!--      -->
 <!--    -->
 <!--  -->
@@ -115,6 +125,9 @@
   <li class=""><a href="/docs/http-extras/">HTTP Extras</a></li>
   <li class=""><a href="/docs/stacker-objc-api/">Obj-C API</a></li>
   <li class=""><a href="/docs/custom-actions/">Custom URL Actions</a></li>
+  <li class="divider"></li>
+  <li class=""><a href="/blog/">Blog</a></li>
+
 
       </ul>
     </div><!-- /.navbar-collapse -->
@@ -128,6 +141,7 @@
     <div class="col-sm-8">
       <div class="markdown-body">
         <h1>Stacker URL Structure</h1>
+        
         <p>Stacker lets you build what I call &quot;URL-driven iOS apps&quot;. That is: you drive your iOS application&#39;s navigation, page headings etc all through how you declare your urls. </p>
 
 <p>An example URL that will stack a new page and set the title to &#39;Profile&#39; will look like: <code>/profile?x_push_page=true&amp;x_page_title=Profile</code>. </p>
@@ -225,13 +239,11 @@ news.ca/some/article?1230-breaking-news-this-morning&amp;?mobile=1
 <p>You can go back one page by specifying <code>x_pop_page=true</code>. </p>
 <div class="highlight"><pre><code class="language-text" data-lang="text">/profile?x_pop_page=true
 </code></pre></div>
-<p>Sometimes you may post something to a server and want the page to go back and refresh to show the new content you created. You can redirect the page to a URL that includes <code>x_pop_page_and_refresh=true</code> and this Stacker will go back one page and refresh that page to reveal any changes. You can also replace the page with <code>x_pop_page_and_replace=true</code>.</p>
+<p>Sometimes you may post something to a server and want the page to go back and refresh to show the new content you created. You can redirect the page to a URL that includes <code>x_pop_page_and_refresh=true</code> and this cause Stacker to go back one page and refresh that page to reveal any changes. You can also replace the page with <code>x_pop_page_and_replace=true</code>.</p>
 
-<p>This will go back one page, replace the page with <code>/newsfeed</code> and change the title to <code>News Feed</code> in the navigation bar:
-<code>
-/newsfeed?x_pop_page_and_replace=true&amp;x_page_title=&quot;News+Feed&quot;
-</code></p>
-
+<p>This will go back one page, replace the page with <code>/newsfeed</code> and change the title to <code>News Feed</code> in the navigation bar:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">/newsfeed?x_pop_page_and_replace=true&amp;x_page_title=&quot;News+Feed&quot;
+</code></pre></div>
 <h2 id="showing-a-button-in-the-navigation-bar">Showing a button in the navigation bar</h2>
 
 <p>If you&#39;ve <a href="/docs/custom-buttons">registered a button with Stacker</a> in your iOS app then you can show that button by calling it in the URL like so:</p>
@@ -263,6 +275,10 @@ news.ca/some/article?1230-breaking-news-this-morning&amp;?mobile=1
 <!--  -->
 <!--    -->
 <!--      -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--      -->
 <!--       <li class=""><a href="/docs/custom-actions/">Custom URL Actions</a></li> -->
 <!--      -->
 <!--    -->
@@ -288,6 +304,12 @@ news.ca/some/article?1230-breaking-news-this-morning&amp;?mobile=1
 <!--    -->
 <!--      -->
 <!--       <li class=""><a href="/docs/http-extras/">HTTP Extras</a></li> -->
+<!--      -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--      -->
+<!--       <li class=""><a href="/blog/">Blog</a></li> -->
 <!--      -->
 <!--    -->
 <!--  -->
@@ -329,6 +351,9 @@ news.ca/some/article?1230-breaking-news-this-morning&amp;?mobile=1
   <li class=""><a href="/docs/http-extras/">HTTP Extras</a></li>
   <li class=""><a href="/docs/stacker-objc-api/">Obj-C API</a></li>
   <li class=""><a href="/docs/custom-actions/">Custom URL Actions</a></li>
+  <li class="divider"></li>
+  <li class=""><a href="/blog/">Blog</a></li>
+
 
       </ul>
     </div>

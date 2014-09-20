@@ -12,8 +12,8 @@ permalink:        pretty
 title:            Stacker
 tagline:          'Kickstart development of hybrid iOS apps'
 description:      'Kickstart development of hybrid iOS apps'
-url:              http://stacker.lokimeyburg.com
-paginate:         2
+url:              http://www.lokimeyburg.com/Stacker/
+paginate:         15
 
 author:
   name:           'Loki Meyburg'
@@ -26,3 +26,6 @@ version:          1.0.0
 
 github:
   repo:           https://github.com/lokimeyburg/home
+
+paginate_path:    "blog/page:num"
+excerpt_separator: <!--more-->
