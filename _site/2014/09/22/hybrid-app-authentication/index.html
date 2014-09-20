@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="/public/favicon.ico">
+  <title>
+    
+      Tutorial: creating a login screen &middot; Stacker
+    
+  </title>
+
+  <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/public/css/custom.css">
+  <link rel="stylesheet" href="/public/css/theme.css">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+
+</head>
+
+<body>
+  <nav class="navbar navbar-default navbar-static-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-8">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href=""><img src='/assets/logo-nav.png' /></a>
+    </div>
+
+
+    <div class="collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+        <!-- <li><a class="" href="/">Home</a></li> -->
+<!--  -->
+<!--  -->
+<!--    -->
+<!--      -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--      -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--      -->
+<!--       <li class=""><a href="/docs/custom-actions/">Custom URL Actions</a></li> -->
+<!--      -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--      -->
+<!--       <li class=""><a href="/docs/custom-buttons/">Custom Navigation Buttons</a></li> -->
+<!--      -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--      -->
+<!--       <li class=""><a href="/docs/getting-started/">Getting Started</a></li> -->
+<!--      -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--      -->
+<!--       <li class=""><a href="/docs/html-best-practices/">HTML Best Practices</a></li> -->
+<!--      -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--      -->
+<!--       <li class=""><a href="/docs/http-extras/">HTTP Extras</a></li> -->
+<!--      -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--      -->
+<!--       <li class=""><a href="/blog/">Blog</a></li> -->
+<!--      -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--      -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--      -->
+<!--       <li class=""><a href="/docs/javascript-bridge/">Javascript Bridge</a></li> -->
+<!--      -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--      -->
+<!--       <li class=""><a href="/docs/stacker-objc-api/">Obj-C API</a></li> -->
+<!--      -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--      -->
+<!--       <li class=""><a href="/docs/theming/">Theming Stacker</a></li> -->
+<!--      -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--      -->
+<!--       <li class=""><a href="/docs/url-structure/">Stacker URL Structure</a></li> -->
+<!--      -->
+<!--    -->
+<!--  -->
+
+  <li class=""><a href="/docs/getting-started/">Getting Started</a></li>
+  <li class=""><a href="/docs/url-structure/">Stacker URL Structure</a></li>
+  <li class=""><a href="/docs/javascript-bridge/">Javascript Bridge</a></li>
+  <li class=""><a href="/docs/custom-buttons/">Custom Navigation Buttons</a></li>
+  <li class=""><a href="/docs/theming/">Theming Stacker</a></li>
+  <li class=""><a href="/docs/html-best-practices/">HTML Best Practices</a></li>
+  <li class=""><a href="/docs/http-extras/">HTTP Extras</a></li>
+  <li class=""><a href="/docs/stacker-objc-api/">Obj-C API</a></li>
+  <li class=""><a href="/docs/custom-actions/">Custom URL Actions</a></li>
+  <li class="divider"></li>
+  <li class=""><a href="/blog/">Blog</a></li>
+
+
+      </ul>
+    </div><!-- /.navbar-collapse -->
+
+  </div>
+</nav>
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-8">
+      <div class="markdown-body">
+        <h1>Tutorial: creating a login screen</h1>
+        
+          <p><span class="post-meta"><time datetime="2014-09-22">22 Sep 2014</time> </span></p>
+        
+        <p>Out of the box, <a href="http://www.lokimeyburg.com/Stacker/">Stacker</a> comes with a pretty good example app that can serve as a basis for your own iPhone apps. But what about getting users to log in to your app?</p>
+
+<div style="text-align: center; padding: 20px 0px;">
+  <img src='/assets/blog/stacker-authentication.gif' style='width: 50%;' />
+</div>
+
+<p>I&#39;m going to show you a very simple technique I like to use to show a &quot;welcome screen&quot; that asks a user to log in (or sign up). Even though the server code is written in Rails, the technique is simple enough that it can be applied to most other frameworks without a lot of effort. We&#39;ll be building off of the example app, called GameRoom, so be sure to try to get the demo working by following the <a href="http://www.lokimeyburg.com/Stacker/docs/getting-started/">getting started documentation.</a></p>
+
+<!--more-->
+
+<blockquote>
+<p>You can checkout the complete example - which includes a few extra things - by visiting the <code>authentication-example</code> branch for both the <a href="https://github.com/lokimeyburg/GameRoom/tree/authentication-example">Rails app</a> and the <a href="https://github.com/lokimeyburg/Stacker/tree/authentication-example">iOS app</a> on Github.</p>
+</blockquote>
+
+<p>There are many ways to authenticate a user in an iOS app but since Stacker uses WebViews, signing in to your app in one WebView means you&#39;ll be signed in on your other pages because your session and cookies are shared between pages in your app. This makes our lives a lot easier.</p>
+
+<h2 id="the-cookie-technique">The cookie technique</h2>
+
+<p>The first things we need to do is decide how we&#39;re going to tell our iOS app that a user has signed in from the web app. We need to know this in order to show or hide the &quot;sign in&quot; page. The way we&#39;re going to do this is by setting a cookie called &quot;signed_in&quot; (and delete it when you log out).</p>
+
+<p>Apple gives us a nice way to monitor changes to our iOS app&#39;s cookies using the <code>NSNotificationCenter</code>. This means that all our server has to do is set a cookie called <code>signed_in</code> after we&#39;ve successfully signed in and we&#39;ll know to hide the &quot;sign in&quot; screen. And visa versa: we&#39;ll know when the cookie gets deleted so we&#39;ll present the &quot;sign in&quot; page again.</p>
+
+<p>We&#39;re going to break this tutorial up into two sections: first the server (Rails) side, followed by the iOS app. I&#39;ll try to explain what I&#39;m doing on the server side in a manner that can be applied to any framework besides Rails.</p>
+
+<p>[ show image of listening for cookie ]</p>
+
+<p>[ show image of setting and deleting cookie ]</p>
+
+<h2 id="setting-up-the-server-side">Setting up the server side</h2>
+
+<p>Download <a href="https://github.com/lokimeyburg/GameRoom">GameRoom</a>, the example Rails app that is designed to showcase Stacker. Make sure you&#39;ve tried to run it at least once by following the <a href="http://www.lokimeyburg.com/Stacker/docs/getting-started/">Getting Started</a> documentation.</p>
+
+<h3 id="setup">Setup</h3>
+
+<p>We&#39;re going to use <a href="https://github.com/plataformatec/devise">Devise</a> as our authentication solution because it&#39;s easy to set up.</p>
+
+<p>In your <code>Gemfile</code> add the line</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">gem devise
+</code></pre></div>
+<p>Now install the library </p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">bundle install
+rails generate devise:install
+rails generate devise User
+rails generate devise:views
+rake db:migrate
+</code></pre></div>
+<p>Great! What we&#39;ve done is installed the library, created a <code>User</code> model, generated all the neccessary views and updated our databse by adding the <code>users</code> table. </p>
+
+<p>Try running the app with the <code>rails server</code> command in your terminal and visiting <code>http://localhost:3000/users/sign_up</code> and see if you can create your first user.</p>
+
+<p>In <code>/app/controllers/application_controller.rb</code> you should add a <code>before_filter</code> to ensure the user is always authenticated - if they&#39;re not they will be redirected to the sign in screen.</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">class ApplicationController &lt; ActionController::Base
+    before_filter :authenticate_user!
+end
+</code></pre></div>
+<h3 id="setting-and-deleting-your-cookie">Setting and deleting your cookie</h3>
+
+<p>Remember: the key thing we want to do is set a <code>signed_in</code> cookie right after we&#39;ve signed in and delete it when we log off. This way our iOS app can easily tell whether to display or hide the &quot;sign in&quot; screen. </p>
+
+<p>In Rails we will do this using middleware callbacks, however if you&#39;re using another framework you may choose to do it differently. What&#39;s important is that the cookie is being set and deleted appropriately.</p>
+
+<p>In <code>config/initializers/devise.rb</code> add the following to configure Devise:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">Devise.setup do |config|
+
+  ... other code ... 
+
+  Warden::Manager.after_set_user do |user,auth,opts|
+    auth.cookies[:signed_in] = 1
+  end
+
+  Warden::Manager.before_logout do |user,auth,opts|
+    auth.cookies.delete :signed_in
+  end
+
+ end
+</code></pre></div>
+<p>[ Show picture of Chrome with cookie being set ]</p>
+
+<p>Awesome! Now we&#39;ve got an app that sets a cookie that our iOS app can read to detect if we&#39;re logged in. </p>
+
+<h3 id="adding-a-sign-out-link">Adding a sign out link</h3>
+
+<p>At this point, it&#39;s a good idea to add a &quot;sign out&quot; link on every page just to help us log out while we&#39;re developing. We can remove it after we&#39;re finished by placing it in on a different page where it might be more appropriate to have the link.</p>
+
+<p>In <code>app/views/layouts/application.html.erb</code> right after the <code>&lt;body&gt;</code> add:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">&lt;%= link_to &quot;Sign out&quot;, destroy_user_session_path, :method =&gt; :delete if current_user.present? %&gt;
+</code></pre></div>
+<h3 id="using-database-sessions">Using database sessions</h3>
+
+<p>Since we&#39;re relying heavily on sessions for authentication I&#39;ve found using cookies to store your session information to be unreliable [1]. Also, storing sensitive information in a cookie is generally a bad idea for several reasons, lack of encryption (or weak encryption) being only one of them. Instead, let&#39;s use the database to store session information.</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">gem &#39;activerecord-session_store&#39;, github: &#39;rails/activerecord-session_store&#39;
+rails generate active_record:session_migration
+rake db:migrate
+</code></pre></div>
+<p>in <code>config/initializers/session-store.rb</code></p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">Rails.application.config.session_store :active_record_store
+</code></pre></div>
+<h3 id="testing-it-out">Testing it out</h3>
+
+<p>Spin up the Rails server with the <code>rails server</code> command in your terminal. Visit <code>http://localhost:3000/users/sign_up</code> in Chrome 
+and try to create your first user. Open the inspector and visit the &quot;resources&quot; tab and see if you can see the <code>signed_in</code> cookie being created and destroyed properly.</p>
+
+<p>Great! What we&#39;ve built is a simple authentication system that sets a cookie to indicate when we&#39;re logged in. Next we&#39;re going to build the iOS side and use that cookie to display or hide the sign in screen.</p>
+
+<h2 id="ios-app-side">iOS app side</h2>
+
+<p>We&#39;re going to be building off of the GameRoom app that comes with Stacker. <a href="http://www.lokimeyburg.com/Stacker/docs/getting-started/">Download Stacker</a> and open the <code>GameRoom</code> iOS workspace in Xcode (it&#39;s in the <code>Examples</code> folder).</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">$ git clone https://github.com/lokimeyburg/Stacker.git
+$ cd Stacker/Example
+$ open GameRoom.xcworkspace
+</code></pre></div>
+<h3 id="creating-our-welcome-controller">Creating our welcome controller</h3>
+
+<p>We want the sign in page to be in a new <code>StackerController</code> which we will call our <code>welcomeController</code></p>
+
+<p>In <code>AppDelegate.m</code>, first add our <code>welcomeController</code> variable</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">@implementation AppDelegate
+
+NSString *welcomeController;
+NSString *DOMAIN_URL;
+</code></pre></div>
+<p>Now let&#39;s create our controller:</p>
+
+<p>In <code>AppDelegate.m</code> in the <code>didFinishLaunchingWithOptions</code> method add:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">welcomeController = [[LMStackerController alloc] initWithURL: @&quot;http://localhost:3000/users/sign_in?x_page_title=Log+In&quot;];
+</code></pre></div>
+<h3 id="listening-for-cookie-notifications">Listening for cookie notifications</h3>
+
+<p>Apple lets us listen to changes made to our cookies using the Notification Center. The (very long) event name is <code>NSHTTPCookieManagerCookiesChangedNotification</code>. What we&#39;re going to do is run a method called <code>checkLogInStatus</code> everytime a cookie gets created or destroyed [2].</p>
+
+<p>In <code>AppDelegate.m</code> just below our <code>welcomeController</code> create the observer:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">[[NSNotificationCenter defaultCenter]
+  addObserver:self
+  selector:@selector(checkLogInStatus)
+  name:NSHTTPCookieManagerCookiesChangedNotification
+  object:nil];
+</code></pre></div>
+<p>Great! Now let&#39;s write the <code>checkLogInStatus</code> method. What we&#39;re going to do is iterate through our cookies and check for the <code>signed_in</code> cookie. This will tell us if the user has signed in. Also, we&#39;ll check if our <code>welcomeController</code> is visible so that we now when to show or hide it.</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">-(void) checkLogInStatus
+{
+    BOOL welcomeModalVisible = welcomeController.isViewLoaded &amp;&amp; welcomeController.view.window;
+    BOOL isOnline = NO;
+
+    NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies];
+    for (NSHTTPCookie *cookie in cookies) {
+        if([cookie.name isEqualToString:@&quot;signed_in&quot;] &amp;&amp; [cookie.value isEqualToString:@&quot;1&quot;]){
+            isOnline = YES;
+        }
+    }
+
+    if (isOnline){
+        // You are online
+        if(welcomeModalVisible) {
+            [self closeWelcomeModal];
+        }
+    } else {
+        // You are offline
+        if(!welcomeModalVisible) {
+            [self showWelcomeModal];
+        }
+    }
+}
+
+-(void) closeWelcomeModal
+{
+    [homeNavController clearStack];
+    [homeNavController refreshPage];
+    [self.window.rootViewController dismissViewControllerAnimated:YES completion:nil];
+}
+
+-(void) showWelcomeModal
+{
+    [welcomeController clearStack];
+    [welcomeController refreshPage];
+    [self.window.rootViewController presentViewController:welcomeController animated:YES completion:NULL];
+}
+</code></pre></div>
+<p>Now run the app in your simulator to try it out. Your app should load and then the &quot;Log In&quot; screen should slide up. Log in and it should slide down and away. If everything is working then the rest is just polish!</p>
+
+<p>Congratulations - you&#39;ve built a super simple sign in page for your hybrid iOS app. You can checkout the example - which includes styling and a sign up page  by visiting the <code>authentication-example</code> branch for both the <a href="https://github.com/lokimeyburg/GameRoom/tree/authentication-example">Rails app</a> and the <a href="https://github.com/lokimeyburg/Stacker/tree/authentication-example">iOS app</a> on Github.</p>
+
+<h2 id="more-details">More Details</h2>
+
+<ol>
+<li>Persisting cookies</li>
+<li>Adding another cookie check</li>
+</ol>
+
+<h3 id="persistent-cookies">Persistent cookies</h3>
+
+<p>For extra points, you may wish to do another check on every request to ensure the user is truly logged in (because some applications may have a feature where they allow a user to log themselves out from another device).</p>
+
+<p>In <code>app/controllers/application_controller.rb</code></p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"># This is Devise&#39;s authentication
+before_filter :authenticate_user!
+before_filter :delete_signed_in_token_logged_out
+
+private
+
+def delete_signed_in_token_logged_out
+  cookies.delete :signed_in unless current_user.present?
+end
+</code></pre></div>
+<p>In Devise.rb
+<code>
+config.remember_for = 2.weeks
+</code></p>
+
+<p>In User.rb
+<code>
+  def remember_me
+    true
+  end
+</code></p>
+
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <ul id="sidebar" class="nav nav-pills nav-stacked">
+        <!-- <li><a class="" href="/">Home</a></li> -->
+<!--  -->
+<!--  -->
+<!--    -->
+<!--      -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--      -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--      -->
+<!--       <li class=""><a href="/docs/custom-actions/">Custom URL Actions</a></li> -->
+<!--      -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--      -->
+<!--       <li class=""><a href="/docs/custom-buttons/">Custom Navigation Buttons</a></li> -->
+<!--      -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--      -->
+<!--       <li class=""><a href="/docs/getting-started/">Getting Started</a></li> -->
+<!--      -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--      -->
+<!--       <li class=""><a href="/docs/html-best-practices/">HTML Best Practices</a></li> -->
+<!--      -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--      -->
+<!--       <li class=""><a href="/docs/http-extras/">HTTP Extras</a></li> -->
+<!--      -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--      -->
+<!--       <li class=""><a href="/blog/">Blog</a></li> -->
+<!--      -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--      -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--      -->
+<!--       <li class=""><a href="/docs/javascript-bridge/">Javascript Bridge</a></li> -->
+<!--      -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--      -->
+<!--       <li class=""><a href="/docs/stacker-objc-api/">Obj-C API</a></li> -->
+<!--      -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--      -->
+<!--       <li class=""><a href="/docs/theming/">Theming Stacker</a></li> -->
+<!--      -->
+<!--    -->
+<!--  -->
+<!--    -->
+<!--      -->
+<!--       <li class=""><a href="/docs/url-structure/">Stacker URL Structure</a></li> -->
+<!--      -->
+<!--    -->
+<!--  -->
+
+  <li class=""><a href="/docs/getting-started/">Getting Started</a></li>
+  <li class=""><a href="/docs/url-structure/">Stacker URL Structure</a></li>
+  <li class=""><a href="/docs/javascript-bridge/">Javascript Bridge</a></li>
+  <li class=""><a href="/docs/custom-buttons/">Custom Navigation Buttons</a></li>
+  <li class=""><a href="/docs/theming/">Theming Stacker</a></li>
+  <li class=""><a href="/docs/html-best-practices/">HTML Best Practices</a></li>
+  <li class=""><a href="/docs/http-extras/">HTTP Extras</a></li>
+  <li class=""><a href="/docs/stacker-objc-api/">Obj-C API</a></li>
+  <li class=""><a href="/docs/custom-actions/">Custom URL Actions</a></li>
+  <li class="divider"></li>
+  <li class=""><a href="/blog/">Blog</a></li>
+
+
+      </ul>
+    </div>
+  </div>
+</div>
+
+  <footer class="text-center">
+  <a href="https://github.com/lokimeyburg/Stacker/blob/master/LICENSE">Licence</a>
+  &#183;
+  <a href="https://github.com/lokimeyburg/Stacker">Download</a>
+  &#183;
+  <a href="/docs/getting-started">Documentation</a>
+  &#183;
+  <a href="https://twitter.com/lokimeyburg">Made with &#9825; by @LokiMeyburg</a>
+</footer>
+
+
+  <script src="/public/scripts/bifrost.js"></script>
+
+<script type="text/javascript">
+  $(".navbar-toggle").click(function(e){
+    e.preventDefault();
+    if($(".navbar-collapse").hasClass("active")){
+      $(".navbar-collapse").removeClass("active");
+    } else {
+      $(".navbar-collapse").addClass("active");
+    }
+  });
+</script>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-52626492-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+</body>
+</html>
+
+
