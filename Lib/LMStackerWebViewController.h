@@ -6,6 +6,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <WebKit/WebKit.h>
 #import <WebViewJavascriptBridge/WebViewJavascriptBridge.h>
 
 // Create delegate so we can call parent navigation
@@ -31,7 +32,7 @@
 @end
 
 
-@interface LMStackerWebViewController : UIViewController <UIWebViewDelegate> {
+@interface LMStackerWebViewController : UIViewController <WKNavigationDelegate> {
     UIActivityIndicatorView *activityIndicator;
     UIRefreshControl        *refreshControl;
     BOOL                    currentlyRefreshing;
@@ -45,7 +46,7 @@
 - (void) reloadWebViewInPlace;
 
 // Properties
-@property UIWebView     *myWebView;
+@property WKWebView     *myWebView;
 @property NSString      *pageURL;
 @property NSNumber      *requestCount;
 @property NSString      *backgroundColor;

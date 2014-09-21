@@ -63,15 +63,15 @@ LMStackerController *homeNavController;
     homeNavController.navigationBar.tintColor      = [UIColor colorWithHexString:@"FFFFFF"];
     [homeNavController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor colorWithHexString:@"FFFFFF"]}];
 
-    UITabBarController *tabBarController = [[UITabBarController alloc] init];
-    [[UITabBar appearance] setTintColor:[UIColor colorWithHexString:@"FFFFFF"]];
-    [[UITabBar appearance] setBarTintColor:[UIColor colorWithHexString:@"131313"]];
-    [tabBarController addChildViewController:homeNavController];
+//    UITabBarController *tabBarController = [[UITabBarController alloc] init];
+//    [[UITabBar appearance] setTintColor:[UIColor colorWithHexString:@"FFFFFF"]];
+//    [[UITabBar appearance] setBarTintColor:[UIColor colorWithHexString:@"131313"]];
+//    [tabBarController addChildViewController:homeNavController];
     
     
     // Alrighty, spin up the app!
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    self.window.rootViewController = tabBarController;
+    self.window.rootViewController = homeNavController;
     [self.window makeKeyAndVisible];
     
     return YES;

@@ -22,6 +22,7 @@
 - (id)init
 {
     return [self initWithPageURL:@"http://www.example.com" andBackgroundColor:@"FFFFFF" asRootPage:NO withRootPageTitle:@"" andRootPageTabImageName:@"tab" buttonHandlers:nil];
+    
 }
 
 - (id)initWithPageURL:(NSString*)url
@@ -53,14 +54,16 @@ andRootPageTabImageName:(NSString *)pageTabName
     return self;
 }
 
--(void) viewWillAppear:(BOOL)animated
-{
-    [self setActiveBridge];
-    [super viewWillAppear:animated];
-}
+//-(void) viewWillAppear:(BOOL)animated
+//{
+//    NSLog(@"--- view appearing");
+////    [self setActiveBridge];
+//    [super viewWillAppear:animated];
+//}
 
 - (void)viewDidLoad
 {
+    NSLog(@"--- view did load");
     [super viewDidLoad];
 
     // Setup Basics
@@ -79,12 +82,9 @@ andRootPageTabImageName:(NSString *)pageTabName
     [self updateNavigationItems];
 
     // Setup WebView
-    self.myWebView = [[UIWebView alloc] initWithFrame:self.view.bounds];
+    self.myWebView = [[WKWebView alloc] initWithFrame:self.view.bounds];
     self.myWebView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     [self loadWebView];
-
-    // Setup Javascript Bridge
-    [self setUpJavascriptBridge];
 
     // Setup Refresh Control
     refreshControl = [[UIRefreshControl alloc] init];
@@ -98,20 +98,19 @@ andRootPageTabImageName:(NSString *)pageTabName
 
 - (void)setActiveBridge
 {
-    self.delegate.bridge = _bridge;
-    for (NSString *handlerName in self.delegate.messageHandlers) {
-        [_bridge registerHandler:handlerName handler:self.delegate.messageHandlers[handlerName]];
-    }
+
 }
 
 - (void)setUpJavascriptBridge {
-    _bridge = [WebViewJavascriptBridge bridgeForWebView:self.myWebView
-                                        webViewDelegate:self
-                                                handler:^(id data, WVJBResponseCallback responseCallback) { /*..*/ }];
-    [self setActiveBridge];
+
 }
 
-- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
+
+//- (void)webView:(WKWebView *)webView didCommitNavigation:(WKNavigation *)navigation {
+- (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation {
+    NSLog(@"-- commiting navigation");
+    NSURLRequest *request = navigation.request;
+    
     NSString *requestedURL          = [[request URL] absoluteString];
     LMStackerURLParser *parser      = [[LMStackerURLParser alloc] initWithURLString:requestedURL];
     NSString *pushPageVariable      = [parser valueForVariable:@"x_push_page"];
@@ -140,60 +139,60 @@ andRootPageTabImageName:(NSString *)pageTabName
                 NSObject *myCustomAction = myHandlers[customActionHandler];
                 [myCustomAction performSelector:@selector(performAction)];
             }
-            return NO;
+            [self.myWebView stopLoading];
         }
 
 
         // -- Push new page
         if ([pushPageVariable isEqualToString:@"true"]) {
+            [self.myWebView stopLoading];
             [self.delegate pushNewPage:requestedURL];
-            return NO;
         }
 
         // -- Replace page
         if([replacePageVariable isEqualToString:@"true"]) {
             [self.delegate replacePage:requestedURL];
-            return NO;
+            [self.myWebView stopLoading];
         }
 
         // -- Go back one page
         if([popPage isEqualToString:@"true"]){
             [self.delegate popPage];
-            return NO;
+            [self.myWebView stopLoading];
         }
 
         // -- Go back one page and refresh
         if ([popPageAndRefresh isEqualToString:@"true"]) {
             [self.delegate popPage];
             [self.delegate refreshPage];
-            return NO;
+            [self.myWebView stopLoading];
         }
 
         // -- Go back one page and replace
         if ([popPageAndReplace isEqualToString:@"true"]) {
             [self.delegate popPage];
             [self.delegate replacePage:requestedURL];
-            return NO;
+            [self.myWebView stopLoading];
         }
 
         // -- Clear the stack
         if([clearStack isEqualToString:@"true"]){
             [self.delegate clearStack];
-            return NO;
+            [self.myWebView stopLoading];
         }
 
         // -- Clear the stack and refresh (useful when you post something)
         if ([clearStackAndRefresh isEqualToString:@"true"]) {
             [self.delegate clearStack];
             [self.delegate refreshPage];
-            return NO;
+            [self.myWebView stopLoading];
         }
 
         // -- Clear the stack and replace (useful when you post something)
         if ([clearStackAndReplace isEqualToString:@"true"]) {
             [self.delegate clearStack];
             [self.delegate replacePage:requestedURL];
-            return NO;
+            [self.myWebView stopLoading];
         }
 
         // -- External urls go in a browser
@@ -214,14 +213,12 @@ andRootPageTabImageName:(NSString *)pageTabName
             NSString *urlForBrowser = [[[newURL absoluteString] stringByAppendingString:@"?"] stringByAppendingString:variablesWithoutExternalParamater];
             [self.delegate showBrowserView:urlForBrowser];
 
-            return NO;
+            [self.myWebView stopLoading];
         }
 
     }
 
     self.requestCount = [NSNumber numberWithInt:[self.requestCount intValue] + 1];
-
-    return YES;
 }
 
 - (void) updateNavigationItems
@@ -268,7 +265,8 @@ andRootPageTabImageName:(NSString *)pageTabName
 
 - (void) loadWebView
 {
-
+    NSLog(@"-- loading webview");
+    
     // Clear any previous instances so we make some room in memory
     [self.myWebView removeFromSuperview];
 
@@ -279,8 +277,9 @@ andRootPageTabImageName:(NSString *)pageTabName
     request = [self requestWithStackerHeaders:request];
 
     [self.myWebView loadRequest:request];
-    [self.myWebView setScalesPageToFit:YES];
-    self.myWebView.delegate = self;
+//    [self.myWebView setScalesPageToFit:YES];
+//    self.myWebView.delegate = self;
+    self.myWebView.navigationDelegate = self;
     [self.myWebView setBackgroundColor:[UIColor clearColor]];
     [self.myWebView setOpaque:NO];
     self.myWebView.scrollView.bounces = YES;
@@ -308,12 +307,13 @@ andRootPageTabImageName:(NSString *)pageTabName
     [self updateNavigationItems];
 }
 
-- (void) webViewDidFinishLoad:(UIWebView *)webView
+- (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation
 {
+    NSLog(@"-- finished navigation");
     [activityIndicator removeFromSuperview];
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:0.1];
-    webView.alpha = 1.0f;
+     webView.alpha = 1.0f;
     currentlyRefreshing = NO;
     [UIView commitAnimations];
 }
