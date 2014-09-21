@@ -63,7 +63,7 @@ andRootPageTabImageName:(NSString *)pageTabName
 
 - (void)viewDidLoad
 {
-    NSLog(@"--- view did load");
+    NSLog(@"-- view did load");
     [super viewDidLoad];
 
     // Setup Basics
@@ -105,104 +105,118 @@ andRootPageTabImageName:(NSString *)pageTabName
 
 }
 
+- (void)webView:(WKWebView *)webView didReceiveServerRedirectForProvisionalNavigation:(WKNavigation *)navigation {
+    NSLog(@"-- receiving redirect");
+    [self runStackerProtocol:webView.URL];
+}
 
-//- (void)webView:(WKWebView *)webView didCommitNavigation:(WKNavigation *)navigation {
 - (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation {
-    NSLog(@"-- commiting navigation");
-    NSURLRequest *request = navigation.request;
-    
-    NSString *requestedURL          = [[request URL] absoluteString];
+
+}
+
+
+- (void)webView:(WKWebView *)webView
+decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction
+decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
+    [self runStackerProtocol:navigationAction.request.URL];
+    decisionHandler(WKNavigationActionPolicyAllow);
+}
+
+- (void)runStackerProtocol:(NSURL*)url {
+    NSString *requestedURL          = [url absoluteString];
     LMStackerURLParser *parser      = [[LMStackerURLParser alloc] initWithURLString:requestedURL];
     NSString *pushPageVariable      = [parser valueForVariable:@"x_push_page"];
-
+    
     NSString *replacePageVariable   = [parser valueForVariable:@"x_replace_page"];
-
+    
     NSString *popPage               = [parser valueForVariable:@"x_pop_page"];
     NSString *popPageAndRefresh     = [parser valueForVariable:@"x_pop_page_and_refresh"];
     NSString *popPageAndReplace     = [parser valueForVariable:@"x_pop_page_and_replace"];
-
+    
     NSString *clearStack            = [parser valueForVariable:@"x_clear_stack"];
     NSString *clearStackAndRefresh  = [parser valueForVariable:@"x_clear_stack_and_refresh"];
     NSString *clearStackAndReplace  = [parser valueForVariable:@"x_clear_stack_and_replace"];
-
+    
     NSString *externalURLVariable   = [parser valueForVariable:@"x_external_page"];
     NSString *customActionHandler   = [parser valueForVariable:@"x_action"];
 
+    
     // Don't move to the next page if we're reshreshing the page and always ignore the first request
     // on non-root pages to ensure we don't cause an infinte loop
     if(!currentlyRefreshing && (self.rootPage || [self.requestCount intValue] > 0)) {
-
+        
         // -- Custom capture paths (href="inapp://capture?x_action=foo")
-        if ([request.URL.scheme isEqualToString:@"inapp"]) {
-            if ([request.URL.host isEqualToString:@"capture"]) {
+        if ([url.scheme isEqualToString:@"inapp"]) {
+            if ([url.host isEqualToString:@"capture"]) {
                 NSDictionary *myHandlers = [delegate customURLHandlers];
                 NSObject *myCustomAction = myHandlers[customActionHandler];
                 [myCustomAction performSelector:@selector(performAction)];
             }
             [self.myWebView stopLoading];
         }
-
-
+        
+        
         // -- Push new page
         if ([pushPageVariable isEqualToString:@"true"]) {
             [self.myWebView stopLoading];
             [self.delegate pushNewPage:requestedURL];
         }
-
+        
         // -- Replace page
         if([replacePageVariable isEqualToString:@"true"]) {
-            [self.delegate replacePage:requestedURL];
             [self.myWebView stopLoading];
+            [self.delegate replacePage:requestedURL];
         }
-
+        
         // -- Go back one page
         if([popPage isEqualToString:@"true"]){
-            [self.delegate popPage];
             [self.myWebView stopLoading];
+            [self.delegate popPage];
         }
-
+        
         // -- Go back one page and refresh
         if ([popPageAndRefresh isEqualToString:@"true"]) {
+            [self.myWebView stopLoading];
             [self.delegate popPage];
             [self.delegate refreshPage];
-            [self.myWebView stopLoading];
         }
-
+        
         // -- Go back one page and replace
         if ([popPageAndReplace isEqualToString:@"true"]) {
+            NSLog(@"---> pop page and replace");
+            [self.myWebView stopLoading];
             [self.delegate popPage];
             [self.delegate replacePage:requestedURL];
-            [self.myWebView stopLoading];
         }
-
+        
         // -- Clear the stack
         if([clearStack isEqualToString:@"true"]){
-            [self.delegate clearStack];
             [self.myWebView stopLoading];
+            [self.delegate clearStack];
         }
-
+        
         // -- Clear the stack and refresh (useful when you post something)
         if ([clearStackAndRefresh isEqualToString:@"true"]) {
+            [self.myWebView stopLoading];
             [self.delegate clearStack];
             [self.delegate refreshPage];
-            [self.myWebView stopLoading];
         }
-
+        
         // -- Clear the stack and replace (useful when you post something)
         if ([clearStackAndReplace isEqualToString:@"true"]) {
             [self.delegate clearStack];
             [self.delegate replacePage:requestedURL];
             [self.myWebView stopLoading];
         }
-
+        
         // -- External urls go in a browser
         if ([externalURLVariable isEqualToString:@"true"]) {
             // we need to strip the tilt_external_url parameter so as to keep the intended url
-            NSURL *newURL = [[NSURL alloc] initWithScheme:[[request URL] scheme]
-                                                     host:[[request URL] host]
-                                                     path:[[request URL] path]];
-
-
+            NSURL *newURL = [[NSURL alloc] initWithScheme:[url scheme]
+                                                     host:[url host]
+                                                     path:[url path]];
+            
+            
             NSMutableArray* urlVariables = [parser.variables mutableCopy];
             [urlVariables enumerateObjectsWithOptions:NSEnumerationReverse usingBlock:^(NSString *parameter, NSUInteger index, BOOL *stop) {
                 if ([parameter rangeOfString:@"x_external_page"].location != NSNotFound) {
@@ -212,12 +226,11 @@ andRootPageTabImageName:(NSString *)pageTabName
             NSString *variablesWithoutExternalParamater = [urlVariables componentsJoinedByString:@"&"];
             NSString *urlForBrowser = [[[newURL absoluteString] stringByAppendingString:@"?"] stringByAppendingString:variablesWithoutExternalParamater];
             [self.delegate showBrowserView:urlForBrowser];
-
+            
             [self.myWebView stopLoading];
         }
-
+        
     }
-
     self.requestCount = [NSNumber numberWithInt:[self.requestCount intValue] + 1];
 }
 
@@ -275,13 +288,10 @@ andRootPageTabImageName:(NSString *)pageTabName
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
 
     request = [self requestWithStackerHeaders:request];
-
+    
     [self.myWebView loadRequest:request];
-//    [self.myWebView setScalesPageToFit:YES];
-//    self.myWebView.delegate = self;
     self.myWebView.navigationDelegate = self;
     [self.myWebView setBackgroundColor:[UIColor clearColor]];
-    [self.myWebView setOpaque:NO];
     self.myWebView.scrollView.bounces = YES;
     self.myWebView.alpha = 0.0f;
     [self.view addSubview:self.myWebView];
@@ -304,7 +314,7 @@ andRootPageTabImageName:(NSString *)pageTabName
     currentlyRefreshing = YES;
     self.requestCount = 0;
     [self loadWebView];
-    [self updateNavigationItems];
+//    [self updateNavigationItems];
 }
 
 - (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation
@@ -313,7 +323,7 @@ andRootPageTabImageName:(NSString *)pageTabName
     [activityIndicator removeFromSuperview];
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:0.1];
-     webView.alpha = 1.0f;
+    webView.alpha = 1.0f;
     currentlyRefreshing = NO;
     [UIView commitAnimations];
 }
