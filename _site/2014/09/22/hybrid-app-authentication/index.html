@@ -155,7 +155,9 @@
 <!--more-->
 
 <blockquote>
-<p>You can checkout the complete example - which includes a few extra things - by visiting the <code>authentication-example</code> branch for both the <a href="https://github.com/lokimeyburg/GameRoom/tree/authentication-example">Rails app</a> and the <a href="https://github.com/lokimeyburg/Stacker/tree/authentication-example">iOS app</a> on Github.</p>
+<p>You can checkout the complete example below: <br/>
+Rails app: <a href="https://github.com/lokimeyburg/GameRoom/tree/authentication-example">Download</a> <br/>
+iOS app: <a href="https://github.com/lokimeyburg/Stacker/tree/authentication-example">Download</a></p>
 </blockquote>
 
 <p>There are many ways to authenticate a user in an iOS app but since Stacker uses WebViews, signing in to your app in one WebView means you&#39;ll be signed in on your other pages because your session and cookies are shared between pages in your app. This makes our lives a lot easier.</p>
@@ -183,32 +185,32 @@
 <p>In your <code>Gemfile</code> add the line</p>
 <div class="highlight"><pre><code class="language-text" data-lang="text">gem devise
 </code></pre></div>
-<p>Now install the library </p>
+<p>Now install the library</p>
 <div class="highlight"><pre><code class="language-text" data-lang="text">bundle install
 rails generate devise:install
 rails generate devise User
 rails generate devise:views
 rake db:migrate
 </code></pre></div>
-<p>Great! What we&#39;ve done is installed the library, created a <code>User</code> model, generated all the neccessary views and updated our databse by adding the <code>users</code> table. </p>
+<p>Great! What we&#39;ve done is installed the library, created a <code>User</code> model, generated all the neccessary views and updated our databse by adding the <code>users</code> table.</p>
 
 <p>Try running the app with the <code>rails server</code> command in your terminal and visiting <code>http://localhost:3000/users/sign_up</code> and see if you can create your first user.</p>
 
-<p>In <code>/app/controllers/application_controller.rb</code> you should add a <code>before_filter</code> to ensure the user is always authenticated - if they&#39;re not they will be redirected to the sign in screen.</p>
+<p>In <code>app/controllers/application_controller.rb</code> you should add a <code>before_filter</code> to ensure the user is always authenticated - if they&#39;re not they will be redirected to the sign in screen.</p>
 <div class="highlight"><pre><code class="language-text" data-lang="text">class ApplicationController &lt; ActionController::Base
     before_filter :authenticate_user!
 end
 </code></pre></div>
 <h3 id="setting-and-deleting-your-cookie">Setting and deleting your cookie</h3>
 
-<p>Remember: the key thing we want to do is set a <code>signed_in</code> cookie right after we&#39;ve signed in and delete it when we log off. This way our iOS app can easily tell whether to display or hide the &quot;sign in&quot; screen. </p>
+<p>Remember: the key thing we want to do is set a <code>signed_in</code> cookie right after we&#39;ve signed in and delete it when we log off. This way our iOS app can easily tell whether to display or hide the &quot;sign in&quot; screen.</p>
 
 <p>In Rails we will do this using middleware callbacks, however if you&#39;re using another framework you may choose to do it differently. What&#39;s important is that the cookie is being set and deleted appropriately.</p>
 
 <p>In <code>config/initializers/devise.rb</code> add the following to configure Devise:</p>
 <div class="highlight"><pre><code class="language-text" data-lang="text">Devise.setup do |config|
 
-  ... other code ... 
+  ... other code ...
 
   Warden::Manager.after_set_user do |user,auth,opts|
     auth.cookies[:signed_in] = 1
@@ -220,9 +222,9 @@ end
 
  end
 </code></pre></div>
-<p>[ Show picture of Chrome with cookie being set ]</p>
+<p><img src="/assets/blog/stacker-authentication-cookie.png" alt=" Cookies being set"></p>
 
-<p>Awesome! Now we&#39;ve got an app that sets a cookie that our iOS app can read to detect if we&#39;re logged in. </p>
+<p>Awesome! Now we&#39;ve got an app that sets a cookie that our iOS app can read to detect if we&#39;re logged in.</p>
 
 <h3 id="adding-a-sign-out-link">Adding a sign out link</h3>
 
@@ -243,7 +245,7 @@ rake db:migrate
 </code></pre></div>
 <h3 id="testing-it-out">Testing it out</h3>
 
-<p>Spin up the Rails server with the <code>rails server</code> command in your terminal. Visit <code>http://localhost:3000/users/sign_up</code> in Chrome 
+<p>Spin up the Rails server with the <code>rails server</code> command in your terminal. Visit <code>http://localhost:3000/users/sign_up</code> in Chrome
 and try to create your first user. Open the inspector and visit the &quot;resources&quot; tab and see if you can see the <code>signed_in</code> cookie being created and destroyed properly.</p>
 
 <p>Great! What we&#39;ve built is a simple authentication system that sets a cookie to indicate when we&#39;re logged in. Next we&#39;re going to build the iOS side and use that cookie to display or hide the sign in screen.</p>
@@ -323,41 +325,52 @@ NSString *DOMAIN_URL;
 </code></pre></div>
 <p>Now run the app in your simulator to try it out. Your app should load and then the &quot;Log In&quot; screen should slide up. Log in and it should slide down and away. If everything is working then the rest is just polish!</p>
 
-<p>Congratulations - you&#39;ve built a super simple sign in page for your hybrid iOS app. You can checkout the example - which includes styling and a sign up page  by visiting the <code>authentication-example</code> branch for both the <a href="https://github.com/lokimeyburg/GameRoom/tree/authentication-example">Rails app</a> and the <a href="https://github.com/lokimeyburg/Stacker/tree/authentication-example">iOS app</a> on Github.</p>
+<p>Congratulations - you&#39;ve built a super simple sign in page for your hybrid iOS app. You can checkout the example - which includes styling and a sign up page by visiting the <code>authentication-example</code> branch for both the <a href="https://github.com/lokimeyburg/GameRoom/tree/example/authentication">Rails app</a> and the <a href="https://github.com/lokimeyburg/Stacker/tree/example/authentication">iOS app</a> on Github.</p>
 
 <h2 id="more-details">More Details</h2>
 
 <ol>
 <li>Persisting cookies</li>
 <li>Adding another cookie check</li>
+<li>Styling</li>
 </ol>
 
 <h3 id="persistent-cookies">Persistent cookies</h3>
 
-<p>For extra points, you may wish to do another check on every request to ensure the user is truly logged in (because some applications may have a feature where they allow a user to log themselves out from another device).</p>
+<p>You may notice that you have to log in again after killing the app. This is because we&#39;re not remembering the user between sessions. To fix this we need to tell Devise to always remember a user.</p>
+
+<p>In <code>app/models/user.rb</code> add:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">def remember_me
+  true
+end
+</code></pre></div>
+<p>and then to remember the user for a very long time we need to edit <code>config/initializers/devise.rb</code></p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"># config.remember_for = 2.weeks
+config.remember_for = 1.year
+</code></pre></div>
+<h3 id="adding-another-cookie-check">Adding another cookie check</h3>
+
+<p>We can add an extra check on every request to delete the <code>signed_in</code> cookie if the user is no longer signed in to the app. This ensures we&#39;re always cleaning up our <code>signed in</code> cookie if it&#39;s no longer valid.</p>
 
 <p>In <code>app/controllers/application_controller.rb</code></p>
-<div class="highlight"><pre><code class="language-text" data-lang="text"># This is Devise&#39;s authentication
-before_filter :authenticate_user!
-before_filter :delete_signed_in_token_logged_out
+<div class="highlight"><pre><code class="language-text" data-lang="text">before_filter :authenticate_user!
+before_filter :delete_signed_in_token_if_logged_out
 
 private
 
-def delete_signed_in_token_logged_out
+def delete_signed_in_token_if_logged_out
   cookies.delete :signed_in unless current_user.present?
 end
 </code></pre></div>
-<p>In Devise.rb
-<code>
-config.remember_for = 2.weeks
-</code></p>
+<h3 id="styling">Styling</h3>
 
-<p>In User.rb
-<code>
-  def remember_me
-    true
-  end
-</code></p>
+<p>Here are the links to each screen and the styles associated with them:</p>
+
+<ul>
+<li><a href="https://github.com/lokimeyburg/GameRoom/blob/example/authentication/app/views/devise/sessions/new.html.erb">Log in page</a></li>
+<li><a href="https://github.com/lokimeyburg/GameRoom/blob/example/authentication/app/views/devise/registrations/new.html.erb">Sign up page</a></li>
+<li><a href="https://github.com/lokimeyburg/GameRoom/blob/example/authentication/app/views/design/settings.html.erb">Sign out page</a></li>
+</ul>
 
       </div>
     </div>

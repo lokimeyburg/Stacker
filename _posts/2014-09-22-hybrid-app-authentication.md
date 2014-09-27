@@ -5,14 +5,16 @@ title:  "Tutorial: creating a login screen"
 Out of the box, [Stacker](http://www.lokimeyburg.com/Stacker/) comes with a pretty good example app that can serve as a basis for your own iPhone apps. But what about getting users to log in to your app?
 
 <div style="text-align: center; padding: 20px 0px;">
-  <img src='/assets/blog/stacker-authentication.gif' style='width: 50%;' />
+  <img src='{{ site.baseurl }}/assets/blog/stacker-authentication.gif' style='width: 50%;' />
 </div>
 
 I'm going to show you a very simple technique I like to use to show a "welcome screen" that asks a user to log in (or sign up). Even though the server code is written in Rails, the technique is simple enough that it can be applied to most other frameworks without a lot of effort. We'll be building off of the example app, called GameRoom, so be sure to try to get the demo working by following the [getting started documentation.](http://www.lokimeyburg.com/Stacker/docs/getting-started/)
 
 <!--more-->
 
-> You can checkout the complete example - which includes a few extra things - by visiting the `authentication-example` branch for both the [Rails app](https://github.com/lokimeyburg/GameRoom/tree/authentication-example) and the [iOS app](https://github.com/lokimeyburg/Stacker/tree/authentication-example) on Github.
+> You can checkout the complete example below: <br/>
+> Rails app: [Download](https://github.com/lokimeyburg/GameRoom/tree/authentication-example) <br/>
+> iOS app: [Download](https://github.com/lokimeyburg/Stacker/tree/authentication-example)
 
 There are many ways to authenticate a user in an iOS app but since Stacker uses WebViews, signing in to your app in one WebView means you'll be signed in on your other pages because your session and cookies are shared between pages in your app. This makes our lives a lot easier.
 
@@ -42,7 +44,7 @@ In your `Gemfile` add the line
 gem devise
 ```
 
-Now install the library 
+Now install the library
 
 ```
 bundle install
@@ -52,22 +54,22 @@ rails generate devise:views
 rake db:migrate
 ```
 
-Great! What we've done is installed the library, created a `User` model, generated all the neccessary views and updated our databse by adding the `users` table. 
+Great! What we've done is installed the library, created a `User` model, generated all the neccessary views and updated our databse by adding the `users` table.
 
 Try running the app with the `rails server` command in your terminal and visiting `http://localhost:3000/users/sign_up` and see if you can create your first user.
 
-In `/app/controllers/application_controller.rb` you should add a `before_filter` to ensure the user is always authenticated - if they're not they will be redirected to the sign in screen.
+In `app/controllers/application_controller.rb` you should add a `before_filter` to ensure the user is always authenticated - if they're not they will be redirected to the sign in screen.
 
 ```
 class ApplicationController < ActionController::Base
 	before_filter :authenticate_user!
 end
 ```
- 
+
 ### Setting and deleting your cookie
 
 
-Remember: the key thing we want to do is set a `signed_in` cookie right after we've signed in and delete it when we log off. This way our iOS app can easily tell whether to display or hide the "sign in" screen. 
+Remember: the key thing we want to do is set a `signed_in` cookie right after we've signed in and delete it when we log off. This way our iOS app can easily tell whether to display or hide the "sign in" screen.
 
 In Rails we will do this using middleware callbacks, however if you're using another framework you may choose to do it differently. What's important is that the cookie is being set and deleted appropriately.
 
@@ -77,7 +79,7 @@ In `config/initializers/devise.rb` add the following to configure Devise:
 ```
 Devise.setup do |config|
 
-  ... other code ... 
+  ... other code ...
 
   Warden::Manager.after_set_user do |user,auth,opts|
     auth.cookies[:signed_in] = 1
@@ -86,12 +88,13 @@ Devise.setup do |config|
   Warden::Manager.before_logout do |user,auth,opts|
     auth.cookies.delete :signed_in
   end
-  
+
  end
 ```
-[ Show picture of Chrome with cookie being set ]
 
-Awesome! Now we've got an app that sets a cookie that our iOS app can read to detect if we're logged in. 
+![ Cookies being set](/assets/blog/stacker-authentication-cookie.png)
+
+Awesome! Now we've got an app that sets a cookie that our iOS app can read to detect if we're logged in.
 
 
 ### Adding a sign out link
@@ -104,7 +107,7 @@ In `app/views/layouts/application.html.erb` right after the `<body>` add:
 <%= link_to "Sign out", destroy_user_session_path, :method => :delete if current_user.present? %>
 ```
 
-### Using database sessions 
+### Using database sessions
 
 Since we're relying heavily on sessions for authentication I've found using cookies to store your session information to be unreliable [1]. Also, storing sensitive information in a cookie is generally a bad idea for several reasons, lack of encryption (or weak encryption) being only one of them. Instead, let's use the database to store session information.
 
@@ -122,7 +125,7 @@ Rails.application.config.session_store :active_record_store
 
 ### Testing it out
 
-Spin up the Rails server with the `rails server` command in your terminal. Visit `http://localhost:3000/users/sign_up` in Chrome 
+Spin up the Rails server with the `rails server` command in your terminal. Visit `http://localhost:3000/users/sign_up` in Chrome
 and try to create your first user. Open the inspector and visit the "resources" tab and see if you can see the `signed_in` cookie being created and destroyed properly.
 
 Great! What we've built is a simple authentication system that sets a cookie to indicate when we're logged in. Next we're going to build the iOS side and use that cookie to display or hide the sign in screen.
@@ -179,14 +182,14 @@ Great! Now let's write the `checkLogInStatus` method. What we're going to do is 
 {
     BOOL welcomeModalVisible = welcomeController.isViewLoaded && welcomeController.view.window;
     BOOL isOnline = NO;
-    
+
     NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies];
     for (NSHTTPCookie *cookie in cookies) {
         if([cookie.name isEqualToString:@"signed_in"] && [cookie.value isEqualToString:@"1"]){
             isOnline = YES;
         }
     }
-    
+
     if (isOnline){
         // You are online
         if(welcomeModalVisible) {
@@ -217,40 +220,57 @@ Great! Now let's write the `checkLogInStatus` method. What we're going to do is 
 
 Now run the app in your simulator to try it out. Your app should load and then the "Log In" screen should slide up. Log in and it should slide down and away. If everything is working then the rest is just polish!
 
-Congratulations - you've built a super simple sign in page for your hybrid iOS app. You can checkout the example - which includes styling and a sign up page  by visiting the `authentication-example` branch for both the [Rails app](https://github.com/lokimeyburg/GameRoom/tree/authentication-example) and the [iOS app](https://github.com/lokimeyburg/Stacker/tree/authentication-example) on Github.
+Congratulations - you've built a super simple sign in page for your hybrid iOS app. You can checkout the example - which includes styling and a sign up page by visiting the `authentication-example` branch for both the [Rails app](https://github.com/lokimeyburg/GameRoom/tree/example/authentication) and the [iOS app](https://github.com/lokimeyburg/Stacker/tree/example/authentication) on Github.
 
 ## More Details
 
 1. Persisting cookies
 2. Adding another cookie check
+3. Styling
 
 ### Persistent cookies
 
-For extra points, you may wish to do another check on every request to ensure the user is truly logged in (because some applications may have a feature where they allow a user to log themselves out from another device).
+You may notice that you have to log in again after killing the app. This is because we're not remembering the user between sessions. To fix this we need to tell Devise to always remember a user.
+
+In `app/models/user.rb` add:
+
+```
+def remember_me
+  true
+end
+```
+
+and then to remember the user for a very long time we need to edit `config/initializers/devise.rb`
+
+```
+# config.remember_for = 2.weeks
+config.remember_for = 1.year
+```
+
+### Adding another cookie check
+
+We can add an extra check on every request to delete the `signed_in` cookie if the user is no longer signed in to the app. This ensures we're always cleaning up our `signed in` cookie if it's no longer valid.
 
 In `app/controllers/application_controller.rb`
 
 ```
-# This is Devise's authentication
 before_filter :authenticate_user!
-before_filter :delete_signed_in_token_logged_out
+before_filter :delete_signed_in_token_if_logged_out
 
 private
 
-def delete_signed_in_token_logged_out
+def delete_signed_in_token_if_logged_out
   cookies.delete :signed_in unless current_user.present?
 end
 ```
 
-In Devise.rb
-```
-config.remember_for = 2.weeks
-```
+### Styling
 
-In User.rb
-```
-  def remember_me
-    true
-  end
-```
+Here are the links to each screen and the styles associated with them:
+
+- [Log in page](https://github.com/lokimeyburg/GameRoom/blob/example/authentication/app/views/devise/sessions/new.html.erb)
+- [Sign up page](https://github.com/lokimeyburg/GameRoom/blob/example/authentication/app/views/devise/registrations/new.html.erb)
+- [Sign out page](https://github.com/lokimeyburg/GameRoom/blob/example/authentication/app/views/design/settings.html.erb)
+
+
 

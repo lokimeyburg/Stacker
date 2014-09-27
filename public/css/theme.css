@@ -70,6 +70,10 @@ margin-top: 10px;
   border-bottom: 2px solid #ccc;
 }
 
+.markdown-body p img {
+  width: 100%;
+}
+
 
 .navbar-default .navbar-toggle,
 .navbar-default .navbar-toggle:hover,
