@@ -1,8 +1,5 @@
 ;(function() {
 
-    document.body.style.background = '#777';
-
-
 	if (window.WebViewJavascriptBridge) { return }
 	var messagingIframe
 	var sendMessageQueue = []
@@ -14,13 +11,6 @@
 	
 	var responseCallbacks = {}
 	var uniqueId = 1
-	
-	function _createQueueReadyIframe(doc) {
-		messagingIframe = doc.createElement('iframe')
-		messagingIframe.style.display = 'none'
-		messagingIframe.src = CUSTOM_PROTOCOL_SCHEME + '://' + QUEUE_HAS_MESSAGE
-		doc.documentElement.appendChild(messagingIframe)
-	}
 
 	function init(messageHandler) {
 		if (WebViewJavascriptBridge._messageHandler) { throw new Error('WebViewJavascriptBridge.init called twice') }
@@ -113,7 +103,6 @@
 	}
 
 	var doc = document
-	_createQueueReadyIframe(doc)
 	var readyEvent = doc.createEvent('Events')
 	readyEvent.initEvent('WebViewJavascriptBridgeReady')
 	readyEvent.bridge = WebViewJavascriptBridge
