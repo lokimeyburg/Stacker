@@ -140,67 +140,71 @@ static bool logging = false;
 
     NSString* javascriptCommand = [NSString stringWithFormat:@"WebViewJavascriptBridge._handleMessageFromObjC('%@');", messageJSON];
     if ([[NSThread currentThread] isMainThread]) {
-        [_webView stringByEvaluatingJavaScriptFromString:javascriptCommand];
+        [_webView evaluateJavaScript:javascriptCommand completionHandler:nil];
     } else {
         __strong WVJB_WEBVIEW_TYPE* strongWebView = _webView;
         dispatch_sync(dispatch_get_main_queue(), ^{
-            [strongWebView stringByEvaluatingJavaScriptFromString:javascriptCommand];
+            [strongWebView evaluateJavaScript:javascriptCommand completionHandler:nil];
         });
     }
 }
 
 - (void)_flushMessageQueue {
-    NSString *messageQueueString = [_webView stringByEvaluatingJavaScriptFromString:@"WebViewJavascriptBridge._fetchQueue();"];
-    
-    id messages = [self _deserializeMessageJSON:messageQueueString];
-    if (![messages isKindOfClass:[NSArray class]]) {
-        NSLog(@"WebViewJavascriptBridge: WARNING: Invalid %@ received: %@", [messages class], messages);
-        return;
-    }
-    for (WVJBMessage* message in messages) {
-        if (![message isKindOfClass:[WVJBMessage class]]) {
-            NSLog(@"WebViewJavascriptBridge: WARNING: Invalid %@ received: %@", [message class], message);
-            continue;
+    [_webView evaluateJavaScript:@"WebViewJavascriptBridge._fetchQueue();" completionHandler:^(NSString* result, NSError* error) {
+        NSLog(@"-------------- Evaluated string has returned flushMessageQueue Methods");
+        
+        
+        NSString *messageQueueString = result;
+        id messages = [self _deserializeMessageJSON:messageQueueString];
+        if (![messages isKindOfClass:[NSArray class]]) {
+            NSLog(@"WebViewJavascriptBridge: WARNING: Invalid %@ received: %@", [messages class], messages);
+            return;
         }
-        [self _log:@"RCVD" json:message];
-
-        NSString* responseId = message[@"responseId"];
-        if (responseId) {
-            WVJBResponseCallback responseCallback = _responseCallbacks[responseId];
-            responseCallback(message[@"responseData"]);
-            [_responseCallbacks removeObjectForKey:responseId];
-        } else {
-            WVJBResponseCallback responseCallback = NULL;
-            NSString* callbackId = message[@"callbackId"];
-            if (callbackId) {
-                responseCallback = ^(id responseData) {
-                    if (responseData == nil) {
-                        responseData = [NSNull null];
-                    }
-                    
-                    WVJBMessage* msg = @{ @"responseId":callbackId, @"responseData":responseData };
-                    [self _queueMessage:msg];
-                };
-            } else {
-                responseCallback = ^(id ignoreResponseData) {
-                    // Do nothing
-                };
+        for (WVJBMessage* message in messages) {
+            if (![message isKindOfClass:[WVJBMessage class]]) {
+                NSLog(@"WebViewJavascriptBridge: WARNING: Invalid %@ received: %@", [message class], message);
+                continue;
             }
+            [self _log:@"RCVD" json:message];
             
-            WVJBHandler handler;
-            if (message[@"handlerName"]) {
-                handler = _messageHandlers[message[@"handlerName"]];
+            NSString* responseId = message[@"responseId"];
+            if (responseId) {
+                WVJBResponseCallback responseCallback = _responseCallbacks[responseId];
+                responseCallback(message[@"responseData"]);
+                [_responseCallbacks removeObjectForKey:responseId];
             } else {
-                handler = _messageHandler;
+                WVJBResponseCallback responseCallback = NULL;
+                NSString* callbackId = message[@"callbackId"];
+                if (callbackId) {
+                    responseCallback = ^(id responseData) {
+                        if (responseData == nil) {
+                            responseData = [NSNull null];
+                        }
+                        
+                        WVJBMessage* msg = @{ @"responseId":callbackId, @"responseData":responseData };
+                        [self _queueMessage:msg];
+                    };
+                } else {
+                    responseCallback = ^(id ignoreResponseData) {
+                        // Do nothing
+                    };
+                }
+                
+                WVJBHandler handler;
+                if (message[@"handlerName"]) {
+                    handler = _messageHandlers[message[@"handlerName"]];
+                } else {
+                    handler = _messageHandler;
+                }
+                
+                if (!handler) {
+                    [NSException raise:@"WVJBNoHandlerException" format:@"No handler for message from JS: %@", message];
+                }
+                
+                handler(message[@"data"], responseCallback);
             }
-
-            if (!handler) {
-                [NSException raise:@"WVJBNoHandlerException" format:@"No handler for message from JS: %@", message];
-            }
-            
-            handler(message[@"data"], responseCallback);
         }
-    }
+    }];
 }
 
 - (NSString *)_serializeMessage:(id)message {
@@ -225,126 +229,40 @@ static bool logging = false;
 
 
 
-/* Platform specific internals: OSX
- **********************************/
-#if defined WVJB_PLATFORM_OSX
-
-- (void) _platformSpecificSetup:(WVJB_WEBVIEW_TYPE*)webView webViewDelegate:(WVJB_WEBVIEW_DELEGATE_TYPE*)webViewDelegate handler:(WVJBHandler)messageHandler resourceBundle:(NSBundle*)bundle{
-    _messageHandler = messageHandler;
-    _webView = webView;
-    _webViewDelegate = webViewDelegate;
-    _messageHandlers = [NSMutableDictionary dictionary];
-    
-    _webView.frameLoadDelegate = self;
-    _webView.resourceLoadDelegate = self;
-    _webView.policyDelegate = self;
-    
-    _resourceBundle = bundle;
-}
-
-- (void) _platformSpecificDealloc {
-    _webView.frameLoadDelegate = nil;
-    _webView.resourceLoadDelegate = nil;
-    _webView.policyDelegate = nil;
-}
-
-- (void)webView:(WebView *)webView didFinishLoadForFrame:(WebFrame *)frame
-{
-    if (webView != _webView) { return; }
-    
-    if (![[webView stringByEvaluatingJavaScriptFromString:@"typeof WebViewJavascriptBridge == 'object'"] isEqualToString:@"true"]) {
-        NSBundle *bundle = _resourceBundle ? _resourceBundle : [NSBundle mainBundle];
-        NSString *filePath = [bundle pathForResource:@"WebViewJavascriptBridge.js" ofType:@"txt"];
-        NSString *js = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
-        [webView stringByEvaluatingJavaScriptFromString:js];
-    }
-    
-    if (_startupMessageQueue) {
-        for (id queuedMessage in _startupMessageQueue) {
-            [self _dispatchMessage:queuedMessage];
-        }
-        _startupMessageQueue = nil;
-    }
-    
-    if (_webViewDelegate && [_webViewDelegate respondsToSelector:@selector(webView:didFinishLoadForFrame:)]) {
-        [_webViewDelegate webView:webView didFinishLoadForFrame:frame];
-    }
-}
-
-- (void)webView:(WebView *)webView didFailLoadWithError:(NSError *)error forFrame:(WebFrame *)frame {
-    if (webView != _webView) { return; }
-    
-    if (_webViewDelegate && [_webViewDelegate respondsToSelector:@selector(webView:didFailLoadWithError:forFrame:)]) {
-        [_webViewDelegate webView:webView didFailLoadWithError:error forFrame:frame];
-    }
-}
-
-- (void)webView:(WebView *)webView decidePolicyForNavigationAction:(NSDictionary *)actionInformation request:(NSURLRequest *)request frame:(WebFrame *)frame decisionListener:(id<WebPolicyDecisionListener>)listener
-{
-    if (webView != _webView) { return; }
-    
-    NSURL *url = [request URL];
-    if ([[url scheme] isEqualToString:kCustomProtocolScheme]) {
-        if ([[url host] isEqualToString:kQueueHasMessage]) {
-            [self _flushMessageQueue];
-        } else {
-            NSLog(@"WebViewJavascriptBridge: WARNING: Received unknown WebViewJavascriptBridge command %@://%@", kCustomProtocolScheme, [url path]);
-        }
-        [listener ignore];
-    } else if (_webViewDelegate && [_webViewDelegate respondsToSelector:@selector(webView:decidePolicyForNavigationAction:request:frame:decisionListener:)]) {
-        [_webViewDelegate webView:webView decidePolicyForNavigationAction:actionInformation request:request frame:frame decisionListener:listener];
-    } else {
-        [listener use];
-    }
-}
-
-- (void)webView:(WebView *)webView didCommitLoadForFrame:(WebFrame *)frame {
-    if (webView != _webView) { return; }
-    
-    if (_webViewDelegate && [_webViewDelegate respondsToSelector:@selector(webView:didCommitLoadForFrame:)]) {
-        [_webViewDelegate webView:webView didCommitLoadForFrame:frame];
-    }
-}
-
-- (NSURLRequest *)webView:(WebView *)webView resource:(id)identifier willSendRequest:(NSURLRequest *)request redirectResponse:(NSURLResponse *)redirectResponse fromDataSource:(WebDataSource *)dataSource {
-    if (webView != _webView) { return request; }
-    
-    if (_webViewDelegate && [_webViewDelegate respondsToSelector:@selector(webView:resource:willSendRequest:redirectResponse:fromDataSource:)]) {
-        return [_webViewDelegate webView:webView resource:identifier willSendRequest:request redirectResponse:redirectResponse fromDataSource:dataSource];
-    }
-    
-    return request;
-}
-
-
 
 /* Platform specific internals: iOS
  **********************************/
-#elif defined WVJB_PLATFORM_IOS
 
-- (void) _platformSpecificSetup:(WVJB_WEBVIEW_TYPE*)webView webViewDelegate:(id<UIWebViewDelegate>)webViewDelegate handler:(WVJBHandler)messageHandler resourceBundle:(NSBundle*)bundle{
+- (void) _platformSpecificSetup:(WVJB_WEBVIEW_TYPE*)webView webViewDelegate:(id<WKNavigationDelegate>)webViewDelegate handler:(WVJBHandler)messageHandler resourceBundle:(NSBundle*)bundle{
     _messageHandler = messageHandler;
     _webView = webView;
     _webViewDelegate = webViewDelegate;
     _messageHandlers = [NSMutableDictionary dictionary];
-    _webView.delegate = self;
+    _webView.navigationDelegate = self;
     _resourceBundle = bundle;
 }
 
 - (void) _platformSpecificDealloc {
-    _webView.delegate = nil;
+    _webView.navigationDelegate = nil;
 }
 
-- (void)webViewDidFinishLoad:(UIWebView *)webView {
+
+- (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation
+{
     if (webView != _webView) { return; }
     
     _numRequestsLoading--;
     
-    if (_numRequestsLoading == 0 && ![[webView stringByEvaluatingJavaScriptFromString:@"typeof WebViewJavascriptBridge == 'object'"] isEqualToString:@"true"]) {
-        NSBundle *bundle = _resourceBundle ? _resourceBundle : [NSBundle mainBundle];
-        NSString *filePath = [bundle pathForResource:@"WebViewJavascriptBridge.js" ofType:@"txt"];
-        NSString *js = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
-        [webView stringByEvaluatingJavaScriptFromString:js];
+    if (_numRequestsLoading == 0) {
+        
+        [webView evaluateJavaScript:@"typeof WebViewJavascriptBridge == \'object\';" completionHandler:^(NSString *result, NSError *error) {
+            if([result boolValue]){
+                NSBundle *bundle = _resourceBundle ? _resourceBundle : [NSBundle mainBundle];
+                NSString *filePath = [bundle pathForResource:@"WebViewJavascriptBridge.js" ofType:@"txt"];
+                NSString *js = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
+                [webView evaluateJavaScript:js completionHandler:nil];
+            }
+        }];
     }
     
     if (_startupMessageQueue) {
@@ -355,25 +273,20 @@ static bool logging = false;
     }
     
     __strong typeof(_webViewDelegate) strongDelegate = _webViewDelegate;
-    if (strongDelegate && [strongDelegate respondsToSelector:@selector(webViewDidFinishLoad:)]) {
-        [strongDelegate webViewDidFinishLoad:webView];
+    if (strongDelegate && [strongDelegate respondsToSelector:@selector(webView:didFinishNavigation:)]) {
+        [strongDelegate webView:webView didFinishNavigation:navigation];
     }
 }
 
-- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
+
+
+
+
+- (void)webView:(WKWebView *)webView
+decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction
+decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
     if (webView != _webView) { return; }
-    
-    _numRequestsLoading--;
-    
-    __strong typeof(_webViewDelegate) strongDelegate = _webViewDelegate;
-    if (strongDelegate && [strongDelegate respondsToSelector:@selector(webView:didFailLoadWithError:)]) {
-        [strongDelegate webView:webView didFailLoadWithError:error];
-    }
-}
-
-- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
-    if (webView != _webView) { return YES; }
-    NSURL *url = [request URL];
+    NSURL *url = navigationAction.request.URL;
     __strong typeof(_webViewDelegate) strongDelegate = _webViewDelegate;
     if ([[url scheme] isEqualToString:kCustomProtocolScheme]) {
         if ([[url host] isEqualToString:kQueueHasMessage]) {
@@ -381,25 +294,102 @@ static bool logging = false;
         } else {
             NSLog(@"WebViewJavascriptBridge: WARNING: Received unknown WebViewJavascriptBridge command %@://%@", kCustomProtocolScheme, [url path]);
         }
-        return NO;
-    } else if (strongDelegate && [strongDelegate respondsToSelector:@selector(webView:shouldStartLoadWithRequest:navigationType:)]) {
-        return [strongDelegate webView:webView shouldStartLoadWithRequest:request navigationType:navigationType];
-    } else {
-        return YES;
+        [webView stopLoading];
+    } else if (strongDelegate && [strongDelegate respondsToSelector:@selector(webView:decidePolicyForNavigationAction:decisionHandler:)]) {
+        [_webViewDelegate webView:webView decidePolicyForNavigationAction:navigationAction decisionHandler:decisionHandler];
     }
 }
 
-- (void)webViewDidStartLoad:(UIWebView *)webView {
+- (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation {
     if (webView != _webView) { return; }
     
     _numRequestsLoading++;
     
     __strong typeof(_webViewDelegate) strongDelegate = _webViewDelegate;
-    if (strongDelegate && [strongDelegate respondsToSelector:@selector(webViewDidStartLoad:)]) {
-        [strongDelegate webViewDidStartLoad:webView];
+    if (strongDelegate && [strongDelegate respondsToSelector:@selector(webView:didStartProvisionalNavigation:)]) {
+        [strongDelegate webView:webView didStartProvisionalNavigation:navigation];
     }
 }
 
-#endif
+
+
+
+// TODO: What is the WKWebview equivalent of this?
+// --------------------------------------------------------------
+
+//- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
+//    if (webView != _webView) { return; }
+//
+//    _numRequestsLoading--;
+//
+//    __strong typeof(_webViewDelegate) strongDelegate = _webViewDelegate;
+//    if (strongDelegate && [strongDelegate respondsToSelector:@selector(webView:didFailLoadWithError:)]) {
+//        [strongDelegate webView:webView didFailLoadWithError:error];
+//    }
+//}
+
+
+// NOTE: the WKWebView equivalent is: didFinishNavigation
+// --------------------------------------------------------------
+//- (void)webViewDidFinishLoad:(UIWebView *)webView {
+//    if (webView != _webView) { return; }
+//
+//    _numRequestsLoading--;
+//
+//    if (_numRequestsLoading == 0 && ![[webView stringByEvaluatingJavaScriptFromString:@"typeof WebViewJavascriptBridge == 'object'"] isEqualToString:@"true"]) {
+//        NSBundle *bundle = _resourceBundle ? _resourceBundle : [NSBundle mainBundle];
+//        NSString *filePath = [bundle pathForResource:@"WebViewJavascriptBridge.js" ofType:@"txt"];
+//        NSString *js = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
+//        [webView stringByEvaluatingJavaScriptFromString:js];
+//    }
+//
+//    if (_startupMessageQueue) {
+//        for (id queuedMessage in _startupMessageQueue) {
+//            [self _dispatchMessage:queuedMessage];
+//        }
+//        _startupMessageQueue = nil;
+//    }
+//
+//    __strong typeof(_webViewDelegate) strongDelegate = _webViewDelegate;
+//    if (strongDelegate && [strongDelegate respondsToSelector:@selector(webViewDidFinishLoad:)]) {
+//        [strongDelegate webViewDidFinishLoad:webView];
+//    }
+//}
+
+
+// NOTE: the WKWebView equivalent is: didStartProvisionalNavigation
+// --------------------------------------------------------------
+
+//- (void)webViewDidStartLoad:(UIWebView *)webView {
+//    if (webView != _webView) { return; }
+//
+//    _numRequestsLoading++;
+//
+//    __strong typeof(_webViewDelegate) strongDelegate = _webViewDelegate;
+//    if (strongDelegate && [strongDelegate respondsToSelector:@selector(webViewDidStartLoad:)]) {
+//        [strongDelegate webViewDidStartLoad:webView];
+//    }
+//}
+
+// NOTE: the WKWebView equivalent is: decidePolicyForNavigationAction
+// --------------------------------------------------------------
+//- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
+//    if (webView != _webView) { return YES; }
+//    NSURL *url = [request URL];
+//    __strong typeof(_webViewDelegate) strongDelegate = _webViewDelegate;
+//    if ([[url scheme] isEqualToString:kCustomProtocolScheme]) {
+//        if ([[url host] isEqualToString:kQueueHasMessage]) {
+//            [self _flushMessageQueue];
+//        } else {
+//            NSLog(@"WebViewJavascriptBridge: WARNING: Received unknown WebViewJavascriptBridge command %@://%@", kCustomProtocolScheme, [url path]);
+//        }
+//        return NO;
+//    } else if (strongDelegate && [strongDelegate respondsToSelector:@selector(webView:shouldStartLoadWithRequest:navigationType:)]) {
+//        return [strongDelegate webView:webView shouldStartLoadWithRequest:request navigationType:navigationType];
+//    } else {
+//        return YES;
+//    }
+//}
+
 
 @end

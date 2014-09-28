@@ -1,4 +1,8 @@
 ;(function() {
+
+    document.body.style.background = '#777';
+
+
 	if (window.WebViewJavascriptBridge) { return }
 	var messagingIframe
 	var sendMessageQueue = []

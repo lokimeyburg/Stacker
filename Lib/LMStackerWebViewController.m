@@ -54,12 +54,11 @@ andRootPageTabImageName:(NSString *)pageTabName
     return self;
 }
 
-//-(void) viewWillAppear:(BOOL)animated
-//{
-//    NSLog(@"--- view appearing");
-////    [self setActiveBridge];
-//    [super viewWillAppear:animated];
-//}
+-(void) viewWillAppear:(BOOL)animated
+{
+    [self setActiveBridge];
+    [super viewWillAppear:animated];
+}
 
 - (void)viewDidLoad
 {
@@ -85,6 +84,9 @@ andRootPageTabImageName:(NSString *)pageTabName
     self.myWebView = [[WKWebView alloc] initWithFrame:self.view.bounds];
     self.myWebView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     [self loadWebView];
+    
+    // Setup Javascript Bridge
+    [self setUpJavascriptBridge];
 
     // Setup Refresh Control
     refreshControl = [[UIRefreshControl alloc] init];
@@ -98,11 +100,17 @@ andRootPageTabImageName:(NSString *)pageTabName
 
 - (void)setActiveBridge
 {
-
+    self.delegate.bridge = _bridge;
+    for (NSString *handlerName in self.delegate.messageHandlers) {
+        [_bridge registerHandler:handlerName handler:self.delegate.messageHandlers[handlerName]];
+    }
 }
 
 - (void)setUpJavascriptBridge {
-
+    _bridge = [WebViewJavascriptBridge bridgeForWebView:self.myWebView
+                                        webViewDelegate:self
+                                                handler:^(id data, WVJBResponseCallback responseCallback) { /*..*/ }];
+    [self setActiveBridge];
 }
 
 - (void)webView:(WKWebView *)webView didReceiveServerRedirectForProvisionalNavigation:(WKNavigation *)navigation {
@@ -326,6 +334,17 @@ decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
     webView.alpha = 1.0f;
     currentlyRefreshing = NO;
     [UIView commitAnimations];
+
+    
+    
+    [self.myWebView evaluateJavaScript:@"foo();" completionHandler:^(NSString *result, NSError *error) {
+        
+        if([result boolValue]){
+            
+        }
+        
+    }];
+    
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
