@@ -334,17 +334,6 @@ decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
     webView.alpha = 1.0f;
     currentlyRefreshing = NO;
     [UIView commitAnimations];
-
-    
-    
-    [self.myWebView evaluateJavaScript:@"foo();" completionHandler:^(NSString *result, NSError *error) {
-        
-        if([result boolValue]){
-            
-        }
-        
-    }];
-    
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error

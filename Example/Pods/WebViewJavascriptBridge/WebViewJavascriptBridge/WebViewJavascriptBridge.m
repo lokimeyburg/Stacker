@@ -311,84 +311,28 @@ decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
 }
 
 
+- (void)webView:(WKWebView *)webView
+didFailNavigation:(WKNavigation *)navigation
+      withError:(NSError *)error {
+    
+    if (webView != _webView) { return; }
+    
+    _numRequestsLoading--;
+    
+    __strong typeof(_webViewDelegate) strongDelegate = _webViewDelegate;
+    if (strongDelegate && [strongDelegate respondsToSelector:@selector(webView:didFailNavigation:withError:)]) {
+        [strongDelegate webView:webView didFailNavigation:navigation withError:error];
+    }
+}
 
 
-// TODO: What is the WKWebview equivalent of this?
+// UIWebView                   || WKWebView Equivalent
 // --------------------------------------------------------------
+// didFailLoadWithError        => didFailNavigation
+// webViewDidFinishLoad        => didFinishNavigation
+// webViewDidStartLoad         => didStartProvisionalNavigation
+// shouldStartLoadWithRequest  => decidePolicyForNavigationAction
 
-//- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
-//    if (webView != _webView) { return; }
-//
-//    _numRequestsLoading--;
-//
-//    __strong typeof(_webViewDelegate) strongDelegate = _webViewDelegate;
-//    if (strongDelegate && [strongDelegate respondsToSelector:@selector(webView:didFailLoadWithError:)]) {
-//        [strongDelegate webView:webView didFailLoadWithError:error];
-//    }
-//}
-
-
-// NOTE: the WKWebView equivalent is: didFinishNavigation
-// --------------------------------------------------------------
-//- (void)webViewDidFinishLoad:(UIWebView *)webView {
-//    if (webView != _webView) { return; }
-//
-//    _numRequestsLoading--;
-//
-//    if (_numRequestsLoading == 0 && ![[webView stringByEvaluatingJavaScriptFromString:@"typeof WebViewJavascriptBridge == 'object'"] isEqualToString:@"true"]) {
-//        NSBundle *bundle = _resourceBundle ? _resourceBundle : [NSBundle mainBundle];
-//        NSString *filePath = [bundle pathForResource:@"WebViewJavascriptBridge.js" ofType:@"txt"];
-//        NSString *js = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
-//        [webView stringByEvaluatingJavaScriptFromString:js];
-//    }
-//
-//    if (_startupMessageQueue) {
-//        for (id queuedMessage in _startupMessageQueue) {
-//            [self _dispatchMessage:queuedMessage];
-//        }
-//        _startupMessageQueue = nil;
-//    }
-//
-//    __strong typeof(_webViewDelegate) strongDelegate = _webViewDelegate;
-//    if (strongDelegate && [strongDelegate respondsToSelector:@selector(webViewDidFinishLoad:)]) {
-//        [strongDelegate webViewDidFinishLoad:webView];
-//    }
-//}
-
-
-// NOTE: the WKWebView equivalent is: didStartProvisionalNavigation
-// --------------------------------------------------------------
-
-//- (void)webViewDidStartLoad:(UIWebView *)webView {
-//    if (webView != _webView) { return; }
-//
-//    _numRequestsLoading++;
-//
-//    __strong typeof(_webViewDelegate) strongDelegate = _webViewDelegate;
-//    if (strongDelegate && [strongDelegate respondsToSelector:@selector(webViewDidStartLoad:)]) {
-//        [strongDelegate webViewDidStartLoad:webView];
-//    }
-//}
-
-// NOTE: the WKWebView equivalent is: decidePolicyForNavigationAction
-// --------------------------------------------------------------
-//- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
-//    if (webView != _webView) { return YES; }
-//    NSURL *url = [request URL];
-//    __strong typeof(_webViewDelegate) strongDelegate = _webViewDelegate;
-//    if ([[url scheme] isEqualToString:kCustomProtocolScheme]) {
-//        if ([[url host] isEqualToString:kQueueHasMessage]) {
-//            [self _flushMessageQueue];
-//        } else {
-//            NSLog(@"WebViewJavascriptBridge: WARNING: Received unknown WebViewJavascriptBridge command %@://%@", kCustomProtocolScheme, [url path]);
-//        }
-//        return NO;
-//    } else if (strongDelegate && [strongDelegate respondsToSelector:@selector(webView:shouldStartLoadWithRequest:navigationType:)]) {
-//        return [strongDelegate webView:webView shouldStartLoadWithRequest:request navigationType:navigationType];
-//    } else {
-//        return YES;
-//    }
-//}
 
 
 @end
