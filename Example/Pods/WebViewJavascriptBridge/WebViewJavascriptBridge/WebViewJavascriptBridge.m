@@ -151,9 +151,6 @@ static bool logging = false;
 
 - (void)_flushMessageQueue {
     [_webView evaluateJavaScript:@"WebViewJavascriptBridge._fetchQueue();" completionHandler:^(NSString* result, NSError* error) {
-        NSLog(@"-------------- Evaluated string has returned flushMessageQueue Methods");
-        
-        
         NSString *messageQueueString = result;
         id messages = [self _deserializeMessageJSON:messageQueueString];
         if (![messages isKindOfClass:[NSArray class]]) {
@@ -295,7 +292,9 @@ decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
             NSLog(@"WebViewJavascriptBridge: WARNING: Received unknown WebViewJavascriptBridge command %@://%@", kCustomProtocolScheme, [url path]);
         }
         [webView stopLoading];
-    } else if (strongDelegate && [strongDelegate respondsToSelector:@selector(webView:decidePolicyForNavigationAction:decisionHandler:)]) {
+    }
+    
+    if (strongDelegate && [strongDelegate respondsToSelector:@selector(webView:decidePolicyForNavigationAction:decisionHandler:)]) {
         [_webViewDelegate webView:webView decidePolicyForNavigationAction:navigationAction decisionHandler:decisionHandler];
     }
 }
