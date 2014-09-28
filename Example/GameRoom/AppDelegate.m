@@ -21,8 +21,8 @@ LMStackerController *homeNavController;
     
     // 1.) Create a StackerController
     homeNavController = [[LMStackerController alloc] initWithURL:
-                              [NSString stringWithFormat:@"%@%@", DOMAIN_URL, @"/design/bridge?x_page_title=JS+Bridge+Demo&x_right_button=send_msg_to_bridge"]];
-    
+                         [NSString stringWithFormat:@"%@%@", DOMAIN_URL, @"/design/index?x_right_button=search_button&x_left_button=bridge_demo&x_page_title=News+Feed"]];
+
     // 2.) Custom right button actions
     UIBarButtonItem *newPostButton  = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose target:self action:@selector(showNewPostPage)];
     UIBarButtonItem *searchButton   = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(showSearchPage)];
