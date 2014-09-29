@@ -1,5 +1,5 @@
 ---
-layout: page 
+layout: page
 title: Blog
 ---
 
@@ -8,7 +8,7 @@ title: Blog
     <article class="post">
         <header class="post-header">
             <span class="post-meta"><time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date_to_string }}</time> {{!tags prefix="on "}}</span>
-            <h2 class="post-title"><a href="{{ post.url }}">{{ post.title }}</a></h2>
+            <h2 class="post-title"><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></h2>
         </header>
         <section class="post-excerpt">
             {{ post.excerpt }}
@@ -17,7 +17,7 @@ title: Blog
 
     {% endfor %}
 
-    <!-- 
+    <!--
     <nav class="pagination" role="pagination">
 
         {% if paginator.previous_page %}
@@ -29,10 +29,10 @@ title: Blog
         {% endif %}
 
         <span class="page-number"> Page {{paginator.page}} of {{paginator.total_pages}} </span>
-        
-        {% if paginator.next_page %} 
+
+        {% if paginator.next_page %}
         <a class="older-posts" href="/page{{ paginator.next_page }}/" title="Next Page">Older Posts &raquo;</a>
-        {% endif %} 
+        {% endif %}
     </nav>
     -->
 
