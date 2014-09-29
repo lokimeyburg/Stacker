@@ -1,8 +1,3 @@
-//
-//  Created by Loki Meyburg on 2013-01-04.
-//  Copyright (c) 2013 Loki Meyburg. All rights reserved.
-//
-
 #import "AppDelegate.h"
 #import "LMRGBParser.h"
 #import "LMStackerController.h"
@@ -12,18 +7,12 @@
 
 NSString *DOMAIN_URL;
 LMStackerController *homeNavController;
+LMStackerController *settingsController;
 LMStackerController *welcomeController;
-//BOOL welcomeModalVisible = NO;
+UITabBarController *tabBarController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookieAcceptPolicy];
-    
-    NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies];
-    for (NSHTTPCookie *cookie in cookies) {
-        NSLog(@"%@ => %@ ", cookie.name, cookie.value);
-    }
-    
     // URL of the web app
     DOMAIN_URL = @"http://localhost:3000";
     
@@ -32,14 +21,14 @@ LMStackerController *welcomeController;
                               [NSString stringWithFormat:@"%@%@", DOMAIN_URL, @"/design/index?x_page_title=News+Feed"]];
     
     
-    // 5.) Theme the controller
+    // 2.) Theme the controller
     homeNavController.stackerBackgroundColor =  @"F0F1F2";
     homeNavController.rootPageTitleImage    = [UIImage imageNamed:@"logo.png"];
     homeNavController.statusBarLight        = YES;
     homeNavController.refreshSpinnerColor   = @"6F9FCD";
     homeNavController.loadingSpinnerColor   = @"1C3347";
     
-    // 5.5) Extra theming (but not really Stacker specific)
+    // 2.5) Extra theming (but not really Stacker specific)
     LMRGBParser *rgbParser = [[LMRGBParser alloc] init];
     homeNavController.tabBarItem.title             = @"News Feed";
     homeNavController.tabBarItem.image             = [UIImage imageNamed:@"tab-1.png"];
@@ -47,7 +36,9 @@ LMStackerController *welcomeController;
     homeNavController.navigationBar.tintColor      = [rgbParser colorWithHexString:@"FFFFFF"];
     [homeNavController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [rgbParser colorWithHexString:@"FFFFFF"]}];
     
-    LMStackerController *settingsController = [[LMStackerController alloc] initWithURL:
+    
+    // 3) Settings Controller
+    settingsController = [[LMStackerController alloc] initWithURL:
                                                [NSString stringWithFormat:@"%@%@", DOMAIN_URL, @"/design/settings?x_page_title=Settings"]];
     settingsController.tabBarItem.title             = @"Settings";
     settingsController.navigationBar.barTintColor   = [rgbParser colorWithHexString:@"357ebd"];
@@ -56,14 +47,14 @@ LMStackerController *welcomeController;
     settingsController.tabBarItem.image             = [UIImage imageNamed:@"tab-1.png"];
     settingsController.statusBarLight        = YES;
 
-    UITabBarController *tabBarController = [[UITabBarController alloc] init];
+    tabBarController = [[UITabBarController alloc] init];
     [[UITabBar appearance] setTintColor:[rgbParser colorWithHexString:@"FFFFFF"]];
     [[UITabBar appearance] setBarTintColor:[rgbParser colorWithHexString:@"131313"]];
     [tabBarController addChildViewController:homeNavController];
     [tabBarController addChildViewController:settingsController];
     
     
-    // Welcome Controller
+    // 4.) TUTORIAL: Welcome Controller
     welcomeController = [[LMStackerController alloc] initWithURL:
                               [NSString stringWithFormat:@"%@%@", DOMAIN_URL, @"/users/sign_in?x_page_title=Welcome&x_right_button=show_signup_page"]];
     welcomeController.stackerBackgroundColor = @"F0F1F2";
@@ -82,7 +73,7 @@ LMStackerController *welcomeController;
     welcomeController.buttonHandlers  = welcomeButtonHandlers;
     
     
-    // Register cookieChange observer 
+    // 5.) TUTORIAL: Register cookieChange observer
     [[NSNotificationCenter defaultCenter]
      addObserver:self
      selector:@selector(checkLogInStatus)
@@ -95,17 +86,6 @@ LMStackerController *welcomeController;
     self.window.rootViewController = tabBarController;
     [self.window makeKeyAndVisible];
     return YES;
-}
-
-- (void)reloadMainPage
-{
-    NSLog(@"-- Reloading page");
-    [homeNavController refreshPage];
-}
-
-- (void)applicationWillEnterForeground:(UIApplication *)application
-{
-    NSLog(@"--- Entering foreground. Checking logged in state...");
 }
 
 -(void) checkLogInStatus
@@ -135,8 +115,16 @@ LMStackerController *welcomeController;
 
 -(void) closeWelcomeModal
 {
+    // Refresh the home and settings pages
     [homeNavController clearStack];
     [homeNavController refreshPage];
+    [settingsController clearStack];
+    [settingsController refreshPage];
+    
+    // Go to the homepage (the first tab)
+    [tabBarController setSelectedIndex:0];
+    
+    // Close modal
     [self.window.rootViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -150,31 +138,6 @@ LMStackerController *welcomeController;
 -(void) showLoginPage
 {
     [welcomeController pushNewPage:[NSString stringWithFormat:@"%@%@", DOMAIN_URL, @"/users/sign_up?x_page_title=Sign+Up"]];
-}
-
--(void) closeCustomActionPage
-{
-    [self.window.rootViewController dismissViewControllerAnimated:YES completion:nil];
-}
-
--(void) showSearchPage
-{
-    [homeNavController pushNewPage:[NSString stringWithFormat:@"%@%@", DOMAIN_URL, @"/design/search?x_page_title=Search"]];
-}
-
--(void) showJSBridgePage
-{
-    [homeNavController pushNewPage:[NSString stringWithFormat:@"%@%@", DOMAIN_URL, @"/design/bridge?x_page_title=JS+Bridge+Demo&x_right_button=send_msg_to_bridge"]];
-}
-
--(void) showNewPostPage
-{
-    [homeNavController pushNewPage:[NSString stringWithFormat:@"%@%@", DOMAIN_URL, @"/design/new_post?x_page_title=New+Post"]];
-}
-
--(void) sendMessageToBridge
-{
-    [homeNavController.bridge callHandler:@"testJavascriptHandler" data:@{ @"foo":@"before ready" }];
 }
 
 
