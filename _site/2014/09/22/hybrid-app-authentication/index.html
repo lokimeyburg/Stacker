@@ -156,8 +156,8 @@
 
 <blockquote>
 <p>You can checkout the complete example below: <br/>
-Rails app: <a href="https://github.com/lokimeyburg/GameRoom/tree/authentication-example">Download</a> <br/>
-iOS app: <a href="https://github.com/lokimeyburg/Stacker/tree/authentication-example">Download</a></p>
+Rails app: <a href="https://github.com/lokimeyburg/GameRoom/tree/example/authentication">Download</a> <br/>
+iOS app: <a href="https://github.com/lokimeyburg/Stacker/tree/example/authentication">Download</a></p>
 </blockquote>
 
 <p>There are many ways to authenticate a user in an iOS app but since Stacker uses WebViews, signing in to your app in one WebView means you&#39;ll be signed in on your other pages because your session and cookies are shared between pages in your app. This makes our lives a lot easier.</p>
@@ -170,9 +170,11 @@ iOS app: <a href="https://github.com/lokimeyburg/Stacker/tree/authentication-exa
 
 <p>We&#39;re going to break this tutorial up into two sections: first the server (Rails) side, followed by the iOS app. I&#39;ll try to explain what I&#39;m doing on the server side in a manner that can be applied to any framework besides Rails.</p>
 
-<p>[ show image of listening for cookie ]</p>
+<p><br></p>
 
-<p>[ show image of setting and deleting cookie ]</p>
+<p><img src="/assets/blog/stacker-authentication-illustration.png" alt="authentication-illustration"></p>
+
+<p><br></p>
 
 <h2 id="setting-up-the-server-side">Setting up the server side</h2>
 
@@ -222,7 +224,11 @@ end
 
  end
 </code></pre></div>
+<p><br></p>
+
 <p><img src="/assets/blog/stacker-authentication-cookie.png" alt=" Cookies being set"></p>
+
+<p><br></p>
 
 <p>Awesome! Now we&#39;ve got an app that sets a cookie that our iOS app can read to detect if we&#39;re logged in.</p>
 
@@ -325,7 +331,11 @@ NSString *DOMAIN_URL;
 </code></pre></div>
 <p>Now run the app in your simulator to try it out. Your app should load and then the &quot;Log In&quot; screen should slide up. Log in and it should slide down and away. If everything is working then the rest is just polish!</p>
 
-<p>Congratulations - you&#39;ve built a super simple sign in page for your hybrid iOS app. You can checkout the example - which includes styling and a sign up page by visiting the <code>authentication-example</code> branch for both the <a href="https://github.com/lokimeyburg/GameRoom/tree/example/authentication">Rails app</a> and the <a href="https://github.com/lokimeyburg/Stacker/tree/example/authentication">iOS app</a> on Github.</p>
+<p>Congratulations - you&#39;ve built a super simple sign in page for your hybrid iOS app. You can checkout the example - which includes styling and a sign up page by visiting the <code>example/authentication</code> branch for both the <a href="https://github.com/lokimeyburg/GameRoom/tree/example/authentication">Rails app</a> and the <a href="https://github.com/lokimeyburg/Stacker/tree/example/authentication">iOS app</a> on Github.</p>
+
+<blockquote>
+<p><a href="https://github.com/lokimeyburg/Stacker/blob/example/authentication/Example/GameRoom/AppDelegate.m">View the iOS Code</a></p>
+</blockquote>
 
 <h2 id="more-details">More Details</h2>
 

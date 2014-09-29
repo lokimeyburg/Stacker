@@ -13,8 +13,8 @@ I'm going to show you a very simple technique I like to use to show a "welcome s
 <!--more-->
 
 > You can checkout the complete example below: <br/>
-> Rails app: [Download](https://github.com/lokimeyburg/GameRoom/tree/authentication-example) <br/>
-> iOS app: [Download](https://github.com/lokimeyburg/Stacker/tree/authentication-example)
+> Rails app: [Download](https://github.com/lokimeyburg/GameRoom/tree/example/authentication) <br/>
+> iOS app: [Download](https://github.com/lokimeyburg/Stacker/tree/example/authentication)
 
 There are many ways to authenticate a user in an iOS app but since Stacker uses WebViews, signing in to your app in one WebView means you'll be signed in on your other pages because your session and cookies are shared between pages in your app. This makes our lives a lot easier.
 
@@ -26,9 +26,11 @@ Apple gives us a nice way to monitor changes to our iOS app's cookies using the 
 
 We're going to break this tutorial up into two sections: first the server (Rails) side, followed by the iOS app. I'll try to explain what I'm doing on the server side in a manner that can be applied to any framework besides Rails.
 
-[ show image of listening for cookie ]
+<br>
 
-[ show image of setting and deleting cookie ]
+![authentication-illustration]({{ site.baseurl }}/assets/blog/stacker-authentication-illustration.png)
+
+<br>
 
 ## Setting up the server side
 
@@ -92,7 +94,11 @@ Devise.setup do |config|
  end
 ```
 
-![ Cookies being set](/assets/blog/stacker-authentication-cookie.png)
+<br>
+
+![ Cookies being set]({{ site.baseurl }}/assets/blog/stacker-authentication-cookie.png)
+
+<br>
 
 Awesome! Now we've got an app that sets a cookie that our iOS app can read to detect if we're logged in.
 
@@ -220,7 +226,9 @@ Great! Now let's write the `checkLogInStatus` method. What we're going to do is 
 
 Now run the app in your simulator to try it out. Your app should load and then the "Log In" screen should slide up. Log in and it should slide down and away. If everything is working then the rest is just polish!
 
-Congratulations - you've built a super simple sign in page for your hybrid iOS app. You can checkout the example - which includes styling and a sign up page by visiting the `authentication-example` branch for both the [Rails app](https://github.com/lokimeyburg/GameRoom/tree/example/authentication) and the [iOS app](https://github.com/lokimeyburg/Stacker/tree/example/authentication) on Github.
+Congratulations - you've built a super simple sign in page for your hybrid iOS app. You can checkout the example - which includes styling and a sign up page by visiting the `example/authentication` branch for both the [Rails app](https://github.com/lokimeyburg/GameRoom/tree/example/authentication) and the [iOS app](https://github.com/lokimeyburg/Stacker/tree/example/authentication) on Github.
+
+> [View the iOS Code](https://github.com/lokimeyburg/Stacker/blob/example/authentication/Example/GameRoom/AppDelegate.m)
 
 ## More Details
 

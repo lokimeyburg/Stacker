@@ -4,7 +4,7 @@
  <title>Stacker</title>
  <link href="http://www.lokimeyburg.com/Stacker//atom.xml" rel="self"/>
  <link href="http://www.lokimeyburg.com/Stacker//"/>
- <updated>2014-09-26T16:00:39-07:00</updated>
+ <updated>2014-09-28T19:03:18-07:00</updated>
  <id>http://www.lokimeyburg.com/Stacker/</id>
  <author>
    <name>Loki Meyburg</name>
@@ -29,8 +29,8 @@
 
 &lt;blockquote&gt;
 &lt;p&gt;You can checkout the complete example below: &lt;br/&gt;
-Rails app: &lt;a href=&quot;https://github.com/lokimeyburg/GameRoom/tree/authentication-example&quot;&gt;Download&lt;/a&gt; &lt;br/&gt;
-iOS app: &lt;a href=&quot;https://github.com/lokimeyburg/Stacker/tree/authentication-example&quot;&gt;Download&lt;/a&gt;&lt;/p&gt;
+Rails app: &lt;a href=&quot;https://github.com/lokimeyburg/GameRoom/tree/example/authentication&quot;&gt;Download&lt;/a&gt; &lt;br/&gt;
+iOS app: &lt;a href=&quot;https://github.com/lokimeyburg/Stacker/tree/example/authentication&quot;&gt;Download&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;p&gt;There are many ways to authenticate a user in an iOS app but since Stacker uses WebViews, signing in to your app in one WebView means you&amp;#39;ll be signed in on your other pages because your session and cookies are shared between pages in your app. This makes our lives a lot easier.&lt;/p&gt;
@@ -43,9 +43,11 @@ iOS app: &lt;a href=&quot;https://github.com/lokimeyburg/Stacker/tree/authentica
 
 &lt;p&gt;We&amp;#39;re going to break this tutorial up into two sections: first the server (Rails) side, followed by the iOS app. I&amp;#39;ll try to explain what I&amp;#39;m doing on the server side in a manner that can be applied to any framework besides Rails.&lt;/p&gt;
 
-&lt;p&gt;[ show image of listening for cookie ]&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
 
-&lt;p&gt;[ show image of setting and deleting cookie ]&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/blog/stacker-authentication-illustration.png&quot; alt=&quot;authentication-illustration&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;setting-up-the-server-side&quot;&gt;Setting up the server side&lt;/h2&gt;
 
@@ -95,7 +97,11 @@ end
 
  end
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+
 &lt;p&gt;&lt;img src=&quot;/assets/blog/stacker-authentication-cookie.png&quot; alt=&quot; Cookies being set&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
 
 &lt;p&gt;Awesome! Now we&amp;#39;ve got an app that sets a cookie that our iOS app can read to detect if we&amp;#39;re logged in.&lt;/p&gt;
 
@@ -198,7 +204,11 @@ NSString *DOMAIN_URL;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Now run the app in your simulator to try it out. Your app should load and then the &amp;quot;Log In&amp;quot; screen should slide up. Log in and it should slide down and away. If everything is working then the rest is just polish!&lt;/p&gt;
 
-&lt;p&gt;Congratulations - you&amp;#39;ve built a super simple sign in page for your hybrid iOS app. You can checkout the example - which includes styling and a sign up page by visiting the &lt;code&gt;authentication-example&lt;/code&gt; branch for both the &lt;a href=&quot;https://github.com/lokimeyburg/GameRoom/tree/example/authentication&quot;&gt;Rails app&lt;/a&gt; and the &lt;a href=&quot;https://github.com/lokimeyburg/Stacker/tree/example/authentication&quot;&gt;iOS app&lt;/a&gt; on Github.&lt;/p&gt;
+&lt;p&gt;Congratulations - you&amp;#39;ve built a super simple sign in page for your hybrid iOS app. You can checkout the example - which includes styling and a sign up page by visiting the &lt;code&gt;example/authentication&lt;/code&gt; branch for both the &lt;a href=&quot;https://github.com/lokimeyburg/GameRoom/tree/example/authentication&quot;&gt;Rails app&lt;/a&gt; and the &lt;a href=&quot;https://github.com/lokimeyburg/Stacker/tree/example/authentication&quot;&gt;iOS app&lt;/a&gt; on Github.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/lokimeyburg/Stacker/blob/example/authentication/Example/GameRoom/AppDelegate.m&quot;&gt;View the iOS Code&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
 
 &lt;h2 id=&quot;more-details&quot;&gt;More Details&lt;/h2&gt;
 
