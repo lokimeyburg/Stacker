@@ -4,7 +4,7 @@
  <title>Stacker</title>
  <link href="http://www.lokimeyburg.com/Stacker//atom.xml" rel="self"/>
  <link href="http://www.lokimeyburg.com/Stacker//"/>
- <updated>2014-09-29T09:06:44-07:00</updated>
+ <updated>2014-09-29T10:45:36-07:00</updated>
  <id>http://www.lokimeyburg.com/Stacker/</id>
  <author>
    <name>Loki Meyburg</name>
@@ -153,7 +153,7 @@ NSString *DOMAIN_URL;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h3 id=&quot;listening-for-cookie-notifications&quot;&gt;Listening for cookie notifications&lt;/h3&gt;
 
-&lt;p&gt;Apple lets us listen to changes made to our cookies using the Notification Center. The (very long) event name is &lt;code&gt;NSHTTPCookieManagerCookiesChangedNotification&lt;/code&gt;. What we&amp;#39;re going to do is run a method called &lt;code&gt;checkLogInStatus&lt;/code&gt; everytime a cookie gets created or destroyed [2].&lt;/p&gt;
+&lt;p&gt;Apple lets us listen to changes made to our cookies using the Notification Center. The (very long) event name is &lt;code&gt;NSHTTPCookieManagerCookiesChangedNotification&lt;/code&gt;. What we&amp;#39;re going to do is run a method called &lt;code&gt;checkLogInStatus&lt;/code&gt; everytime a cookie gets created or destroyed.&lt;/p&gt;
 
 &lt;p&gt;In &lt;code&gt;AppDelegate.m&lt;/code&gt; just below our &lt;code&gt;welcomeController&lt;/code&gt; create the observer:&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;[[NSNotificationCenter defaultCenter]

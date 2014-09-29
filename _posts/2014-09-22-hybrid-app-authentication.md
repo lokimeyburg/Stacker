@@ -169,7 +169,7 @@ welcomeController = [[LMStackerController alloc] initWithURL: @"http://localhost
 
 ### Listening for cookie notifications
 
-Apple lets us listen to changes made to our cookies using the Notification Center. The (very long) event name is `NSHTTPCookieManagerCookiesChangedNotification`. What we're going to do is run a method called `checkLogInStatus` everytime a cookie gets created or destroyed [2].
+Apple lets us listen to changes made to our cookies using the Notification Center. The (very long) event name is `NSHTTPCookieManagerCookiesChangedNotification`. What we're going to do is run a method called `checkLogInStatus` everytime a cookie gets created or destroyed.
 
 In `AppDelegate.m` just below our `welcomeController` create the observer:
 

@@ -276,7 +276,7 @@ NSString *DOMAIN_URL;
 </code></pre></div>
 <h3 id="listening-for-cookie-notifications">Listening for cookie notifications</h3>
 
-<p>Apple lets us listen to changes made to our cookies using the Notification Center. The (very long) event name is <code>NSHTTPCookieManagerCookiesChangedNotification</code>. What we&#39;re going to do is run a method called <code>checkLogInStatus</code> everytime a cookie gets created or destroyed [2].</p>
+<p>Apple lets us listen to changes made to our cookies using the Notification Center. The (very long) event name is <code>NSHTTPCookieManagerCookiesChangedNotification</code>. What we&#39;re going to do is run a method called <code>checkLogInStatus</code> everytime a cookie gets created or destroyed.</p>
 
 <p>In <code>AppDelegate.m</code> just below our <code>welcomeController</code> create the observer:</p>
 <div class="highlight"><pre><code class="language-text" data-lang="text">[[NSNotificationCenter defaultCenter]
