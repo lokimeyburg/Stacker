@@ -114,7 +114,6 @@ andRootPageTabImageName:(NSString *)pageTabName
 }
 
 - (void)webView:(WKWebView *)webView didReceiveServerRedirectForProvisionalNavigation:(WKNavigation *)navigation {
-    NSLog(@"-- receiving redirect");
     [self runStackerProtocol:webView.URL];
 }
 
@@ -131,6 +130,8 @@ decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
 }
 
 - (void)runStackerProtocol:(NSURL*)url {
+    NSLog(@"-- trying to run the stacker protocol");
+    
     NSString *requestedURL          = [url absoluteString];
     LMStackerURLParser *parser      = [[LMStackerURLParser alloc] initWithURLString:requestedURL];
     NSString *pushPageVariable      = [parser valueForVariable:@"x_push_page"];
@@ -152,6 +153,8 @@ decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
     // Don't move to the next page if we're reshreshing the page and always ignore the first request
     // on non-root pages to ensure we don't cause an infinte loop
     if(!currentlyRefreshing && (self.rootPage || [self.requestCount intValue] > 0)) {
+        
+        NSLog(@"-- running stacker protocol");
         
         // -- Custom capture paths (href="inapp://capture?x_action=foo")
         if ([url.scheme isEqualToString:@"inapp"]) {
@@ -239,7 +242,7 @@ decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
         }
         
     }
-    self.requestCount = [NSNumber numberWithInt:[self.requestCount intValue] + 1];
+//    self.requestCount = [NSNumber numberWithInt:[self.requestCount intValue] + 1];
 }
 
 - (void) updateNavigationItems
@@ -286,8 +289,6 @@ decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
 
 - (void) loadWebView
 {
-    NSLog(@"-- loading webview");
-    
     // Clear any previous instances so we make some room in memory
     [self.myWebView removeFromSuperview];
 
@@ -322,12 +323,13 @@ decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
     currentlyRefreshing = YES;
     self.requestCount = 0;
     [self loadWebView];
-//    [self updateNavigationItems];
+    [self updateNavigationItems];
 }
 
 - (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation
 {
     NSLog(@"-- finished navigation");
+    
     [activityIndicator removeFromSuperview];
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:0.1];
@@ -336,23 +338,22 @@ decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
     [UIView commitAnimations];
 }
 
-- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
-{
-    [activityIndicator removeFromSuperview];
-
-    if([error code] == -1009){
-        NSString *htmlFile = [[NSBundle mainBundle] pathForResource:@"no-network-connection" ofType:@"html"];
-        NSString* htmlString = [NSString stringWithContentsOfFile:htmlFile encoding:NSUTF8StringEncoding error:nil];
-        [self.myWebView loadHTMLString:htmlString baseURL:nil];
-    }
-
-    if([error code] == -1004){
-        NSString *htmlFile = [[NSBundle mainBundle] pathForResource:@"not-found" ofType:@"html"];
-        NSString* htmlString = [NSString stringWithContentsOfFile:htmlFile encoding:NSUTF8StringEncoding error:nil];
-        [self.myWebView loadHTMLString:htmlString baseURL:nil];
-    }
-
+- (void)webView:(WKWebView *)webView
+didFailNavigation:(WKNavigation *)navigation
+      withError:(NSError *)error {
+    
+    NSLog(@"--- ERROR!");
+    
 }
+
+
+- (void)webView:(WKWebView *)webView
+didFailProvisionalNavigation:(WKNavigation *)navigation
+      withError:(NSError *)error {
+    NSLog(@"--- ERROR!");
+    
+}
+
 
 -(void)handleRefresh:(UIRefreshControl *)refresh {
     // Let this instance know it's refreshing
