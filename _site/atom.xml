@@ -4,13 +4,24 @@
  <title>Stacker</title>
  <link href="http://www.lokimeyburg.com/Stacker//atom.xml" rel="self"/>
  <link href="http://www.lokimeyburg.com/Stacker//"/>
- <updated>2014-09-29T10:45:36-07:00</updated>
+ <updated>2014-10-09T10:01:20-07:00</updated>
  <id>http://www.lokimeyburg.com/Stacker/</id>
  <author>
    <name>Loki Meyburg</name>
    <email></email>
  </author>
 
+ 
+ <entry>
+   <title>How to build fast hybrid iOS apps</title>
+   <link href="http://www.lokimeyburg.com/Stacker//2014/10/06/fast-hybrid-apps/"/>
+   <updated>2014-10-06T03:18:00-07:00</updated>
+   <id>http://www.lokimeyburg.com/Stacker//2014/10/06/fast-hybrid-apps</id>
+   <content type="html">&lt;p&gt;Last week I gave a talk at the &lt;a href=&quot;http://www.meetup.com/Vancouver-Web-Performance/events/206244922/&quot;&gt;Vancouver Web Performance meetup&lt;/a&gt; on building fast hybrid iOS apps. Here are the slides:&lt;/p&gt;
+
+&lt;script async class=&quot;speakerdeck-embed&quot; data-id=&quot;8bc7ed302a5d01328ca832fecbd8e6ce&quot; data-ratio=&quot;1.33333333333333&quot; src=&quot;//speakerdeck.com/assets/embed.js&quot;&gt;&lt;/script&gt;
+</content>
+ </entry>
  
  <entry>
    <title>Tutorial: creating a login screen</title>

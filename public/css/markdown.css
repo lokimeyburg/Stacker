@@ -21,7 +21,7 @@
     margin: 1em 0 15px;
     padding: 0;
     font-weight: bold;
-    line-height: 1.7;
+    line-height: 1.2;
     cursor: text;
     position: relative; }
     .markdown-body h1 .octicon-link, .markdown-body h2 .octicon-link, .markdown-body h3 .octicon-link, .markdown-body h4 .octicon-link, .markdown-body h5 .octicon-link, .markdown-body h6 .octicon-link {
