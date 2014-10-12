@@ -115,7 +115,7 @@ In `app/views/layouts/application.html.erb` right after the `<body>` add:
 
 ### Using database sessions
 
-Since we're relying heavily on sessions for authentication I've found using cookies to store your session information to be unreliable [1]. Also, storing sensitive information in a cookie is generally a bad idea for several reasons, lack of encryption (or weak encryption) being only one of them. Instead, let's use the database to store session information.
+Since we're relying heavily on sessions for authentication I've found using cookies to store your session information to be unreliable. Also, storing sensitive information in a cookie is generally a bad idea for several reasons, lack of encryption (or weak encryption) being only one of them. Instead, let's use the database to store session information.
 
 ```
 gem 'activerecord-session_store', github: 'rails/activerecord-session_store'
