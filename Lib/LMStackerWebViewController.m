@@ -62,7 +62,6 @@ andRootPageTabImageName:(NSString *)pageTabName
 
 - (void)viewDidLoad
 {
-    NSLog(@"-- view did load");
     [super viewDidLoad];
 
     // Setup Basics
@@ -130,8 +129,6 @@ decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
 }
 
 - (void)runStackerProtocol:(NSURL*)url {
-    NSLog(@"-- trying to run the stacker protocol");
-    
     NSString *requestedURL          = [url absoluteString];
     LMStackerURLParser *parser      = [[LMStackerURLParser alloc] initWithURLString:requestedURL];
     NSString *pushPageVariable      = [parser valueForVariable:@"x_push_page"];
@@ -173,6 +170,7 @@ decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
             [self.delegate pushNewPage:requestedURL];
         }
         
+        
         // -- Replace page
         if([replacePageVariable isEqualToString:@"true"]) {
             [self.myWebView stopLoading];
@@ -194,7 +192,6 @@ decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
         
         // -- Go back one page and replace
         if ([popPageAndReplace isEqualToString:@"true"]) {
-            NSLog(@"---> pop page and replace");
             [self.myWebView stopLoading];
             [self.delegate popPage];
             [self.delegate replacePage:requestedURL];
@@ -240,7 +237,6 @@ decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
             
             [self.myWebView stopLoading];
         }
-        
     }
     self.requestCount = [NSNumber numberWithInt:[self.requestCount intValue] + 1];
 }
@@ -298,8 +294,8 @@ decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
 
     request = [self requestWithStackerHeaders:request];
     
-    [self.myWebView loadRequest:request];
     self.myWebView.navigationDelegate = self;
+    [self.myWebView loadRequest:request];
     [self.myWebView setBackgroundColor:[UIColor clearColor]];
     self.myWebView.scrollView.bounces = YES;
     self.myWebView.alpha = 0.0f;
@@ -327,9 +323,7 @@ decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
 }
 
 - (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation
-{
-    NSLog(@"-- finished navigation");
-    
+{    
     [activityIndicator removeFromSuperview];
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:0.1];
@@ -347,11 +341,8 @@ didFailNavigation:(WKNavigation *)navigation
 }
 
 
-- (void)webView:(WKWebView *)webView
-didFailProvisionalNavigation:(WKNavigation *)navigation
-      withError:(NSError *)error {
+- (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(WKNavigation *)navigation withError:(NSError *)error {
     NSLog(@"--- ERROR!");
-    
 }
 
 

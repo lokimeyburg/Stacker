@@ -307,7 +307,6 @@ decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
 - (void)webView:(WKWebView *)webView
 didFailNavigation:(WKNavigation *)navigation
       withError:(NSError *)error {
-    
     if (webView != _webView) { return; }
     
     _numRequestsLoading--;
