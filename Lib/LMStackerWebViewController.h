@@ -7,7 +7,7 @@
 
 #import <UIKit/UIKit.h>
 #import <WebKit/WebKit.h>
-#import <WebViewJavascriptBridge/WebViewJavascriptBridge.h>
+#import <WebViewJavascriptBridge/WKWebViewJavascriptBridge.h>
 
 // Create delegate so we can call parent navigation
 @protocol LMStackerWebViewControllerDelegate <NSObject>
@@ -26,7 +26,7 @@
 @property NSDictionary              *buttonHandlers;
 @property NSString                  *refreshSpinnerColor;
 @property NSString                  *loadingSpinnerColor;
-@property WebViewJavascriptBridge   *bridge;
+@property WKWebViewJavascriptBridge *bridge;
 @property NSMutableDictionary       *messageHandlers;
 
 @end

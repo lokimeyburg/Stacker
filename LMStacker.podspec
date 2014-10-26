@@ -19,5 +19,5 @@ Pod::Spec.new do |s|
 
   s.dependency "UIDevice-Hardware", "~> 0.1.3"
   s.dependency "HexColors", "~> 2.2.1"
-  s.dependency "WebViewJavascriptBridge", "~> 4.1.4"  
+  s.dependency "WebViewJavascriptBridge", "~> 4.1.4"
 end

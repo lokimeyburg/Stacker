@@ -1,5 +1,0 @@
-#include "Pods-GameRoom-LMStacker.xcconfig"
-GCC_PREPROCESSOR_DEFINITIONS = COCOAPODS=1
-HEADER_SEARCH_PATHS = "${PODS_ROOT}/BuildHeaders" "${PODS_ROOT}/BuildHeaders/LMStacker" "${PODS_ROOT}/Headers" "${PODS_ROOT}/Headers/HexColors" "${PODS_ROOT}/Headers/LMStacker" "${PODS_ROOT}/Headers/UIDevice-Hardware" "${PODS_ROOT}/Headers/WebViewJavascriptBridge"
-OTHER_LDFLAGS = -ObjC
-PODS_ROOT = ${SRCROOT}

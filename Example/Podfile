@@ -1,7 +1,8 @@
 # Uncomment this line to define a global platform for your project
 # platform :ios, "6.0"
-
+source 'https://github.com/CocoaPods/Specs.git'
 target "GameRoom" do
   pod "LMStacker", :path => "../"
+  pod "WebViewJavascriptBridge", :git => 'https://github.com/lokimeyburg/WebViewJavascriptBridge.git', :branch => 'wkwebview-support'
 end
 

@@ -12,7 +12,7 @@
 #import <HexColors/HexColor.h>
 
 @interface LMStackerWebViewController ()
-@property WebViewJavascriptBridge* bridge;
+@property WKWebViewJavascriptBridge* bridge;
 @end
 
 @implementation LMStackerWebViewController
@@ -107,7 +107,7 @@ andRootPageTabImageName:(NSString *)pageTabName
 }
 
 - (void)setUpJavascriptBridge {
-    _bridge = [WebViewJavascriptBridge bridgeForWebView:self.myWebView
+    _bridge = [WKWebViewJavascriptBridge bridgeForWebView:self.myWebView
                                         webViewDelegate:self
                                                 handler:^(id data, WVJBResponseCallback responseCallback) { /*..*/ }];
     [self setActiveBridge];
@@ -242,7 +242,7 @@ decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
         }
         
     }
-//    self.requestCount = [NSNumber numberWithInt:[self.requestCount intValue] + 1];
+    self.requestCount = [NSNumber numberWithInt:[self.requestCount intValue] + 1];
 }
 
 - (void) updateNavigationItems
