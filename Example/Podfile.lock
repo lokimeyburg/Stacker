@@ -18,10 +18,15 @@ EXTERNAL SOURCES:
     :branch: wkwebview-support
     :git: https://github.com/lokimeyburg/WebViewJavascriptBridge.git
 
+CHECKOUT OPTIONS:
+  WebViewJavascriptBridge:
+    :commit: 35a8b7bc250b2e9060dc7fe640da19aea86bb76b
+    :git: https://github.com/lokimeyburg/WebViewJavascriptBridge.git
+
 SPEC CHECKSUMS:
   HexColors: 01384d2bbe8dc4ffa43c3b4135db6e976952d153
   LMStacker: bdcc132e9572244b2749be8d0a6d50cdb25ad8de
   UIDevice-Hardware: 7f1d1aba15fa6a65959b449b4a0f8e0f42f674d7
-  WebViewJavascriptBridge: 259a6c8c67b492bd8079c9944b6866d3476e16ac
+  WebViewJavascriptBridge: 3e13dffb51120b21fb1eb3acc02fdd2ec5d0fe03
 
-COCOAPODS: 0.34.4
+COCOAPODS: 0.35.0
