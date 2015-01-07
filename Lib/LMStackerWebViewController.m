@@ -242,6 +242,8 @@ andRootPageTabImageName:(NSString *)pageTabName
     if (self.rootPage) {
         if ([self.delegate rootPageTitleImage] != nil){
             self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[self.delegate rootPageTitleImage]];
+        } else {
+            self.navigationItem.titleView = nil;
         }
     }
 
