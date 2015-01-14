@@ -15,11 +15,8 @@
 		0EBA957B192585DB00A1E4C2 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EBA957A192585DB00A1E4C2 /* CoreGraphics.framework */; };
 		0EBA957D192585DB00A1E4C2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EBA957C192585DB00A1E4C2 /* UIKit.framework */; };
 		0EBA9583192585DB00A1E4C2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0EBA9581192585DB00A1E4C2 /* InfoPlist.strings */; };
-		0EBA9585192585DB00A1E4C2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EBA9584192585DB00A1E4C2 /* main.m */; };
-		0EBA9589192585DB00A1E4C2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EBA9588192585DB00A1E4C2 /* AppDelegate.m */; };
-		0EBA958C192585DB00A1E4C2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0EBA958A192585DB00A1E4C2 /* Main.storyboard */; };
+		0EBA9589192585DB00A1E4C2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBA9588192585DB00A1E4C2 /* AppDelegate.swift */; };
 		0EBA9591192585DB00A1E4C2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0EBA9590192585DB00A1E4C2 /* Images.xcassets */; };
-		660579B4454741D7920CCD48 /* libPods-GameRoom.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E94C88027424C68814F0D11 /* libPods-GameRoom.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,10 +30,7 @@
 		0EBA957C192585DB00A1E4C2 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		0EBA9580192585DB00A1E4C2 /* GameRoom-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GameRoom-Info.plist"; sourceTree = "<group>"; };
 		0EBA9582192585DB00A1E4C2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		0EBA9584192585DB00A1E4C2 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		0EBA9586192585DB00A1E4C2 /* GameRoom-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GameRoom-Prefix.pch"; sourceTree = "<group>"; };
-		0EBA9587192585DB00A1E4C2 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		0EBA9588192585DB00A1E4C2 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		0EBA9588192585DB00A1E4C2 /* AppDelegate.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0EBA958B192585DB00A1E4C2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0EBA9590192585DB00A1E4C2 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		4EB71CB001174DCDB535E4F1 /* Pods-GameRoom.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GameRoom.xcconfig"; path = "Pods/Pods-GameRoom.xcconfig"; sourceTree = "<group>"; };
@@ -51,7 +45,6 @@
 				0EBA957B192585DB00A1E4C2 /* CoreGraphics.framework in Frameworks */,
 				0EBA957D192585DB00A1E4C2 /* UIKit.framework in Frameworks */,
 				0EBA9579192585DB00A1E4C2 /* Foundation.framework in Frameworks */,
-				660579B4454741D7920CCD48 /* libPods-GameRoom.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -90,8 +83,7 @@
 		0EBA957E192585DB00A1E4C2 /* GameRoom */ = {
 			isa = PBXGroup;
 			children = (
-				0EBA9587192585DB00A1E4C2 /* AppDelegate.h */,
-				0EBA9588192585DB00A1E4C2 /* AppDelegate.m */,
+				0EBA9588192585DB00A1E4C2 /* AppDelegate.swift */,
 				0EBA958A192585DB00A1E4C2 /* Main.storyboard */,
 				0EBA9590192585DB00A1E4C2 /* Images.xcassets */,
 				0EBA957F192585DB00A1E4C2 /* Supporting Files */,
@@ -108,8 +100,6 @@
 				0E4FE8271925B8FE008DF208 /* tab-1@2x.png */,
 				0EBA9580192585DB00A1E4C2 /* GameRoom-Info.plist */,
 				0EBA9581192585DB00A1E4C2 /* InfoPlist.strings */,
-				0EBA9584192585DB00A1E4C2 /* main.m */,
-				0EBA9586192585DB00A1E4C2 /* GameRoom-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -174,7 +164,6 @@
 				0EBA9591192585DB00A1E4C2 /* Images.xcassets in Resources */,
 				0EBA9583192585DB00A1E4C2 /* InfoPlist.strings in Resources */,
 				0E4FE82C1925B8FE008DF208 /* tab-1@2x.png in Resources */,
-				0EBA958C192585DB00A1E4C2 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -218,8 +207,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0EBA9589192585DB00A1E4C2 /* AppDelegate.m in Sources */,
-				0EBA9585192585DB00A1E4C2 /* main.m in Sources */,
+				0EBA9589192585DB00A1E4C2 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -321,10 +309,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "GameRoom/GameRoom-Prefix.pch";
 				INFOPLIST_FILE = "GameRoom/GameRoom-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
+				New_Setting = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -336,10 +326,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "GameRoom/GameRoom-Prefix.pch";
 				INFOPLIST_FILE = "GameRoom/GameRoom-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
+				New_Setting = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
