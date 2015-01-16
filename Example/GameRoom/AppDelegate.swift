@@ -4,6 +4,7 @@
 
 
 import UIKit
+//import StackerController
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -12,20 +13,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
-        var myWebView = UIWebView(frame: window.bounds);
-        myWebView.autoresizingMask = (UIViewAutoresizing.FlexibleWidth | UIViewAutoresizing.FlexibleHeight);
-        
-        var myURL = NSURL(string: "http://www.google.com")?;
-        var myURLRequest = NSURLRequest(URL: myURL!);
-        myWebView.loadRequest(myURLRequest);
+        var myNavController = StackerController.initWithURL("http://www.google.com");
         
         
-        
-        var myNavController = UINavigationController();
-        myNavController.view.addSubview(myWebView);
-        
-        
-//        self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        window = UIWindow(frame: UIScreen.mainScreen().bounds)
         window.rootViewController = myNavController;
         window.makeKeyAndVisible();
         
