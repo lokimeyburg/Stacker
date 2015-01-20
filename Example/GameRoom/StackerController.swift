@@ -9,40 +9,16 @@
 import Foundation
 import UIKit
 
-class StackerController : UINavigationController {
+class StackerController : UINavigationController, StackerWebViewControllerDelegate {
     
+    var backgroundColor = "#FFFFFF";
     
-    class func initWithURL(url: NSString) -> StackerController {
-        
+    convenience init(url: String) {
+        self.init();
         var myViewController = StackerWebViewController();
-        
-        var returnable = self.init(rootViewController: myViewController);
-        return returnable;
+        myViewController.pageURL = url;
+        myViewController.delegate = self;
+        self.addChildViewController(myViewController);
     }
-    
-    
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//        
-//        self.view.backgroundColor = UIColor.redColor();
-//    }
-
-    
-//    -(id)initWithURL:(NSString*)url
-//    {
-//    self = [super init];
-//    
-//    LMStackerWebViewController *rootViewController = [[LMStackerWebViewController alloc] init];
-//    rootViewController.pageURL = url;
-//    rootViewController.rootPage = YES;
-//    
-//    // init message handlers for the Javascript Bridge
-//    self.messageHandlers = [NSMutableDictionary dictionary];
-//    
-//    self = [self initWithRootViewController:rootViewController];
-//    
-//    return(self);
-//    }
-    
     
 }

@@ -9,9 +9,8 @@
 import Foundation
 import UIKit
 
-@objc protocol StackerWebViewControllerDelegate{
-    optional func getBackgroundColor();
-    optional func timerFinished()
+protocol StackerWebViewControllerDelegate {
+    var backgroundColor: String { get };
 }
 
 class StackerWebViewController : UIViewController, UIWebViewDelegate {
@@ -20,13 +19,11 @@ class StackerWebViewController : UIViewController, UIWebViewDelegate {
     var activityIndicator   : UIActivityIndicatorView!
     var currentlyRefreshing : Bool!
     var refreshControl      : UIRefreshControl!
-    var pageURL             : NSString!
+    var pageURL             : String!
     var delegate            : StackerWebViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        pageURL = "https://www.skypay.io";
         
         // Setup Basics
         view.frame = CGRectMake(0, 0, 320, 480);
@@ -37,6 +34,7 @@ class StackerWebViewController : UIViewController, UIWebViewDelegate {
         
         // TODO: set background color from delegate
         view.backgroundColor = UIColor.whiteColor();
+        println(delegate?.backgroundColor);
         
         // TODO: set up navigation items
         
