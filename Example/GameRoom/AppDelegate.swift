@@ -1,10 +1,4 @@
-//
-//  Created by Loki Meyburg on 2013-01-04.
-//  Copyright (c) 2013 Loki Meyburg. All rights reserved.
-
-
 import UIKit
-//import StackerController
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -13,8 +7,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
-        var myNavController = StackerController.init(url: "http://www.thinkgeek.com/");
-        myNavController.backgroundColor = "#EFEFEF";
+        var myNavController = StackerController.init(url: "http://127.0.0.1.xip.io:3000/?x_page_title=GameRoom");
+        myNavController.backgroundColor = "#f8f8f8";
         
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         window.rootViewController = myNavController;

@@ -1,11 +1,3 @@
-//
-//  StackerController.swift
-//  GameRoom
-//
-//  Created by Loki Meyburg on 2015-01-14.
-//  Copyright (c) 2015 Loki Meyburg. All rights reserved.
-//
-
 import Foundation
 import UIKit
 
@@ -18,7 +10,16 @@ class StackerController : UINavigationController, StackerWebViewControllerDelega
         var myViewController = StackerWebViewController();
         myViewController.pageURL = url;
         myViewController.delegate = self;
+        myViewController.rootPage = true;
         self.addChildViewController(myViewController);
+    }
+    
+    
+    func pushNewPage(url: String) {
+        var newController = StackerWebViewController();
+        newController.pageURL = url;
+        newController.delegate = self;
+        pushViewController(newController, animated: true);
     }
     
 }
