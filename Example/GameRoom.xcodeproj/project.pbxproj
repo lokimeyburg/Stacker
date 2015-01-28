@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0E1C83A31A67647B00902067 /* StackerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1C83A21A67647B00902067 /* StackerController.swift */; };
+		0E4BCAF81A78A2C10027013B /* StackerBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4BCAF71A78A2C10027013B /* StackerBridge.swift */; };
 		0E4FE8281925B8FE008DF208 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E4FE8231925B8FE008DF208 /* logo.png */; };
 		0E4FE8291925B8FE008DF208 /* logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E4FE8241925B8FE008DF208 /* logo@2x.png */; };
 		0E4FE82B1925B8FE008DF208 /* tab-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E4FE8261925B8FE008DF208 /* tab-1.png */; };
@@ -25,6 +26,7 @@
 
 /* Begin PBXFileReference section */
 		0E1C83A21A67647B00902067 /* StackerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StackerController.swift; sourceTree = "<group>"; };
+		0E4BCAF71A78A2C10027013B /* StackerBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StackerBridge.swift; sourceTree = "<group>"; };
 		0E4FE8231925B8FE008DF208 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		0E4FE8241925B8FE008DF208 /* logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo@2x.png"; sourceTree = "<group>"; };
 		0E4FE8261925B8FE008DF208 /* tab-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab-1.png"; sourceTree = "<group>"; };
@@ -95,6 +97,7 @@
 				0EA9C8471A68B24B00BAC6E0 /* StackerWebViewController.swift */,
 				0E8D44DC1A6F19DC004727C2 /* UIColorExtension.swift */,
 				0E8D44DE1A6F2104004727C2 /* StackerURLParser.swift */,
+				0E4BCAF71A78A2C10027013B /* StackerBridge.swift */,
 				0EBA9590192585DB00A1E4C2 /* Images.xcassets */,
 				0EBA957F192585DB00A1E4C2 /* Supporting Files */,
 			);
@@ -221,6 +224,7 @@
 				0EA9C8481A68B24B00BAC6E0 /* StackerWebViewController.swift in Sources */,
 				0EBA9589192585DB00A1E4C2 /* AppDelegate.swift in Sources */,
 				0E1C83A31A67647B00902067 /* StackerController.swift in Sources */,
+				0E4BCAF81A78A2C10027013B /* StackerBridge.swift in Sources */,
 				0E8D44DD1A6F19DC004727C2 /* UIColorExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

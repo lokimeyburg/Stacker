@@ -5,6 +5,11 @@ import UIKit
 protocol StackerWebViewControllerDelegate {
     var backgroundColor: String { get };
     func pushNewPage(url: String);
+    func replacePage(url: String);
+    func refreshPage();
+    func popPage();
+    func clearStack();
+    func showBrowserView(url: String);
 }
 
 class StackerWebViewController : UIViewController, UIWebViewDelegate {
@@ -65,8 +70,61 @@ class StackerWebViewController : UIViewController, UIWebViewDelegate {
         // Don't move to the next page if we're reshreshing the page and always ignore the first request
         // on non-root pages to ensure we don't cause an infinte loop
         if(!currentlyRefreshing && (rootPage || requestCount > 0)) {
+            // -- Push page
             if(pushPageVariable == "true") {
                 delegate?.pushNewPage(requestedURL!);
+                return false;
+            }
+            // -- Replace page
+            if(replacePageVariable == "true") {
+                delegate?.replacePage(requestedURL!);
+                return false;
+            }
+            // -- Go back one page
+            if(popPage == "true") {
+                delegate?.popPage();
+                return false;
+            }
+            
+            // -- Go back one page and refresh
+            if(popPageAndRefresh == "true") {
+                delegate?.popPage();
+                delegate?.refreshPage();
+                return false;
+            }
+            
+            // -- Go back one page and replace
+            if(popPageAndReplace == "true") {
+                delegate?.popPage();
+                delegate?.replacePage(requestedURL!);
+                return false;
+            }
+            
+            // -- Clear the stack
+            if(clearStack == "true") {
+                delegate?.clearStack();
+                return false;
+            }
+            
+            // -- Clear the stack and refresh (useful when you post something)
+            if(clearStackAndRefresh == "true") {
+                delegate?.clearStack();
+                delegate?.refreshPage();
+                return false;
+            }
+            
+            // -- Clear the stack and refresh (useful when you post something)
+            if(clearStackAndReplace == "true") {
+                delegate?.clearStack();
+                delegate?.replacePage(requestedURL!);
+                return false;
+            }
+            
+            // -- External urls go in a browser
+            if(externalURLVariable == "true") {
+                // TODO: we need to strip the x_external_url parameter so as to keep the intended url
+                var newURL = NSURL(scheme: request.URL.scheme!, host: request.URL.host!, path: request.URL.path!);
+                delegate?.showBrowserView(requestedURL!);
                 return false;
             }
         }
@@ -130,6 +188,13 @@ class StackerWebViewController : UIViewController, UIWebViewDelegate {
         myWebView.loadRequest(request);
         // TODO: we could probably hold off on ending the refresh until after the webview has loaded?
         refresh.endRefreshing();
+    }
+    
+    func reloadWebViewInPlace() {
+        currentlyRefreshing = true;
+        requestCount = 0;
+        loadWebView();
+        updateNavigationItems();
     }
 
     
