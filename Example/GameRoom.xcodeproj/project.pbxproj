@@ -15,6 +15,7 @@
 		0E4FE82C1925B8FE008DF208 /* tab-1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E4FE8271925B8FE008DF208 /* tab-1@2x.png */; };
 		0E8D44DD1A6F19DC004727C2 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8D44DC1A6F19DC004727C2 /* UIColorExtension.swift */; };
 		0E8D44DF1A6F2104004727C2 /* StackerURLParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8D44DE1A6F2104004727C2 /* StackerURLParser.swift */; };
+		0EA0DB1E1A7BEA2F001AE931 /* StackerBridge.js.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0EA0DB1D1A7BEA2F001AE931 /* StackerBridge.js.txt */; };
 		0EA9C8481A68B24B00BAC6E0 /* StackerWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA9C8471A68B24B00BAC6E0 /* StackerWebViewController.swift */; };
 		0EBA9579192585DB00A1E4C2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EBA9578192585DB00A1E4C2 /* Foundation.framework */; };
 		0EBA957B192585DB00A1E4C2 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EBA957A192585DB00A1E4C2 /* CoreGraphics.framework */; };
@@ -33,6 +34,7 @@
 		0E4FE8271925B8FE008DF208 /* tab-1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab-1@2x.png"; sourceTree = "<group>"; };
 		0E8D44DC1A6F19DC004727C2 /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		0E8D44DE1A6F2104004727C2 /* StackerURLParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StackerURLParser.swift; sourceTree = "<group>"; };
+		0EA0DB1D1A7BEA2F001AE931 /* StackerBridge.js.txt */ = {isa = PBXFileReference; explicitFileType = text; fileEncoding = 4; path = StackerBridge.js.txt; sourceTree = "<group>"; };
 		0EA9C8471A68B24B00BAC6E0 /* StackerWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StackerWebViewController.swift; sourceTree = "<group>"; };
 		0EBA9575192585DB00A1E4C2 /* GameRoom.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GameRoom.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0EBA9578192585DB00A1E4C2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -113,6 +115,7 @@
 				0E4FE8271925B8FE008DF208 /* tab-1@2x.png */,
 				0EBA9580192585DB00A1E4C2 /* GameRoom-Info.plist */,
 				0EBA9581192585DB00A1E4C2 /* InfoPlist.strings */,
+				0EA0DB1D1A7BEA2F001AE931 /* StackerBridge.js.txt */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -175,6 +178,7 @@
 				0E4FE82B1925B8FE008DF208 /* tab-1.png in Resources */,
 				0E4FE8281925B8FE008DF208 /* logo.png in Resources */,
 				0EBA9591192585DB00A1E4C2 /* Images.xcassets in Resources */,
+				0EA0DB1E1A7BEA2F001AE931 /* StackerBridge.js.txt in Resources */,
 				0EBA9583192585DB00A1E4C2 /* InfoPlist.strings in Resources */,
 				0E4FE82C1925B8FE008DF208 /* tab-1@2x.png in Resources */,
 			);

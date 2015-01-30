@@ -44,6 +44,12 @@ class StackerWebViewController : UIViewController, UIWebViewDelegate {
         myWebView.autoresizingMask = (UIViewAutoresizing.FlexibleWidth | UIViewAutoresizing.FlexibleHeight);
         loadWebView();
         
+        
+        // TODO: set up bridge
+        StackerBridge(webView: myWebView, webViewDelegate: self, { (data, responseCallback) -> () in
+            // something
+        });
+        
         refreshControl = UIRefreshControl();
         refreshControl.addTarget(self, action: Selector("handleRefresh:"), forControlEvents: UIControlEvents.ValueChanged);
 
@@ -53,6 +59,7 @@ class StackerWebViewController : UIViewController, UIWebViewDelegate {
     }
     
     func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool {
+        
         var requestedURL = request.URL.absoluteString;
         var parser = StackerURLParser(url: requestedURL!);
         
