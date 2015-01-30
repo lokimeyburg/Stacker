@@ -1,5 +1,5 @@
 ;(function() {
-  if (window.WebViewJavascriptBridge) { return }
+  if (window.StackerBridge) { return }
   var messagingIframe
   var sendMessageQueue = []
   var receiveMessageQueue = []
@@ -11,7 +11,7 @@
   var responseCallbacks = {}
   var uniqueId = 1
   
-  alert("here");
+  alert("here")
   
   function _createQueueReadyIframe(doc) {
 		messagingIframe = doc.createElement('iframe')
@@ -21,8 +21,8 @@
   }
   
   function init(messageHandler) {
-		if (WebViewJavascriptBridge._messageHandler) { throw new Error('WebViewJavascriptBridge.init called twice') }
-		WebViewJavascriptBridge._messageHandler = messageHandler
+		if (StackerBridge._messageHandler) { throw new Error('StackerBridge.init called twice') }
+		StackerBridge._messageHandler = messageHandler
 		var receivedMessages = receiveMessageQueue
 		receiveMessageQueue = null
 		for (var i=0; i<receivedMessages.length; i++) {
@@ -77,7 +77,7 @@
                    }
                    }
                    
-                   var handler = WebViewJavascriptBridge._messageHandler
+                   var handler = StackerBridge._messageHandler
                    if (message.handlerName) {
                    handler = messageHandlers[message.handlerName]
                    }
@@ -86,7 +86,7 @@
                    handler(message.data, responseCallback)
                    } catch(exception) {
                    if (typeof console != 'undefined') {
-                   console.log("WebViewJavascriptBridge: WARNING: javascript handler threw.", message, exception)
+                   console.log("StackerBridge: WARNING: javascript handler threw.", message, exception)
                    }
                    }
                    }
@@ -101,7 +101,7 @@
 		}
   }
   
-  window.WebViewJavascriptBridge = {
+  window.StackerBridge = {
 		init: init,
 		send: send,
 		registerHandler: registerHandler,
@@ -113,7 +113,7 @@
   var doc = document
   _createQueueReadyIframe(doc)
   var readyEvent = doc.createEvent('Events')
-  readyEvent.initEvent('WebViewJavascriptBridgeReady')
-  readyEvent.bridge = WebViewJavascriptBridge
+  readyEvent.initEvent('StackerBridgeReady')
+  readyEvent.bridge = StackerBridge
   doc.dispatchEvent(readyEvent)
   })();

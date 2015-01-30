@@ -18,6 +18,7 @@ class StackerWebViewController : UIViewController, UIWebViewDelegate {
     var activityIndicator   : UIActivityIndicatorView!
     var refreshControl      : UIRefreshControl!
     var pageURL             : String!
+    var bridge              : StackerBridge!
     var delegate            : StackerWebViewControllerDelegate?
     var currentlyRefreshing = true;
     var rootPage            = false;
@@ -42,13 +43,13 @@ class StackerWebViewController : UIViewController, UIWebViewDelegate {
         
         myWebView = UIWebView(frame: self.view.bounds);
         myWebView.autoresizingMask = (UIViewAutoresizing.FlexibleWidth | UIViewAutoresizing.FlexibleHeight);
+        
         loadWebView();
         
-        
         // TODO: set up bridge
-        StackerBridge(webView: myWebView, webViewDelegate: self, { (data, responseCallback) -> () in
-            // something
-        });
+        bridge = StackerBridge(webView: myWebView, webViewDelegate: self, { (data, responseCallback) -> () in
+                        // something
+                    });
         
         refreshControl = UIRefreshControl();
         refreshControl.addTarget(self, action: Selector("handleRefresh:"), forControlEvents: UIControlEvents.ValueChanged);
@@ -165,7 +166,6 @@ class StackerWebViewController : UIViewController, UIWebViewDelegate {
         myWebView.removeFromSuperview();
         
         var myURL = NSURL(string: pageURL)?;
-        println(pageURL);
         var myURLRequest = NSURLRequest(URL: myURL!);
         myWebView.loadRequest(myURLRequest);
         
