@@ -51,6 +51,8 @@ class StackerWebViewController : UIViewController, UIWebViewDelegate {
                         // something
                     });
         
+        bridge.send("Hello World");
+        
         refreshControl = UIRefreshControl();
         refreshControl.addTarget(self, action: Selector("handleRefresh:"), forControlEvents: UIControlEvents.ValueChanged);
 

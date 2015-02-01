@@ -52,6 +52,7 @@ class StackerController : UINavigationController, StackerWebViewControllerDelega
     
     func showBrowserView(url: String) {
         browserViewURL = url;
+        
         // create the main controller
         var myRootController = UIViewController();
         myRootController.title = url;
@@ -103,18 +104,6 @@ class StackerController : UINavigationController, StackerWebViewControllerDelega
             UIApplication.sharedApplication().openURL(NSURL(string: browserViewURL)!);
         }
     }
-    
-//    - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
-//    {
-//    NSString *buttonTitle = [actionSheet buttonTitleAtIndex:buttonIndex];
-//    if ([buttonTitle isEqualToString:@"Copy Link"]) {
-//    UIPasteboard *pb = [UIPasteboard generalPasteboard];
-//    [pb setString:browserViewURL];
-//    }
-//    if ([buttonTitle isEqualToString:@"Open in Safari"]) {
-//    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:browserViewURL]];
-//    }
-//    }
 
     
     // END: EXTERNAL BROWSER MODAL VIEW
