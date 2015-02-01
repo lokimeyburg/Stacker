@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-typealias WVJBResponseCallback = ( data : String) -> ()
+typealias WVJBResponseCallback = ( data : String) -> Void
 typealias WVJBHandler = ( data : String, responseCallback: WVJBResponseCallback) -> ()
 typealias WVJBMessage = [AnyObject];
 
@@ -23,6 +23,7 @@ class StackerBridge : NSObject, UIWebViewDelegate {
     private var _messageHandlers    = [String:WVJBHandler]();
     private var _responseCallbacks  = [String:WVJBResponseCallback]();
     private var _startupMessageQueue = [AnyObject]();
+    private var _bridgeComplete = false;
     
     private let _customProtocolScheme = "stackerscheme";
     private let _queueHasMessage = "__STACKER_QUEUE_MESSAGE__"
@@ -48,20 +49,23 @@ class StackerBridge : NSObject, UIWebViewDelegate {
             
         queueMessage(message);
     }
+
+    func registerHandler(handlerName: String, handler: WVJBHandler){
+        _messageHandlers[handlerName] = handler;
+    }
     
     // Internals
     // ---------------------------------------
 
     
     func queueMessage(message: AnyObject) {
+        if(_bridgeComplete){
+            dispatchMessageQueue(message);
+        } else {
+            _startupMessageQueue.append(message);
+        }
         
-        // dispatch if queue no longer exists
         
-        _startupMessageQueue.append(message);
-        
-//        if(_startupMessageQueue?){
-//            
-//        }
     }
     
     func dispatchMessageQueue(message: AnyObject) {
@@ -83,14 +87,38 @@ class StackerBridge : NSObject, UIWebViewDelegate {
     func flushMessageQueue() {
         var messageQueueString = _webView.stringByEvaluatingJavaScriptFromString("StackerBridge._fetchQueue()")!;
         
-        println("messageQueueString ---- " + messageQueueString);
-        
         var messages = deserializeMessageJSON(messageQueueString);
         // TODO: print error message and return if not valid JSON
         
         for message in messages {
             // TODO: print error message and return if not valid JSON
+            // TODO: deal with response callbacks with a response id
+            var callbackId = message["callbackId"];
             
+            var responseCallback = {(data: String) -> () in
+                // do nothing
+                //                    println("in the response callback");
+                //                    println(data);
+            }
+            
+            if let callId: AnyObject = callbackId? {
+                var responseCallback = {(data: String) -> () in
+                    println("2. response callback called");
+                    var msg = ["responseId": callId, "responseData": data];
+                    self.queueMessage(msg);
+                }
+            }
+            
+            var handler: WVJBHandler;
+            
+            if let messageHandler : AnyObject = message["handlerName"] {
+                handler = _messageHandlers[messageHandler as String]!;
+            } else {
+                handler = _messageHandler;
+            }
+
+            
+            handler(data: message as String, responseCallback);
             
         }
         
@@ -142,8 +170,6 @@ class StackerBridge : NSObject, UIWebViewDelegate {
         var url = request.URL;
         if(url.scheme == _customProtocolScheme) {
             if(url.host == _queueHasMessage) {
-                println("TODO: flush message queue");
-                
                 flushMessageQueue();
             } else {
                 println("StackerBridge: WARNING: Received unknown StackerBridge command " + _customProtocolScheme + "//" + url.path!);
@@ -166,21 +192,12 @@ class StackerBridge : NSObject, UIWebViewDelegate {
             var js = String(contentsOfFile: filePath!, encoding: NSUTF8StringEncoding, error: nil);
             webView.stringByEvaluatingJavaScriptFromString(js!);
         }
-
-    
-            
             
         for queuedMessage in _startupMessageQueue {
             dispatchMessageQueue(queuedMessage)
         }
-        
-//        if (_startupMessageQueue) {
-//            for (id queuedMessage in _startupMessageQueue) {
-//                [self _dispatchMessage:queuedMessage];
-//            }
-//            _startupMessageQueue = nil;
-//        }
-        
+
+        _bridgeComplete = true;
         
         _webViewDelegate.webViewDidFinishLoad?(webView);
     }

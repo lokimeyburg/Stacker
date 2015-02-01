@@ -48,11 +48,20 @@ class StackerWebViewController : UIViewController, UIWebViewDelegate {
         
         // TODO: set up bridge
         bridge = StackerBridge(webView: myWebView, webViewDelegate: self, { (data, responseCallback) -> () in
-                        // something
-                    });
+//            println("--- I'm in your callback bro");
+//            println(data);
+//            responseCallback(data: "Hello world: this is the Swift callback");
+        });
         
-        bridge.send("Hello World");
+//        bridge.send("Hello world this is Swift talking");
         
+        
+        bridge.registerHandler("testSwiftCallback", handler: { (data, responseCallback) -> () in
+            println("---- YES! Callback registered and called!");
+            println(data);
+            responseCallback(data:"Hello world. This is swift!");
+        });
+
         refreshControl = UIRefreshControl();
         refreshControl.addTarget(self, action: Selector("handleRefresh:"), forControlEvents: UIControlEvents.ValueChanged);
 
