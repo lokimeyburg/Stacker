@@ -92,33 +92,26 @@ class StackerBridge : NSObject, UIWebViewDelegate {
         
         for message in messages {
             // TODO: print error message and return if not valid JSON
+            
             // TODO: deal with response callbacks with a response id
+            var responseId = message["responseId"];
+            // ENDTODO
+            
+            var responseCallback = {(data: AnyObject) -> () in /* empty callback */ }
+            
             var callbackId = message["callbackId"];
-            
-            var responseCallback = {(data: AnyObject) -> () in
-                
-                
-                // do nothing
-                //                    println("in the response callback");
-                //                    println(data);
-            }
-            
             if let callId: AnyObject = callbackId? {
-                var responseCallback = {(data: String) -> () in
-                    println("2. response callback called");
+                responseCallback = {(data: AnyObject) -> () in
                     var msg = ["responseId": callId, "responseData": data];
                     self.queueMessage(msg);
                 }
             }
-            
             var handler: WVJBHandler;
-            
             if let messageHandler : AnyObject = message["handlerName"] {
                 handler = _messageHandlers[messageHandler as String]!;
             } else {
                 handler = _messageHandler;
             }
-            
             handler(data: message, responseCallback);
             
         }

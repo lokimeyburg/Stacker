@@ -56,9 +56,7 @@ class StackerWebViewController : UIViewController, UIWebViewDelegate {
 //        bridge.send("Hello world this is Swift talking");
         
         
-        bridge.registerHandler("testSwiftCallback", handler: { (data, responseCallback) -> () in
-            println("---- YES! Callback registered and called!");
-            println(data);
+        bridge.registerHandler("testSwiftCallback", handler: { (data, responseCallback) -> () in
             responseCallback(data:"Hello world. This is swift!");
         });
 
