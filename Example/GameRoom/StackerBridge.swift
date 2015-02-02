@@ -9,8 +9,8 @@
 import Foundation
 import UIKit
 
-typealias WVJBResponseCallback = ( data : String) -> Void
-typealias WVJBHandler = ( data : String, responseCallback: WVJBResponseCallback) -> ()
+typealias WVJBResponseCallback = ( data : AnyObject) -> Void
+typealias WVJBHandler = ( data : AnyObject, responseCallback: WVJBResponseCallback) -> ()
 typealias WVJBMessage = [AnyObject];
 
 class StackerBridge : NSObject, UIWebViewDelegate {
@@ -95,7 +95,9 @@ class StackerBridge : NSObject, UIWebViewDelegate {
             // TODO: deal with response callbacks with a response id
             var callbackId = message["callbackId"];
             
-            var responseCallback = {(data: String) -> () in
+            var responseCallback = {(data: AnyObject) -> () in
+                
+                
                 // do nothing
                 //                    println("in the response callback");
                 //                    println(data);
@@ -116,9 +118,8 @@ class StackerBridge : NSObject, UIWebViewDelegate {
             } else {
                 handler = _messageHandler;
             }
-
             
-            handler(data: message as String, responseCallback);
+            handler(data: message, responseCallback);
             
         }
         

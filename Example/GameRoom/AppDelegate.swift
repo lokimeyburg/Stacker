@@ -7,7 +7,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
-        var myNavController = StackerController.init(url: "http://127.0.0.1.xip.io:3000/design/bridge?x_page_title=GameRoom");
+        var myNavController = StackerController.init(url: "http://127.0.0.1.xip.io:3000/design/bridge?x_page_title=Title");
         myNavController.backgroundColor = "#f8f8f8";
         
         
