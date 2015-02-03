@@ -73,9 +73,14 @@ class StackerWebViewController : UIViewController, UIWebViewDelegate {
     }
     
     func sendMessageToBridge() {
-        bridge.send("Hello from Swift", responseCallback: { (data) -> Void in
-            println("GOAL: reponse callback triggered! -----");
-        });
+//        bridge.send("Hello from Swift", responseCallback: { (data) -> Void in
+//            println("GOAL: reponse callback triggered! -----");
+//        });
+        
+        bridge.callHandler("testJavascriptHandler", data: "This is Swift and this is a callback!") { (data) -> Void in
+            println("GOAL! Callback called from handler!");
+            // this is the calback
+        }
     }
     
     func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool {

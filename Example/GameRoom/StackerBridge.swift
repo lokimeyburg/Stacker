@@ -66,7 +66,7 @@ class StackerBridge : NSObject, UIWebViewDelegate {
     }
     
     func callHandler(handlerName: String, data: AnyObject, responseCallback: WVJBResponseCallback) {
-
+        send(data, responseCallback: responseCallback, handlerName: handlerName);
     }
     
     // Internals
@@ -111,19 +111,11 @@ class StackerBridge : NSObject, UIWebViewDelegate {
             // TODO: deal with response callbacks with a response id
             
             if let responseId : AnyObject = message["responseId"] {
-                println("GOAL: we have a reponse id!");
-                println(responseId);
                 var responseCallback = _responseCallbacks[responseId as String];
                 
-                println(responseCallback);
-                
                 if let responseMessage : AnyObject = message["responseData"] {
-                    println("GOAL: We're calling the reponse callback!");
                    responseCallback?(data: responseMessage);
                 }
-                
-//                responseCallback(data: "asdasd");
-//                _responseCallbacks.removeValueForKey(responseId as String);
             } else {
                 var responseCallback = {(data: AnyObject) -> () in /* empty callback */ }
                 
