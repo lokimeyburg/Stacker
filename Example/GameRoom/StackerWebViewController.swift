@@ -46,26 +46,36 @@ class StackerWebViewController : UIViewController, UIWebViewDelegate {
         
         loadWebView();
         
-        // TODO: set up bridge
         bridge = StackerBridge(webView: myWebView, webViewDelegate: self, { (data, responseCallback) -> () in
-//            println("--- I'm in your callback bro");
-//            println(data);
-//            responseCallback(data: "Hello world: this is the Swift callback");
+            // println(data);
+            // responseCallback(data: "Hello world: this is the Swift callback");
         });
         
-//        bridge.send("Hello world this is Swift talking");
+//        bridge.send("Hello from Swift", responseCallback: { (data) -> Void in
+//            println("-----");
+//        });
         
-        
-        bridge.registerHandler("testSwiftCallback", handler: { (data, responseCallback) -> () in
+        bridge.registerHandler("testSwiftCallback", handler: { (data, responseCallback) -> () in
             responseCallback(data:"Hello world. This is swift!");
         });
-
+        
+        // Buttons!
+        var bridgeDemoButton = UIBarButtonItem(title: "Test", style: UIBarButtonItemStyle.Bordered, target: self, action: "sendMessageToBridge");
+        navigationItem.rightBarButtonItems = [bridgeDemoButton];
+        
+        // Refresh Control
         refreshControl = UIRefreshControl();
         refreshControl.addTarget(self, action: Selector("handleRefresh:"), forControlEvents: UIControlEvents.ValueChanged);
 
         // TODO: set refresh control color from delegate
         
         myWebView.scrollView.addSubview(refreshControl);
+    }
+    
+    func sendMessageToBridge() {
+        bridge.send("Hello from Swift", responseCallback: { (data) -> Void in
+            println("GOAL: reponse callback triggered! -----");
+        });
     }
     
     func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool {

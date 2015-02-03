@@ -67,7 +67,7 @@
     }
 
     function _dispatchMessageFromSwift(messageJSON) {
-        setTimeout(function _timeoutDispatchMessageFromObjC() {
+        setTimeout(function _timeoutDispatchMessageFromSwift() {
             var message = JSON.parse(messageJSON)
             var messageHandler
 

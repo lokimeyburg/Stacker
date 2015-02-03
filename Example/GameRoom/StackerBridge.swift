@@ -17,7 +17,7 @@ class StackerBridge : NSObject, UIWebViewDelegate {
     
     private var _uniqueId = 0;
     private var _numRequestsLoading = 0;
-    var _webView:           UIWebView!;
+    private var _webView:           UIWebView!;
     private var _webViewDelegate:   UIWebViewDelegate!;
     private var _messageHandler:    WVJBHandler!;
     private var _messageHandlers    = [String:WVJBHandler]();
@@ -43,15 +43,30 @@ class StackerBridge : NSObject, UIWebViewDelegate {
     
     // API
     // ---------------------------------------
-    func send(payload: AnyObject) {
+    func send(data: AnyObject, responseCallback: WVJBResponseCallback?, handlerName: String? = nil) {
         
-        var message = [ "data" : payload ];
-            
+        var message = [ "data" : data ];
+        
+        if let responseCb = responseCallback {
+            _uniqueId++;
+            var callbackId = String(format: "objc_cb_%d", _uniqueId);
+            _responseCallbacks[callbackId] = responseCallback;
+            message["callbackId"] = callbackId;
+        }
+        
+        if let handler = handlerName {
+            message["handlerName"] = handler;
+        }
+        
         queueMessage(message);
     }
 
     func registerHandler(handlerName: String, handler: WVJBHandler){
         _messageHandlers[handlerName] = handler;
+    }
+    
+    func callHandler(handlerName: String, data: AnyObject, responseCallback: WVJBResponseCallback) {
+
     }
     
     // Internals
@@ -64,8 +79,6 @@ class StackerBridge : NSObject, UIWebViewDelegate {
         } else {
             _startupMessageQueue.append(message);
         }
-        
-        
     }
     
     func dispatchMessageQueue(message: AnyObject) {
@@ -81,7 +94,6 @@ class StackerBridge : NSObject, UIWebViewDelegate {
         }
 
         // TODO: dispatch async on different thread
-        
     }
     
     func flushMessageQueue() {
@@ -91,32 +103,46 @@ class StackerBridge : NSObject, UIWebViewDelegate {
         // TODO: print error message and return if not valid JSON
         
         for message in messages {
+            println("Message from JS: ");
+            println(message);
+            
             // TODO: print error message and return if not valid JSON
             
             // TODO: deal with response callbacks with a response id
-            var responseId = message["responseId"];
-            // ENDTODO
             
-            var responseCallback = {(data: AnyObject) -> () in /* empty callback */ }
-            
-            var callbackId = message["callbackId"];
-            if let callId: AnyObject = callbackId? {
-                responseCallback = {(data: AnyObject) -> () in
-                    var msg = ["responseId": callId, "responseData": data];
-                    self.queueMessage(msg);
+            if let responseId : AnyObject = message["responseId"] {
+                println("GOAL: we have a reponse id!");
+                println(responseId);
+                var responseCallback = _responseCallbacks[responseId as String];
+                
+                println(responseCallback);
+                
+                if let responseMessage : AnyObject = message["responseData"] {
+                    println("GOAL: We're calling the reponse callback!");
+                   responseCallback?(data: responseMessage);
                 }
-            }
-            var handler: WVJBHandler;
-            if let messageHandler : AnyObject = message["handlerName"] {
-                handler = _messageHandlers[messageHandler as String]!;
+                
+//                responseCallback(data: "asdasd");
+//                _responseCallbacks.removeValueForKey(responseId as String);
             } else {
-                handler = _messageHandler;
+                var responseCallback = {(data: AnyObject) -> () in /* empty callback */ }
+                
+                var callbackId = message["callbackId"];
+                if let callId: AnyObject = callbackId? {
+                    responseCallback = {(data: AnyObject) -> () in
+                        var msg = ["responseId": callId, "responseData": data];
+                        self.queueMessage(msg);
+                    }
+                }
+                var handler: WVJBHandler;
+                if let messageHandler : AnyObject = message["handlerName"] {
+                    handler = _messageHandlers[messageHandler as String]!;
+                } else {
+                    handler = _messageHandler;
+                }
+                handler(data: message, responseCallback);
             }
-            handler(data: message, responseCallback);
-            
         }
-        
-        
     }
     
     func serializeMessage(value: AnyObject, prettyPrinted: Bool = false) -> String {
