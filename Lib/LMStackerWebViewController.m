@@ -264,6 +264,8 @@ andRootPageTabImageName:(NSString *)pageTabName
     UIBarButtonItem *ourButton = self.buttonHandlers[rightButtonHandler];
     if(ourButton != NULL){
         self.navigationItem.rightBarButtonItems = @[ourButton];
+    } else {
+        self.navigationItem.rightBarButtonItems = nil;
     }
 
 }
