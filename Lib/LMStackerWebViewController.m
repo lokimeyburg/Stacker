@@ -81,6 +81,7 @@ andRootPageTabImageName:(NSString *)pageTabName
     // Setup WebView
     self.myWebView = [[UIWebView alloc] initWithFrame:self.view.bounds];
     self.myWebView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    self.myWebView.scrollView.decelerationRate = UIScrollViewDecelerationRateNormal;
     [self loadWebView];
 
     // Setup Javascript Bridge
