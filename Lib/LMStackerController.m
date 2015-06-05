@@ -85,6 +85,7 @@
     // Now add a webview to the main controller
     UIWebView *myWebView = [[UIWebView alloc] initWithFrame:myRootController.view.bounds];
     myWebView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    myWebView.scrollView.decelerationRate = UIScrollViewDecelerationRateNormal;
     NSURL *url = [[NSURL alloc]initWithString:browserURL];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [myWebView loadRequest:request];
